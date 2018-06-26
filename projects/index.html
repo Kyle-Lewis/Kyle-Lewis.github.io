@@ -7,12 +7,12 @@ title: Kyle Lewis's Projects
 <ul class="posts">
 
   <h3> Physics Projects <h3>
-  {% for post in site.posts.physics %}
-    <li><span>{{ post.date | date_to_string }}</span> » <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+  {% for physpost in site.physics.posts %}
+    <li><span>{{ physpost.date | date_to_string }}</span> » <a href="{{ physpost.url }}" title="{{ physpost.title }}">{{ physpost.title }}</a></li>
   {% endfor %}
 
   <h3> Machine Learning Projects <h3>
-  {% for post in site.posts.ml %}
-    <li><span>{{ post.date | date_to_string }}</span> » <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+  {% for mlpost in site.physics.posts %}
+    <li><span>{{ mlpost.date | date_to_string }}</span> » <a href="{{ mlpost.url }}" title="{{ mlpost.title }}">{{ mlpost.title }}</a></li>
   {% endfor %}
 </ul>
