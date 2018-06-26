@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Physics Post"
+categories: Physics
 date: 2018-06-25
 ---
 
