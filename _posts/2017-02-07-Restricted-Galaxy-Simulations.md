@@ -5,15 +5,7 @@ categories: [Physics]
 date: 2018-06-25
 ---
 
-<h3>References</h3>
-
-
-- On restricted galaxy simulations, and the Mice: Toomre & Toomre  - 1972
-- A quick rundown of the leapfrog algorithm: The Art of Computational Science
-- The code I've used for the simulations can be found on my GitHub
-- Code for animations will be detailed in a future post!
-
-<h3>Introduction and Motivation</h3>
+<h2>Introduction and Motivation</h2>
 
 
 Before diving directly into CUDA powered simulations we can take a look at a simple approach to galaxy simulation to introduce the physics of collisions clearly. We can also quickly demonstrate the leapfrog algorithm which is a low order yet effective integration method for the motions of bodies under a force like gravity.
@@ -22,7 +14,7 @@ Before diving directly into CUDA powered simulations we can take a look at a sim
 Motivation for these and further computational approaches in astrophysics is quite prevalent; predicting the conditions necessary for some of the more extravagant galactic collisions to form, predicting and fitting dark matter, and modelling the expansion of the universe on larger scales (should you have access to a cluster / supercomputer that is).
 
 
-<h3>Collisions and Tidal Forces</h3>
+<h2>Collisions and Tidal Forces</h2>
 
 
 A quick case study looking at the popular Mice Galaxies lets us study phenomena of colliding bodies, such as the formation of the tails you see below.
@@ -96,3 +88,11 @@ Conclusion
 The restricted model has provided a good way to introduce anyone to the methodology at hand for n-body simulations (in particular our leapfrog method) as well as demonstrate a recreational ability from a simulation with very few parameters.
 
 In the next post I will be demonstrating disk-bulge-halo galaxy simulations with tens of thousands of "stars" all of which will be massive, which is made computationally possible on my measly laptop by performing tasks in bulk and in parallel with NVIDIA's CUDA platform.
+
+<h2>References</h2>
+
+
+- On restricted galaxy simulations, and the Mice: <a href="http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?1972ApJ...178..623T&data_type=PDF_HIGH&whole_paper=YES&type=PRINTER&filetype=.pdf">Toomre & Toomre - 1972</a>
+- A quick rundown of the leapfrog algorithm: The Art of Computational Science
+- The code I've used for the simulations can be found on my GitHub
+- Code for animations will be detailed in a future post!
