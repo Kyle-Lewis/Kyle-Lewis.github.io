@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "ML Post"
+categories: Machine Learning
 date: 2018-06-25
 ---
 
