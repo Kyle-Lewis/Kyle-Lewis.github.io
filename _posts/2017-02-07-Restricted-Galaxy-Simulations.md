@@ -7,6 +7,7 @@ date: 2018-06-25
 
 <h3>References</h3>
 
+
 - On restricted galaxy simulations, and the Mice: Toomre & Toomre  - 1972
 - A quick rundown of the leapfrog algorithm: The Art of Computational Science
 - The code I've used for the simulations can be found on my GitHub
@@ -14,15 +15,21 @@ date: 2018-06-25
 
 <h3>Introduction and Motivation</h3>
 
+
 Before diving directly into CUDA powered simulations we can take a look at a simple approach to galaxy simulation to introduce the physics of collisions clearly. We can also quickly demonstrate the leapfrog algorithm which is a low order yet effective integration method for the motions of bodies under a force like gravity.
+
 
 Motivation for these and further computational approaches in astrophysics is quite prevalent; predicting the conditions necessary for some of the more extravagant galactic collisions to form, predicting and fitting dark matter, and modelling the expansion of the universe on larger scales (should you have access to a cluster / supercomputer that is).
 
+
 <h3>Collisions and Tidal Forces</h3>
+
 
 A quick case study looking at the popular Mice Galaxies lets us study phenomena of colliding bodies, such as the formation of the tails you see below.
 
-<img src="images/mice.jpeg" alt="The Mice,and their tidal tails" class="inline"/>
+
+<img src="{{site.baseurl}}/images/mice.jpeg">
+
 
 The Mice, and their tidal tails
 As described in the Toomre & Toomre paper we can observe the formation of a "bridge" between the two galaxies which will allow for the exchange of mass during passing, as well as the formation of elongated "tails" of stars which have been flung out from their respective disks. These qualities are found by Toomre & Toomre to be dependent on many qualities of the encounter:
