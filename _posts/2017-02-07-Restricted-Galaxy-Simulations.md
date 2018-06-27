@@ -5,7 +5,7 @@ categories: [Physics]
 date: 2018-06-25
 ---
 
-<h2>Introduction and Motivation</h2>
+<h2 align="center">Introduction and Motivation</h2>
 
 
 Before diving directly into CUDA powered simulations we can take a look at a simple approach to galaxy simulation to introduce the physics of collisions clearly. We can also quickly demonstrate the leapfrog algorithm which is a low order yet effective integration method for the motions of bodies under a force like gravity.
@@ -14,13 +14,13 @@ Before diving directly into CUDA powered simulations we can take a look at a sim
 Motivation for these and further computational approaches in astrophysics is quite prevalent; predicting the conditions necessary for some of the more extravagant galactic collisions to form, predicting and fitting dark matter, and modelling the expansion of the universe on larger scales (should you have access to a cluster / supercomputer that is).
 
 
-<h2>Collisions and Tidal Forces</h2>
+<h2 align="center">Collisions and Tidal Forces</h2>
 
 
 A quick case study looking at the popular Mice Galaxies lets us study phenomena of colliding bodies, such as the formation of the tails you see below.
 
 
-<img src="{{site.baseurl}}/images/mice.jpeg">
+<div style="width:image width px; font-size:80%"><img src="{{site.baseurl}}/images/mice.jpeg">The Mice and their tidal tails</div>
 
 
 The Mice, and their tidal tails
@@ -32,10 +32,11 @@ Formation depends heavily on the class of approach; parabolic, hyper... etc.
 Ribbon like features such as the upper left are typically 3 dimensional looping tendrils which are being viewed at an angle to appear as a 1 dimensional tail.
 In general the tails are formed by <a href="https://en.wikipedia.org/wiki/Tidal_force" target="_blank">Tidal Forces</a>, the same which the moon inflicts upon the earth, which become very expressive during the closest points of passage. In those moments which are highly dependent on the relative spins of the galaxies (which I will demonstrate in the simulations) the tails from each galaxy are violently whipped out as a result of the gradient of force the galaxies exert on each other.
 
-Methodology - Leapfrog and Restricted Model
+<h2 align="center">Methodology - Leapfrog and Restricted Model</h2>
+
 In order to integrate many object interactions through time we have to use some numerical approximation, as a true continuous integral would of course take forever on a computer. My approach has been to use the "Leapfrog" method, which is known to be extremely accurate for low time steps, and conserves angular momentum and energy perfectly. If there is interest, a common alternative is a Runge-Kutta or RK4 method, which will yield accurate results with larger time-steps and is attractive for this reason.
 
-The Leapfrog Algorithm
+<h2>The Leapfrog Algorithm</h2>
 
 As I've implemented it:
 
@@ -59,7 +60,8 @@ Points are chosen simply to fill space and display interactions during the colli
 Set to orbit the only massive object at the center, which makes up the entire mass
 This model works surprisingly well as our galaxies are axially symmetric, and makes computation extremely simple with only two massive objects to use for acceleration calculation, which is N2 in time complexity using the most straightforward method and so limiting massive objects in this way is good for us.
 
-Simulation and Results
+<h2 align="center">Simulation and Results</h2>
+
 Following the paper's set of initial conditions, which includes various sets of tilts for the two disks, and putting them on the prescribed elliptic orbit which the paper suggests gives the results closest to reality, all that is left is to choose the relative spins of the galaxies, which turns out to be quite important! As it turns out, galactic tails like the ones exhibited by the Mice only arise during prograde collisions as opposed to retrograde. What this means is that the rotation of either galaxy is opposite that of the other upon collision, causing the "fringe" stars of either galaxy farthest from the center of collision to experience an additive force and be flung out.
 
 Here I'll show the resulting simulations of both retrograde and prograde approaches:
@@ -96,6 +98,6 @@ In the next post I will be demonstrating disk-bulge-halo galaxy simulations with
 
 - On restricted galaxy simulations, and the Mice: <a href="http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?1972ApJ...178..623T&data_type=PDF_HIGH&whole_paper=YES&type=PRINTER&filetype=.pdf" target="_blank">Toomre & Toomre - 1972</a>
 - A quick rundown of the leapfrog algorithm: <a href="http://www.artcompsci.org/vol_1/v1_web/node34.html" target="_blank">The Art of Computational Science</a>
-- The code I've used for the simulations can be found <a href="https://github.com/Hobbes1/RestrictedGalaxies" target=_blank">on my GitHub</a>
+- The code I've used for the simulations can be found <a href="https://github.com/Hobbes1/RestrictedGalaxies" target="THATSNIG_blank">on my GitHub</a>
 - Code for animations will be detailed in a future post!
 IT 
