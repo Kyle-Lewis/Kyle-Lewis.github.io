@@ -50,13 +50,12 @@ As I've implemented it:
 
 For all bodies in the system at once:
 
-- Determine the acceleration a body should experience given all other bodies
-
-- "Kick" the velocity of the body for half of a timestep
-
-- "Kick" the position of the body for a full timestep (using the half updated velocity)
-
-- "Kick" the velocity of the body for the next half timestep
+<ul>
+	<li>Determine the acceleration a body should experience given all other bodies</li>
+	<li>"Kick" the velocity of the body for half of a timestep</li>
+	<li>"Kick" the position of the body for a full timestep (using the half updated velocity)</li>
+	<li>"Kick" the velocity of the body for the next half timestep</li>
+</ul>
 
 This describes one timestep of the algorithm, which can then be run for however long is necessary. In the limit where you choose an infinitely small timestep you approach a continuum solution, however you don't need to get close to this limit to achieve accurate results in many cases.
 
