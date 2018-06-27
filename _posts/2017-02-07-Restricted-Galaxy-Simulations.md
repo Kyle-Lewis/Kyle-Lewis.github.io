@@ -41,7 +41,7 @@ In order to integrate many object interactions through time we have to use some 
 As I've implemented it:
 
 <figure>
-	<img src="{{site.baseurl}}/images/leapfrog.png" style="padding-bottom:0.5em; width:50%; left:auto; right:auto;" />
+	<img src="{{site.baseurl}}/images/leapfrog.png" style="padding-bottom:0.5em; width:50%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">My description of the algorithm begins at the 1/2 mark</figcaption>
 </figure>
 
