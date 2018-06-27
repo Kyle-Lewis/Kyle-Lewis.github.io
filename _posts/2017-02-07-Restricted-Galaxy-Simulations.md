@@ -41,7 +41,7 @@ In order to integrate many object interactions through time we have to use some 
 As I've implemented it:
 
 <figure>
-	<img src="{{site.baseurl}}/images/leapfrog.png" style="padding-bottom:0.5em; width:50%" />
+	<img src="{{site.baseurl}}/images/leapfrog.png" style="padding-bottom:0.5em; width:50%" align="middle" />
 	<figcaption style="text-align:center;">My description of the algorithm begins at the 1/2 mark</figcaption>
 </figure>
 
@@ -64,8 +64,8 @@ This describes one timestep of the algorithm, which can then be run for however 
 
 As mentioned before, we first want to demonstrate formations of tidal tails with a simple simulation which could run on any platform in reasonable time. To achieve this I have recreated the restricted or "toy" model of galaxies which is detailed in the Toomre & Toomre paper. Here's what we are looking at:
 
-<figure>
-	<img src="{{site.baseurl}}/images/RModelStill.png" style="padding-bottom:0.5em; width:75%" />
+<figure> 
+	<img src="{{site.baseurl}}/images/RModelStill.png" style="padding-bottom:0.5em; width:75%" align="middle" />
 	<figcaption style="text-align:center;">Toomre & Toomre's Restricted galaxy model</figcaption>
 </figure>
 
@@ -87,7 +87,7 @@ Following the paper's set of initial conditions, which includes various sets of 
 Here I'll show the resulting simulations of both prograde and retrograde approaches:
 
 <figure>
-	<img src="{{site.baseurl}}/images/programde.gif" style="padding-bottom:0.5em; width:75%" />
+	<img src="{{site.baseurl}}/images/prograde.gif" style="padding-bottom:0.5em; width:75%" align="middle" />
 	<figcaption style="text-align:center;">Retrograde approach; yields no tails as momenta tend to cancel</figcaption>
 </figure>
 
@@ -95,7 +95,7 @@ Here I'll show the resulting simulations of both prograde and retrograde approac
 The retrograde approach ends up with what would be the tail "suns" getting their own momentum cancelled somewhat by the incoming galaxy, which does not match the spin of the representative point (thus "retro"-grade). The result is a jumbled distortion of the rings of each galaxy as their different orientations and the passing of a massive object throws everything off of their circular orbits. We can see the opposite of this effect, an additive force, in the prograde approach below:
 
 <figure>
-	<img src="{{site.baseurl}}/images/retrograde.gif" style="padding-bottom:0.5em; width:75%" />
+	<img src="{{site.baseurl}}/images/retrograde.gif" style="padding-bottom:0.5em; width:75%" align="middle" />
 	<figcaption style="text-align:center;">Prograde approach; long tails result</figcaption>
 </figure>
 
