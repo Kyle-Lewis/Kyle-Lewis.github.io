@@ -30,7 +30,7 @@ As described in the Toomre & Toomre paper we can observe the formation of a "bri
 Long tails form best when the masses of the two galaxies are nearly one to one
 Formation depends heavily on the class of approach; parabolic, hyper... etc.
 Ribbon like features such as the upper left are typically 3 dimensional looping tendrils which are being viewed at an angle to appear as a 1 dimensional tail.
-In general the tails are formed by Tidal Forces, the same which the moon inflicts upon the earth, which become very expressive during the closest points of passage. In those moments which are highly dependent on the relative spins of the galaxies (which I will demonstrate in the simulations) the tails from each galaxy are violently whipped out as a result of the gradient of force the galaxies exert on each other.
+In general the tails are formed by <a href="https://en.wikipedia.org/wiki/Tidal_force" target="_blank">Tidal Forces</a>, the same which the moon inflicts upon the earth, which become very expressive during the closest points of passage. In those moments which are highly dependent on the relative spins of the galaxies (which I will demonstrate in the simulations) the tails from each galaxy are violently whipped out as a result of the gradient of force the galaxies exert on each other.
 
 Methodology - Leapfrog and Restricted Model
 In order to integrate many object interactions through time we have to use some numerical approximation, as a true continuous integral would of course take forever on a computer. My approach has been to use the "Leapfrog" method, which is known to be extremely accurate for low time steps, and conserves angular momentum and energy perfectly. If there is interest, a common alternative is a Runge-Kutta or RK4 method, which will yield accurate results with larger time-steps and is attractive for this reason.
@@ -48,7 +48,7 @@ Determine the acceleration a body should experience given all other bodies
 "Kick" the velocity of the body for the next half timestep
 This describes one timestep of the algorithm, which can then be run for however long is necessary. In the limit where you choose an infinitely small timestep you approach a continuum solution, however you don't need to get close to this limit to achieve accurate results in many cases.
 
-The Restricted Galaxy Model
+<h2>The Restricted Galaxy Model</h2>
 
 As mentioned before, we first want to demonstrate formations of tidal tails with a simple simulation which could run on any platform in reasonable time. To achieve this I have recreated the restricted or "toy" model of galaxies which is detailed in the Toomre & Toomre paper. Here's what we are looking at:
 
@@ -84,7 +84,9 @@ We can compare the galaxies of the paper and my own simulation to our view of th
 
 Although a rotation is in order for the sky-view we can easily see why this simulation argues for the particular set of initial conditions to have resulted in what we see of the collision.
 
-Conclusion
+<h2>Conclusion</h2>
+
+
 The restricted model has provided a good way to introduce anyone to the methodology at hand for n-body simulations (in particular our leapfrog method) as well as demonstrate a recreational ability from a simulation with very few parameters.
 
 In the next post I will be demonstrating disk-bulge-halo galaxy simulations with tens of thousands of "stars" all of which will be massive, which is made computationally possible on my measly laptop by performing tasks in bulk and in parallel with NVIDIA's CUDA platform.
@@ -92,7 +94,8 @@ In the next post I will be demonstrating disk-bulge-halo galaxy simulations with
 <h2>References</h2>
 
 
-- On restricted galaxy simulations, and the Mice: <a href="http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?1972ApJ...178..623T&data_type=PDF_HIGH&whole_paper=YES&type=PRINTER&filetype=.pdf">Toomre & Toomre - 1972</a>
-- A quick rundown of the leapfrog algorithm: The Art of Computational Science
-- The code I've used for the simulations can be found on my GitHub
+- On restricted galaxy simulations, and the Mice: <a href="http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?1972ApJ...178..623T&data_type=PDF_HIGH&whole_paper=YES&type=PRINTER&filetype=.pdf" target="_blank">Toomre & Toomre - 1972</a>
+- A quick rundown of the leapfrog algorithm: <a href="http://www.artcompsci.org/vol_1/v1_web/node34.html" target="_blank">The Art of Computational Science</a>
+- The code I've used for the simulations can be found <a href="https://github.com/Hobbes1/RestrictedGalaxies" target=_blank">on my GitHub</a>
 - Code for animations will be detailed in a future post!
+IT 
