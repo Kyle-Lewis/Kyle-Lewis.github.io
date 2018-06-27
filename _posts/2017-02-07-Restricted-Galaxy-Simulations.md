@@ -71,7 +71,7 @@ This describes one timestep of the algorithm, which can then be run for however 
 As mentioned before, we first want to demonstrate formations of tidal tails with a simple simulation which could run on any platform in reasonable time. To achieve this I have recreated the restricted or "toy" model of galaxies which is detailed in the Toomre & Toomre paper. Here's what we are looking at:
 
 <figure> 
-	<img src="{{site.baseurl}}/images/RModelStill.png" style="padding-bottom:0.5em; width:75% ;margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/RModelStill.png" style="padding-bottom:0.5em; width:50% ;margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">Toomre & Toomre's Restricted galaxy model</figcaption>
 </figure>
 
