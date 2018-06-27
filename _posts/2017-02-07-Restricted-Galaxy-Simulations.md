@@ -20,7 +20,7 @@ Motivation for these and further computational approaches in astrophysics is qui
 A quick case study looking at the popular Mice Galaxies lets us study phenomena of colliding bodies, such as the formation of the tails you see below.
 
 <figure>
-	<img src="{{site.baseurl}}/images/mice.jpeg" style="padding-bottom:0.5em; width:100%: margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/mice.jpeg" style="padding-bottom:0.5em; width:100%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">The Mice and their tidal tails</figcaption>
 </figure>
 
