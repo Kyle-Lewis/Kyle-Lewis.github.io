@@ -20,7 +20,7 @@ Motivation for these and further computational approaches in astrophysics is qui
 A quick case study looking at the popular Mice Galaxies lets us study phenomena of colliding bodies, such as the formation of the tails you see below.
 
 
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="{{site.baseurl}}/images/mice.jpeg" style="padding-bottom:0.5em;">The Mice and their tidal tails</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="{{site.baseurl}}/images/mice.jpeg" style="padding-bottom:0.5em;" />The Mice and their tidal tails</div>
 
 
 As described in the Toomre & Toomre paper we can observe the formation of a "bridge" between the two galaxies which will allow for the exchange of mass during passing, as well as the formation of elongated "tails" of stars which have been flung out from their respective disks. These qualities are found by Toomre & Toomre to be dependent on many qualities of the encounter:
