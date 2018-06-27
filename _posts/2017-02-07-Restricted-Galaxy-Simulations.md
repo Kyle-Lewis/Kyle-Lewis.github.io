@@ -39,13 +39,16 @@ In order to integrate many object interactions through time we have to use some 
 
 As I've implemented it:
 
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="{{site.baseurl}}/images/leapfrog.png" style="padding-bottom:0.5em;" />My description of the algorithm begins at the 1/2 mark
+</div>
 
-My description of the algorithm begins at the 1/2 mark
 For all bodies in the system at once:
-Determine the acceleration a body should experience given all other bodies
-"Kick" the velocity of the body for half of a timestep
-"Kick" the position of the body for a full timestep (using the half updated velocity)
-"Kick" the velocity of the body for the next half timestep
+
+- Determine the acceleration a body should experience given all other bodies
+- "Kick" the velocity of the body for half of a timestep
+- "Kick" the position of the body for a full timestep (using the half updated velocity)
+- "Kick" the velocity of the body for the next half timestep
+
 This describes one timestep of the algorithm, which can then be run for however long is necessary. In the limit where you choose an infinitely small timestep you approach a continuum solution, however you don't need to get close to this limit to achieve accurate results in many cases.
 
 <h2>The Restricted Galaxy Model</h2>
