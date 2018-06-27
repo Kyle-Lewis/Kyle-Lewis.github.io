@@ -2,7 +2,7 @@
 layout: post
 title: "Restricted Galaxy Simulations"
 categories: [Physics]
-date: 2018-06-25
+date: 2017-02-07
 ---
 
 <h2 align="center">Introduction and Motivation</h2>
@@ -20,7 +20,7 @@ Motivation for these and further computational approaches in astrophysics is qui
 A quick case study looking at the popular Mice Galaxies lets us study phenomena of colliding bodies, such as the formation of the tails you see below.
 
 
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="{{site.baseurl}}/images/mice.jpeg" style="padding-bottom:0.5em;" />The Mice and their tidal tails</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="{{site.baseurl}}/images/mice.jpeg" style="padding-bottom:0.5em; width:150%" />The Mice and their tidal tails</div>
 
 
 As described in the Toomre & Toomre paper we can observe the formation of a "bridge" between the two galaxies which will allow for the exchange of mass during passing, as well as the formation of elongated "tails" of stars which have been flung out from their respective disks. These qualities are found by Toomre & Toomre to be dependent on many qualities of the encounter:
@@ -58,11 +58,15 @@ This describes one timestep of the algorithm, which can then be run for however 
 
 As mentioned before, we first want to demonstrate formations of tidal tails with a simple simulation which could run on any platform in reasonable time. To achieve this I have recreated the restricted or "toy" model of galaxies which is detailed in the Toomre & Toomre paper. Here's what we are looking at:
 
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="{{site.baseurl}}/images/RModelStill.png" style="padding-bottom:0.5em;" />Toomre & Toomre's Restricted galaxy model
+</div>
 
-Toomre & Toomre's Restricted galaxy model
-The galactic disk is modeled as 11 concentric rings of massless points
-Points are chosen simply to fill space and display interactions during the collision
-Set to orbit the only massive object at the center, which makes up the entire mass
+- The galactic disk is modeled as 11 concentric rings of massless points
+
+- Points are chosen simply to fill space and display interactions during the collision
+
+- Set to orbit the only massive object at the center, which makes up the entire mass
+
 This model works surprisingly well as our galaxies are axially symmetric, and makes computation extremely simple with only two massive objects to use for acceleration calculation, which is N2 in time complexity using the most straightforward method and so limiting massive objects in this way is good for us.
 
 <h2 align="center">Simulation and Results</h2>
