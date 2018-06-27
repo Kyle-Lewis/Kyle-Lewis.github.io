@@ -20,7 +20,7 @@ Motivation for these and further computational approaches in astrophysics is qui
 A quick case study looking at the popular Mice Galaxies lets us study phenomena of colliding bodies, such as the formation of the tails you see below.
 
 
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="{{site.baseurl}}/images/mice.jpeg" style="padding-bottom:0.5em; width:150%" />The Mice and their tidal tails</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="{{site.baseurl}}/images/mice.jpeg" style="padding-bottom:0.5em; width:100%" />The Mice and their tidal tails</div>
 
 
 As described in the Toomre & Toomre paper we can observe the formation of a "bridge" between the two galaxies which will allow for the exchange of mass during passing, as well as the formation of elongated "tails" of stars which have been flung out from their respective disks. These qualities are found by Toomre & Toomre to be dependent on many qualities of the encounter:
@@ -39,7 +39,7 @@ In order to integrate many object interactions through time we have to use some 
 
 As I've implemented it:
 
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="{{site.baseurl}}/images/leapfrog.png" style="padding-bottom:0.5em;" />My description of the algorithm begins at the 1/2 mark
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="{{site.baseurl}}/images/leapfrog.png" style="padding-bottom:0.5em; width:75%" />My description of the algorithm begins at the 1/2 mark
 </div>
 
 For all bodies in the system at once:
@@ -58,7 +58,7 @@ This describes one timestep of the algorithm, which can then be run for however 
 
 As mentioned before, we first want to demonstrate formations of tidal tails with a simple simulation which could run on any platform in reasonable time. To achieve this I have recreated the restricted or "toy" model of galaxies which is detailed in the Toomre & Toomre paper. Here's what we are looking at:
 
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="{{site.baseurl}}/images/RModelStill.png" style="padding-bottom:0.5em;" />Toomre & Toomre's Restricted galaxy model
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="{{site.baseurl}}/images/RModelStill.png" style="padding-bottom:0.5em; width:75%" />Toomre & Toomre's Restricted galaxy model
 </div>
 
 - The galactic disk is modeled as 11 concentric rings of massless points
