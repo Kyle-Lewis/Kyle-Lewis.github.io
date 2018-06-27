@@ -1,5 +1,5 @@
 body {
-    background-color: #D2E1E3;
+    background-color: #F0F8FF;
     margin: 60px auto;
     width: 70%;
 }
@@ -30,8 +30,8 @@ p {
     color: #333;
 }
 footer {
-    border-top: 1px solid #d5d5d5;
-    font-size: .8em;
+    border-top: 2px solid #434343;
+    font-size: 0.8em;
 }
 
 ul.posts { 
