@@ -45,8 +45,11 @@ As I've implemented it:
 For all bodies in the system at once:
 
 - Determine the acceleration a body should experience given all other bodies
+
 - "Kick" the velocity of the body for half of a timestep
+
 - "Kick" the position of the body for a full timestep (using the half updated velocity)
+
 - "Kick" the velocity of the body for the next half timestep
 
 This describes one timestep of the algorithm, which can then be run for however long is necessary. In the limit where you choose an infinitely small timestep you approach a continuum solution, however you don't need to get close to this limit to achieve accurate results in many cases.
@@ -99,7 +102,9 @@ In the next post I will be demonstrating disk-bulge-halo galaxy simulations with
 
 
 - On restricted galaxy simulations, and the Mice: <a href="http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?1972ApJ...178..623T&data_type=PDF_HIGH&whole_paper=YES&type=PRINTER&filetype=.pdf" target="_blank">Toomre & Toomre - 1972</a>
+
 - A quick rundown of the leapfrog algorithm: <a href="http://www.artcompsci.org/vol_1/v1_web/node34.html" target="_blank">The Art of Computational Science</a>
+
 - The code I've used for the simulations can be found <a href="https://github.com/Hobbes1/RestrictedGalaxies" target="THATSNIG_blank">on my GitHub</a>
+
 - Code for animations will be detailed in a future post!
-IT 
