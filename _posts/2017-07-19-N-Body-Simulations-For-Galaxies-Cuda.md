@@ -61,8 +61,8 @@ The model for the disk expects there to be central mass, from the bulge and ha
 <div style="font-size: 150%;">
 	$$
 		f_{disk}(E_p, L_z, E_z) = 
-		\frac{\Sigma(R_c)}{((2\pi^3)^{1/2}\kappa(R_c))} \times \frac{\rho_d(R_c)}{\sigma_R^2(R_c)\sigma_z(R_c)}
-		e^{-\frac{E_p - E_c(R_c)}{\sigma_R^2(R_c)} - \frac{E_z}{\sigma_z^2(R_c)}}
+		\frac{\Sigma(R_c)}{((2\pi^3)^{1/2}\kappa(R_c))} \times \frac{\tilde\rho_d(R_c)}{\tilde\sigma_R^2(R_c)\tilde\sigma_z(R_c)}
+		e^{-\frac{E_p - E_c(R_c)}{\tilde\sigma_R^2(R_c)} - \frac{E_z}{\tilde\sigma_z^2(R_c)}}
 	$$
 </div>
 
