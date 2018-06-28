@@ -216,10 +216,9 @@ zero_accels( float3 *__restrict__ accels )
 
 {% endhighlight %} -->
 
-<!-- These are all called with the same thread dimensions using CUDA's "<<< >>>" syntax:
+These are all called with the same thread dimensions using CUDA's "<<< >>>" syntax:
 
-{% highlight c++}
-
+```c++
 const int threadsPerBlock = 512;		// blockSize from NVDA_nbody
 const int numTiles = (numPoints + threadsPerBlock -1) / threadsPerBlock;
 const int sharedMemSize = threadsPerBlock * 2 * sizeof(float4);
@@ -227,7 +226,7 @@ const int sharedMemSize = threadsPerBlock * 2 * sizeof(float4);
 . . .
 . . .
 
-// the leapfrog algorithm through CUDA kernel calls:
+	// the leapfrog algorithm through CUDA kernel calls:
 
 accel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
 		   (dev_points, dev_accels, numPoints, softSquared, dt, numTiles);
@@ -243,8 +242,7 @@ vel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
 
 zero_accels <<< numTiles, threadsPerBlock, sharedMemSize >>>
 		   (dev_accels);
-
-{% endhighlight %} -->
+```
 
 <h2 align="center">Results</h2>
 
