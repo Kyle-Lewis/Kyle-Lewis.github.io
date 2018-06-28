@@ -23,17 +23,17 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 <h2>Introduction and Motivation</h2>	
 
-I realized while writing up [a relative link](2017-07-19-Variational-Monte-Carlo-in-QM.md "my post on the Quantum Variational Monte Carlo") that there was enough non-physics background information to warrant a separate post. I went back to one of those resources, Hjorth-Jensen's notes, which a professor of mine had provided as an extra resource and, at the time, I had completely passed over.
+I realized while writing up [my post on the Quantum Variational Monte Carlo](2017-07-19-Variational-Monte-Carlo-in-QM.md ) that there was enough non-physics background information to warrant a separate post. I went back to one of those resources, Hjorth-Jensen's notes, which a professor of mine had provided as an extra resource and, at the time, I had completely passed over.
 
 It's too bad that I did because a few chapters I pull from in this post give wonderfully simplistic examples of Monte Carlo simulations, Markov processes, and the motivation behind the detail balance requirement. This post is more or less my notes from those notes. These are general approaches to problems which have probabilistic features, and extend in use cases beyond physics, so it would be good to explain their use before applying them.
 
-<h2>TL;DR</h2>
+<h2 align="center">TL;DR</h2>
 
 Raw Monte Carlo, random importance sampling, is not very useful for even simple cases where methods fail to converge if the acceptances are small. Some Markov Process, a chain of states describing some system and linked by transition matrices, can be introduced to defeat this problem. The nature of the acceptance criteria for random moves between states must abide by both *ergodicity* and *detailed balance* constraints; an example which satisfies both being the Metropolis-Hastings algorithm.
 
 Algorithms like this are called Markov chain Monte Carlo methods, MCMC.
 
-<h2>Discrete forms for Vector Calculus Operators, a cheat sheet</h2>
+<h2 align="center">Discrete forms for Vector Calculus Operators, a cheat sheet</h2>
 
 Because computations are finite, simulations become discrete; continuous functions are represented in a space which is divided into small cells. In other words, the dx which we put at the end of our integrals is no longer infinitesimally small but has some real length (or time, or frequency, etc) value, and our integrals all become really long sums as a result. Below are some common calculus operators as they appear in a discrete 2 dimensional case:
 
@@ -42,18 +42,20 @@ Because computations are finite, simulations become discrete; continuous functio
 	<figcaption style="text-align:center;"></figcaption>
 </figure>
 
-Which I borrowed from [a link](http://meatfighter.com/fluiddynamics/GPU_Gems_Chapter_38.pdf "a chapter of Nvidias cuda gems book") to avoid the Latex work. I promise that thinking about these for a minute to check that they make sense is worth anyone's time here.
+Which I borrowed from [a chapter of Nvidias cuda gems book](http://meatfighter.com/fluiddynamics/GPU_Gems_Chapter_38.pdf) to avoid the Latex work. I promise that thinking about these for a minute to check that they make sense is worth anyone's time here.
 
-<h2>Markov Chains, Discretized Diffusion example</h2>
+<h2 align="center">Markov Chains, Discretized Diffusion example</h2>
 
 We can apply a Markov chain to random walks simulating the evolution described by the diffusion equation:
 
-$latex \frac{\partial w(x, t)}{\partial t} = D \frac{\partial^2 w(x,t)}{\partial x^2} &bg=ffffff&s=3$
-
+<div style="font-size: 150%;">
+	$$ \frac{\partial w(x, t)}{\partial t} = D \frac{\partial^2 w(x,t)}{\partial x^2} $$
+</div>
 where
 
-$latex w(x, t)\partial x &bg=ffffff&s=2$
-
+<div style="font-size: 150%;">
+	$$ w(x, t)\partial x $$
+</div>
 is the probability of finding a particle in some discrete region dx and at some time t. It is the classical equivalent of the wavefunction I discuss in the {next post}.
 
 The chain in a Markov chain is a chain between states of a system. The states of our system, for example, can be simply the set of [0, 1] values indicating the position of a particle on a discrete lattice in one dimensional space, with divisions of length l
@@ -117,7 +119,8 @@ Which makes sense, the probability to find a particle at position x in the next 
 
 Looking at the cheat sheet for the gradient and laplacian discrete forms (and removing the extra terms because this is a 1D case) we've recovered exactly the discrete form of the diffusion equation from the application of our transition matrix. So, a Markov chain approximates a real physical process given enough states and a small enough time step.
 
-Detailed Balance
+<h2 align="center">Detailed Balance</h2>
+
 Recreating diffusion isn't all too interesting because the equilibrium state, when our transformation matrix has been applied an "infinite" number of times, is just equal probability everywhere. What if we wan't to achieve some other final distribution? It turns out we can just fine as long as we are looking for equilibrium states of a particular system, and in fact with a few restrictions on our Markov chain we can get to distributions which otherwise would require an intractable amount of computation.
 
 Generally we've been able to say this of our state:
@@ -147,7 +150,8 @@ or in the form of a ratio as we will use it:
 
 Again, for any state i, to and from any other state j.
 
-An example application to the Boltzmann Distribution using the Metropolis-Hastings algorithm
+<h2 align="center">An example application to the Boltzmann Distribution using the Metropolis-Hastings algorithm</h2>
+
 To demonstrate the use of detailed balance in a markov process we can apply the concepts to generate the Boltzmann distribution. The Boltzmann distribution describes the probability of finding a microstate of particles (classically of some gas) with a certain energy Ei. It looks like:
 
 
@@ -168,7 +172,7 @@ So if we make random moves among the particles in the system, and accept/deny th
 
 Where A is an acceptance rate for the move between states i and j.
 
-We know systems in equilibrium will inhabit the lowest energy states available to them, and so a simple test would be to only accept random state changes which lower the energy. This would could give us solutions, but would get stuck in any local minima which exist in our state space, generally speaking. This is another way of saying that such a simple acceptance criteria would violate ergodicity. Even given an infinite amount of computing time, we would not explore all available states and therefore never be sure that we had found the correct solution rather than a local minimum.
+We know systems in equilibrium will inhabit the lowest energy states available to them, and so a simple test would be to only accept random state changes which lower the energy. This would could give us solutions, but would get stuck in any local minima which exist in our state space, generally speaking. This is another way of saying that such a simple acceptance criteria would violate [ergodicity](https://en.wikipedia.org/wiki/Ergodicity). Even given an infinite amount of computing time, we would not explore all available states and therefore never be sure that we had found the correct solution rather than a local minimum.
 
 To make our Markov chain abide by this ergodic constraint we accept moves which do not lower the energy of the state as well, but with a probability which corresponds to the ratio described by the detail balance condition. Detail balance gives us the proper form of the equilibrium distribution, ergodicity ensures that the chain does not get stuck forming that distribution in a local minima. That sums up the Metropolis algorithm, which reads:
 
