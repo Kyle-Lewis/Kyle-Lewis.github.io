@@ -5,6 +5,14 @@ categories: [Physics]
 date: 2017-02-07
 ---
 
+<h2 align="center">References</h2>
+
+- On restricted galaxy simulations, and the Mice: <a href="http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?1972ApJ...178..623T&data_type=PDF_HIGH&whole_paper=YES&type=PRINTER&filetype=.pdf" target="_blank">Toomre & Toomre - 1972</a>
+
+- A quick rundown of the leapfrog algorithm: <a href="http://www.artcompsci.org/vol_1/v1_web/node34.html" target="_blank">The Art of Computational Science</a>
+
+- The code I've used for the simulations can be found <a href="https://github.com/Hobbes1/RestrictedGalaxies" target="THATSNIG_blank">on my GitHub</a>
+
 <h2 align="center">Introduction and Motivation</h2>
 
 
@@ -105,16 +113,10 @@ We can compare the galaxies of the paper and my own simulation to our view of th
 
 Although a rotation is in order for the sky-view we can easily see why this simulation argues for the particular set of initial conditions to have resulted in what we see of the collision.
 
-<h2>Conclusion</h2>
+<h2 align="center">Conclusion</h2>
 
 The restricted model has provided a good way to introduce anyone to the methodology at hand for n-body simulations (in particular our leapfrog method) as well as demonstrate a recreational ability from a simulation with very few parameters.
 
 In the next post I will be demonstrating disk-bulge-halo galaxy simulations with tens of thousands of "stars" all of which will be massive, which is made computationally possible on my measly laptop by performing tasks in bulk and in parallel with NVIDIA's CUDA platform.
 
-<h2>References</h2>
 
-- On restricted galaxy simulations, and the Mice: <a href="http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?1972ApJ...178..623T&data_type=PDF_HIGH&whole_paper=YES&type=PRINTER&filetype=.pdf" target="_blank">Toomre & Toomre - 1972</a>
-
-- A quick rundown of the leapfrog algorithm: <a href="http://www.artcompsci.org/vol_1/v1_web/node34.html" target="_blank">The Art of Computational Science</a>
-
-- The code I've used for the simulations can be found <a href="https://github.com/Hobbes1/RestrictedGalaxies" target="THATSNIG_blank">on my GitHub</a>
