@@ -111,138 +111,152 @@ As described, the parameters A, B, and C, correspond to the density scale, t
 
 The CUDA device code i've used is shown below. As demonstrated by NVDIA, the acceleration kernel is split into chunks ("tiles") which can access a smaller pool of shared memory while they run. The other kernels perform the leapfrog steps of the algorithm after acceleration has been calculated for each body. 
 
-{% highlight c++ %}
+<hr>
+<div style="width:110%">
 
-		/* Single body-body interaction, sums the acceleration 
-		 * quantity across all interactions */
-__device__ float3
-bodyBodyInteraction(float4 bi, float4 bj, float3 ai, float softSquared) 
-{
-	float3 r;
-	r.x = bj.x - bi.x;
-	r.y = bj.y - bi.y;
-	r.z = bj.z - bi.z;
-	float distSqr = r.x * r.x + r.y * r.y + r.z * r.z;
-	float invDist = rsqrt(distSqr + softSquared);
-	float invDistCube = invDist * invDist * invDist;
-	float s = bj.w * invDistCube;
-	if(r.x != 0.0){
-		ai.x += r.x * s;
-		ai.y += r.y * s;
-		ai.z += r.z * s;
-	}
-	return ai;
-}
+	{% highlight c++ %}
 
-		/* Apply body-body interactions in sets of "tiles" as per
-		 * NVIDIA's n-body example, loading from shared memory in 
-		 * this way speeds the algorithm further */ 
-__device__ float3
-tile_accel(float4 threadPos, float4 *PosMirror, float3 accel, float softSquared,
-		   int numTiles) 
-{
-
-	extern __shared__ float4 sharedPos[];
-
-	for (int tile = 0; tile < numTiles; tile++){
-		sharedPos[threadIdx.x] = PosMirror[tile * blockDim.x + threadIdx.x];
-		__syncthreads();
-
-#pragma unroll 128
-
-		for ( int i = 0; i < blockDim.x; i++ ) {
-			accel = bodyBodyInteraction(threadPos, sharedPos[i], accel, softSquared);
+			/* Single body-body interaction, sums the acceleration 
+			 * quantity across all interactions */
+	__device__ float3
+	bodyBodyInteraction(float4 bi, float4 bj, float3 ai, float softSquared) 
+	{
+		float3 r;
+		r.x = bj.x - bi.x;
+		r.y = bj.y - bi.y;
+		r.z = bj.z - bi.z;
+		float distSqr = r.x * r.x + r.y * r.y + r.z * r.z;
+		float invDist = rsqrt(distSqr + softSquared);
+		float invDistCube = invDist * invDist * invDist;
+		float s = bj.w * invDistCube;
+		if(r.x != 0.0){
+			ai.x += r.x * s;
+			ai.y += r.y * s;
+			ai.z += r.z * s;
 		}
+		return ai;
+	}
+
+			/* Apply body-body interactions in sets of "tiles" as per
+			 * NVIDIA's n-body example, loading from shared memory in 
+			 * this way speeds the algorithm further */ 
+	__device__ float3
+	tile_accel(float4 threadPos, float4 *PosMirror, float3 accel, float softSquared,
+			   int numTiles) 
+	{
+
+		extern __shared__ float4 sharedPos[];
+
+		for (int tile = 0; tile < numTiles; tile++){
+			sharedPos[threadIdx.x] = PosMirror[tile * blockDim.x + threadIdx.x];
+			__syncthreads();
+
+	#pragma unroll 128
+
+			for ( int i = 0; i < blockDim.x; i++ ) {
+				accel = bodyBodyInteraction(threadPos, sharedPos[i], accel, softSquared);
+			}
+			__syncthreads();
+		}
+		return accel;
+	}
+
+			/* Acquire all acceleration vectors for the points */ 
+	__global__ void
+	accel_step( float4 *__restrict__ devPos,
+				float3 *__restrict__ accels,
+				unsigned int numBodies,
+				float softSquared,
+				float dt, int numTiles ) 
+	{
+		int index = blockIdx.x * blockDim.x + threadIdx.x;
+		if (index > numBodies) {return;};
+		accels[index] = tile_accel(devPos[index], devPos, accels[index], softSquared, numTiles);
 		__syncthreads();
 	}
-	return accel;
-}
 
-		/* Acquire all acceleration vectors for the points */ 
-__global__ void
-accel_step( float4 *__restrict__ devPos,
-			float3 *__restrict__ accels,
+			/* Step all point-velocities by 0.5 * a * dt
+			 * as per a leapfrog algorithm; is called twice,
+			 * once before and once after the position step */
+	__global__ void
+	vel_step( float4 *__restrict__ deviceVel,
+			  float3 *__restrict__ accels,
+			  unsigned int numBodies,
+			  float dt)
+	{
+		int index = blockIdx.x * blockDim.x + threadIdx.x;
+		if (index > numBodies) {return;};
+		deviceVel[index].x += accels[index].x * 0.5 * dt;
+		deviceVel[index].y += accels[index].y * 0.5 * dt;
+		deviceVel[index].z += accels[index].z * 0.5 * dt;
+	}
+
+			/* Step positions from velocities */
+	__global__ void
+	r_step( float4 *__restrict__ devPos,
+			float4 *__restrict__ deviceVel,
 			unsigned int numBodies,
-			float softSquared,
-			float dt, int numTiles ) 
-{
-	int index = blockIdx.x * blockDim.x + threadIdx.x;
-	if (index > numBodies) {return;};
-	accels[index] = tile_accel(devPos[index], devPos, accels[index], softSquared, numTiles);
-	__syncthreads();
-}
+			float dt)
+	{
+		int index = blockIdx.x * blockDim.x + threadIdx.x;
+		if (index > numBodies) {return;};
+		devPos[index].x += deviceVel[index].x * dt;
+		devPos[index].y += deviceVel[index].y * dt;
+		devPos[index].z += deviceVel[index].z * dt;
+	}
 
-		/* Step all point-velocities by 0.5 * a * dt
-		 * as per a leapfrog algorithm; is called twice,
-		 * once before and once after the position step */
-__global__ void
-vel_step( float4 *__restrict__ deviceVel,
-		  float3 *__restrict__ accels,
-		  unsigned int numBodies,
-		  float dt)
-{
-	int index = blockIdx.x * blockDim.x + threadIdx.x;
-	if (index > numBodies) {return;};
-	deviceVel[index].x += accels[index].x * 0.5 * dt;
-	deviceVel[index].y += accels[index].y * 0.5 * dt;
-	deviceVel[index].z += accels[index].z * 0.5 * dt;
-}
+			/* zero the acceleration array between leapfrog 
+			 * steps, I wasn't sure if a cuda mem-set existed 
+			 * and/or would be faster */
+	__global__ void
+	zero_accels( float3 *__restrict__ accels ) 
+	{
+		int index = blockIdx.x * blockDim.x + threadIdx.x;
+		accels[index].x = 0.0f;
+		accels[index].y = 0.0f;
+		accels[index].z = 0.0f;
+	}
 
-		/* Step positions from velocities */
-__global__ void
-r_step( float4 *__restrict__ devPos,
-		float4 *__restrict__ deviceVel,
-		unsigned int numBodies,
-		float dt)
-{
-	int index = blockIdx.x * blockDim.x + threadIdx.x;
-	if (index > numBodies) {return;};
-	devPos[index].x += deviceVel[index].x * dt;
-	devPos[index].y += deviceVel[index].y * dt;
-	devPos[index].z += deviceVel[index].z * dt;
-}
+	{% endhighlight %}
 
-		/* zero the acceleration array between leapfrog 
-		 * steps, I wasn't sure if a cuda mem-set existed 
-		 * and/or would be faster */
-__global__ void
-zero_accels( float3 *__restrict__ accels ) 
-{
-	int index = blockIdx.x * blockDim.x + threadIdx.x;
-	accels[index].x = 0.0f;
-	accels[index].y = 0.0f;
-	accels[index].z = 0.0f;
-}
-
-{% endhighlight %}
+</div>
+<hr>
 
 These are all called with the same thread dimensions using CUDA's "<<< >>>" syntax:
 
-```c++
-const int threadsPerBlock = 512;		// blockSize from NVDA_nbody
-const int numTiles = (numPoints + threadsPerBlock -1) / threadsPerBlock;
-const int sharedMemSize = threadsPerBlock * 2 * sizeof(float4);
+<hr>
+<div style="width:110%">
 
-. . .
-. . .
+	{% highlight c++ %}
 
-	// the leapfrog algorithm through CUDA kernel calls:
+	const int threadsPerBlock = 512;		// blockSize from NVDA_nbody
+	const int numTiles = (numPoints + threadsPerBlock -1) / threadsPerBlock;
+	const int sharedMemSize = threadsPerBlock * 2 * sizeof(float4);
 
-accel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
-		   (dev_points, dev_accels, numPoints, softSquared, dt, numTiles);
+	. . .
+	. . .
 
-vel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
-		 (dev_velocities, dev_accels, numPoints, dt);
+		// the leapfrog algorithm through CUDA kernel calls:
 
-r_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
-	   (dev_points, dev_velocities, numPoints, dt);
+	accel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
+			   (dev_points, dev_accels, numPoints, softSquared, dt, numTiles);
 
-vel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
-		 (dev_velocities, dev_accels, numPoints, dt);
+	vel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
+			 (dev_velocities, dev_accels, numPoints, dt);
 
-zero_accels <<< numTiles, threadsPerBlock, sharedMemSize >>>
-		   (dev_accels);
-```
+	r_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
+		   (dev_points, dev_velocities, numPoints, dt);
+
+	vel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
+			 (dev_velocities, dev_accels, numPoints, dt);
+
+	zero_accels <<< numTiles, threadsPerBlock, sharedMemSize >>>
+			   (dev_accels);
+
+	{% endhighlight %}
+
+</div>
+<hr>
 
 <h2 align="center">Results</h2>
 

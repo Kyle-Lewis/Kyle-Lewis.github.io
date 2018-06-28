@@ -52,7 +52,7 @@ ul.posts li {
     font-size: 1.5em !important;
 }
 
-.highlight  { background: #ffffff; }
+.highlight  { background: #F0F8FF; }
 .highlight .c { color: #999988; font-style: italic } /* Comment */
 .highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
 .highlight .k { font-weight: bold } /* Keyword */
