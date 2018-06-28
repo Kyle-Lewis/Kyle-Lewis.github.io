@@ -66,8 +66,8 @@ If you can make out the now tiny axes (which have remained the same size) throug
 $$
 	f_{halo}(E,L_z^2) = 
 		\begin{cases}
-		[(AL_z^2 + B)e^(-E/\sigma_0^2)] & \text{if $E < 0$,}
-		0 \text{otherwise.}
+		[(AL_z^2 + B)e^(-E/\sigma_0^2)] * [e^(-E/\sigma_0^2) - 1] & \text{if $E < 0$,} \\
+		0 & \text{otherwise.}
 		\end{cases}
 $$
 
