@@ -61,8 +61,8 @@ The model for the disk expects there to be central mass, from the bulge and ha
 <div style="font-size: 150%;">
 	$$
 		f_{disk}(E_p, L_z, E_z) = 
-		\frac{\SIGNMA(R_c)}{((2\pi^3)^{1/2}\kappa(R_c))} * \frac{\ro_d(R_c)}{\sigma_R^2(R_c)\sigma_z(R_c)}
-		e^{-\frac{E_p - E_c(R_c)}{\sigma_R^2(R_c)}}
+		\frac{\Sigma(R_c)}{((2\pi^3)^{1/2}\kappa(R_c))} \times \frac{\rho_d(R_c)}{\sigma_R^2(R_c)\sigma_z(R_c)}
+		e^{-\frac{E_p - E_c(R_c)}{\sigma_R^2(R_c)} - \frac{E_z}{\sigma_z^2(R_c)}}
 	$$
 </div>
 
@@ -82,7 +82,7 @@ If you can make out the now tiny axes (which have remained the same size) throug
 	$$
 		f_{halo}(E,L_z^2) = 
 			\begin{cases}
-			[(AL_z^2 + B)e^{-E/\sigma_0^2}] * [e^{-E/\sigma_0^2} - 1] & \text{if $E < 0$,} \\
+			[(AL_z^2 + B)e^{-E/\sigma_0^2}] \times [e^{-E/\sigma_0^2} - 1] & \text{if $E < 0$,} \\
 			0 & \text{otherwise.}
 			\end{cases}
 	$$
