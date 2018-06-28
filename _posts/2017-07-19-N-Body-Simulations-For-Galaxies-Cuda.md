@@ -64,9 +64,9 @@ the density and frequency parameters with a tilde are chosen to match observatio
 If you can make out the now tiny axes (which have remained the same size) through the artifacts in the gif you can see the halo is massive in comparison to the visible galaxy. It's also literally massive, ~94% of the entire system using this combined model. The distribution function is not too different from that of the bulge, it decays more slowly and most importantly, it is not spherical. It's known as an Evan's model and has slightly flattened poles, converging slightly inward towards the disk:
 
 $$
-	f_halo(E,L_z^2) = 
+	f_{halo}(E,L_z^2) = 
 		\begin{cases}
-		[(AL_z^2 + B)e^(-E/$sigma_0^2)] & \text{if $E < 0$,}
+		[(AL_z^2 + B)e^(-E/\sigma_0^2)] & \text{if $E < 0$,}
 		0 \text{otherwise.}
 		\end{cases}
 $$
@@ -76,7 +76,11 @@ As described, the parameters A, B, and C, correspond to the density scale, t
 
 <h2 align="center">All Together</h2>
 
-A stationary full galaxy, stable when put together as intended
+<figure>
+	<img src="{{site.baseurl}}/images/nbody-cuda/33kgalaxy7h.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">A stationary full galaxy, stable when put together as intended</figcaption>
+</figure>
+
 
 
 <h2 align="center">The Code</h2>
