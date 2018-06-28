@@ -49,7 +49,7 @@ The bulge utilizes King's model, which can be thought of as a truncated Isotherm
 	$$
 		f_{bulge}(E) = 
 			\begin{cases}
-			\rho_b(2\pi\sigma_b^2)^{-frac{3}{2}}e^{\frac{\Psi_o - \Psi_c)}{\sigma_b^2}} \cdot (e^{\frac{-(E-\Psi_c)}{\sigma_b^2}} - 1) & \text{if $E < \Psi_c$,} \\
+			\rho_b(2\pi\sigma_b^2)^{-\frac{3}{2}}e^{\frac{\Psi_o - \Psi_c}{\sigma_b^2}} \cdot (e^{\frac{-E+\Psi_c}{\sigma_b^2}} - 1) & \text{if $E < \Psi_c$,} \\
 			0 & \text{otherwise.}
 			\end{cases}
 	$$
@@ -108,13 +108,142 @@ As described, the parameters A, B, and C, correspond to the density scale, t
 
 
 <h2 align="center">The Code</h2>
+The CUDA device code i've used is shown below. As demonstrated by NVDIA, the acceleration kernel is split into chunks ("tiles") which can access a smaller pool of shared memory while they run. The other kernels perform the leapfrog steps of the algorithm after acceleration has been calculated for each body. 
 
-to be written . . .
+{% highlight c++ %}
+		/* Single body-body interaction, sums the acceleration 
+		 * quantity across all interactions */
+__device__ float3
+bodyBodyInteraction(float4 bi, float4 bj, float3 ai, float softSquared) 
+{
+	float3 r;
+	r.x = bj.x - bi.x;
+	r.y = bj.y - bi.y;
+	r.z = bj.z - bi.z;
+	float distSqr = r.x * r.x + r.y * r.y + r.z * r.z;
+	float invDist = rsqrt(distSqr + softSquared);
+	float invDistCube = invDist * invDist * invDist;
+	float s = bj.w * invDistCube;
+	if(r.x != 0.0){
+		ai.x += r.x * s;
+		ai.y += r.y * s;
+		ai.z += r.z * s;
+	}
+	return ai;
+}
 
-the code is linked above, this will contain an introduction to CUDA and how it fits with common C++ programming, and a description of the n-body algorithm which differs only slightly from NVIDIA's provides sample. 
+		/* Apply body-body interactions in sets of "tiles" as per
+		 * NVIDIA's n-body example, loading from shared memory in 
+		 * this way speeds the algorithm further */ 
+__device__ float3
+tile_accel(float4 threadPos, float4 *PosMirror, float3 accel, float softSquared,
+		   int numTiles) 
+{
 
-I'll discuss the possibility for a tree code implementation as well, and the additional orders of magnitude which it would bring in speed. 
+	extern __shared__ float4 sharedPos[];
+
+	for (int tile = 0; tile < numTiles; tile++){
+		sharedPos[threadIdx.x] = PosMirror[tile * blockDim.x + threadIdx.x];
+		__syncthreads();
+
+#pragma unroll 128
+
+		for ( int i = 0; i < blockDim.x; i++ ) {
+			accel = bodyBodyInteraction(threadPos, sharedPos[i], accel, softSquared);
+		}
+		__syncthreads();
+	}
+	return accel;
+}
+
+		/* Acquire all acceleration vectors for the points */ 
+__global__ void
+accel_step( float4 *__restrict__ devPos,
+			float3 *__restrict__ accels,
+			unsigned int numBodies,
+			float softSquared,
+			float dt, int numTiles ) 
+{
+	int index = blockIdx.x * blockDim.x + threadIdx.x;
+	if (index > numBodies) {return;};
+	accels[index] = tile_accel(devPos[index], devPos, accels[index], softSquared, numTiles);
+	__syncthreads();
+}
+
+		/* Step all point-velocities by 0.5 * a * dt
+		 * as per a leapfrog algorithm; is called twice,
+		 * once before and once after the position step */
+__global__ void
+vel_step( float4 *__restrict__ deviceVel,
+		  float3 *__restrict__ accels,
+		  unsigned int numBodies,
+		  float dt)
+{
+	int index = blockIdx.x * blockDim.x + threadIdx.x;
+	if (index > numBodies) {return;};
+	deviceVel[index].x += accels[index].x * 0.5 * dt;
+	deviceVel[index].y += accels[index].y * 0.5 * dt;
+	deviceVel[index].z += accels[index].z * 0.5 * dt;
+}
+
+		/* Step positions from velocities */
+__global__ void
+r_step( float4 *__restrict__ devPos,
+		float4 *__restrict__ deviceVel,
+		unsigned int numBodies,
+		float dt)
+{
+	int index = blockIdx.x * blockDim.x + threadIdx.x;
+	if (index > numBodies) {return;};
+	devPos[index].x += deviceVel[index].x * dt;
+	devPos[index].y += deviceVel[index].y * dt;
+	devPos[index].z += deviceVel[index].z * dt;
+}
+
+		/* zero the acceleration array between leapfrog 
+		 * steps, I wasn't sure if a cuda mem-set existed 
+		 * and/or would be faster */
+__global__ void
+zero_accels( float3 *__restrict__ accels ) 
+{
+	int index = blockIdx.x * blockDim.x + threadIdx.x;
+	accels[index].x = 0.0f;
+	accels[index].y = 0.0f;
+	accels[index].z = 0.0f;
+}
+
+{% endhighlight %}
+
+These are all called with the same thread dimensions using CUDA's "<<< >>>" syntax:
+
+{% highlight c++}
+
+	const int threadsPerBlock = 512;		// blockSize from NVDA_nbody
+	const int numTiles = (numPoints + threadsPerBlock -1) / threadsPerBlock;
+	const int sharedMemSize = threadsPerBlock * 2 * sizeof(float4);
+
+	. . .
+	. . .
+
+	// the leapfrog algorithm through CUDA kernel calls:
+
+	accel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
+			   (dev_points, dev_accels, numPoints, softSquared, dt, numTiles);
+
+	vel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
+			 (dev_velocities, dev_accels, numPoints, dt);
+
+	r_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
+		   (dev_points, dev_velocities, numPoints, dt);
+
+	vel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
+			 (dev_velocities, dev_accels, numPoints, dt);
+
+	zero_accels <<< numTiles, threadsPerBlock, sharedMemSize >>>
+			   (dev_accels);
+
+{% endhighlight %}
 
 <h2 align="center">Results</h2>
 
-I'll be posting more on the results, including a simulated collision of these D.B.H. galaxies. For now here is a colorized visualization of the code running on a galaxy comprised of ~33 thousand points. The simulation ran on the order of hours; without any approximations like a tree-code it could have taken many years on the CPU.
+I'll be posting more on the results, including a simulated collision of these D.B.H. galaxies.
