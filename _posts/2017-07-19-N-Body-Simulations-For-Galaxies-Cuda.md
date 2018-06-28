@@ -107,12 +107,11 @@ As described, the parameters A, B, and C, correspond to the density scale, t
 </figure>
 
 
-
 <h2 align="center">The Code</h2>
 
 The CUDA device code i've used is shown below. As demonstrated by NVDIA, the acceleration kernel is split into chunks ("tiles") which can access a smaller pool of shared memory while they run. The other kernels perform the leapfrog steps of the algorithm after acceleration has been calculated for each body. 
 
-{% highlight c++ %}
+<!-- {% highlight c++ %}
 
 		/* Single body-body interaction, sums the acceleration 
 		 * quantity across all interactions */
@@ -142,7 +141,7 @@ __device__ float3
 tile_accel(float4 threadPos, float4 *PosMirror, float3 accel, float softSquared,
 		   int numTiles) 
 {
-	
+
 	extern __shared__ float4 sharedPos[];
 
 	for (int tile = 0; tile < numTiles; tile++){
@@ -215,35 +214,35 @@ zero_accels( float3 *__restrict__ accels )
 	accels[index].z = 0.0f;
 }
 
-{% endhighlight %}
+{% endhighlight %} -->
 
 These are all called with the same thread dimensions using CUDA's "<<< >>>" syntax:
 
 {% highlight c++}
 
-	const int threadsPerBlock = 512;		// blockSize from NVDA_nbody
-	const int numTiles = (numPoints + threadsPerBlock -1) / threadsPerBlock;
-	const int sharedMemSize = threadsPerBlock * 2 * sizeof(float4);
+const int threadsPerBlock = 512;		// blockSize from NVDA_nbody
+const int numTiles = (numPoints + threadsPerBlock -1) / threadsPerBlock;
+const int sharedMemSize = threadsPerBlock * 2 * sizeof(float4);
 
-	. . .
-	. . .
+. . .
+. . .
 
-	// the leapfrog algorithm through CUDA kernel calls:
+// the leapfrog algorithm through CUDA kernel calls:
 
-	accel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
-			   (dev_points, dev_accels, numPoints, softSquared, dt, numTiles);
+accel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
+		   (dev_points, dev_accels, numPoints, softSquared, dt, numTiles);
 
-	vel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
-			 (dev_velocities, dev_accels, numPoints, dt);
+vel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
+		 (dev_velocities, dev_accels, numPoints, dt);
 
-	r_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
-		   (dev_points, dev_velocities, numPoints, dt);
+r_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
+	   (dev_points, dev_velocities, numPoints, dt);
 
-	vel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
-			 (dev_velocities, dev_accels, numPoints, dt);
+vel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
+		 (dev_velocities, dev_accels, numPoints, dt);
 
-	zero_accels <<< numTiles, threadsPerBlock, sharedMemSize >>>
-			   (dev_accels);
+zero_accels <<< numTiles, threadsPerBlock, sharedMemSize >>>
+		   (dev_accels);
 
 {% endhighlight %}
 
