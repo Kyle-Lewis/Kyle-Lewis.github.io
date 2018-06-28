@@ -45,7 +45,15 @@ I'll break this portion into descriptions of Kiujiken & Dubinski's models for 
 
 The bulge utilizes King's model, which can be thought of as a truncated Isothermal Sphere. Model's such as these achieve stability by requiring inward gravitational forces to match outward "pressure" when forming a distribution. One must make corrections to an infinity which arises at the origin, as well as the truncation which must be made in a simulation, without which the sphere would go to infinity and contain theoretically infinite mass. Here's what that ends up looking like in the paper:
 
-
+<div style="font-size: 150%;">
+	$$
+		f_{bulge}(E) = 
+			\begin{cases}
+			\rho_b(2\pi\sigma_b^2)^{-frac{3}{2}}e^{\frac{\Psi_o - \Psi_c)}{\sigma_b^2}} \cdot (e^{\frac{-(E-\Psi_c)}{\sigma_b^2}} - 1) & \text{if $E < \Psi_c$,} \\
+			0 & \text{otherwise.}
+			\end{cases}
+	$$
+</div>
 
 These are not very pretty! What matters here are the desired ρb value specifying the central bulge density, and the relationships between ψc and σb and σ0, which determine how sharply the distribution cuts off. The author's chose values which gave a more centrally dense bulge than the halo distribution, likely to match observation.
 
@@ -61,7 +69,7 @@ The model for the disk expects there to be central mass, from the bulge and ha
 <div style="font-size: 150%;">
 	$$
 		f_{disk}(E_p, L_z, E_z) = 
-		\frac{\Sigma(R_c)}{((2\pi^3)^{1/2}\kappa(R_c))} \times \frac{\tilde\rho_d(R_c)}{\tilde\sigma_R^2(R_c)\tilde\sigma_z(R_c)}
+		\frac{\Sigma(R_c)}{((2\pi^3)^{1/2}\kappa(R_c))} \cdot \frac{\tilde\rho_d(R_c)}{\tilde\sigma_R^2(R_c)\tilde\sigma_z(R_c)}
 		e^{-\frac{E_p - E_c(R_c)}{\tilde\sigma_R^2(R_c)} - \frac{E_z}{\tilde\sigma_z^2(R_c)}}
 	$$
 </div>
@@ -82,7 +90,7 @@ If you can make out the now tiny axes (which have remained the same size) throug
 	$$
 		f_{halo}(E,L_z^2) = 
 			\begin{cases}
-			[(AL_z^2 + B)e^{-E/\sigma_0^2}] \times [e^{-E/\sigma_0^2} - 1] & \text{if $E < 0$,} \\
+			[(AL_z^2 + B)e^{-E/\sigma_0^2}] \cdot [e^{-E/\sigma_0^2} - 1] & \text{if $E < 0$,} \\
 			0 & \text{otherwise.}
 			\end{cases}
 	$$
