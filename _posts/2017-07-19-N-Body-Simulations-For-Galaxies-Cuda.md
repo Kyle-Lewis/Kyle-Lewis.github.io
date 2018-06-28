@@ -28,7 +28,11 @@ I'll break this portion into descriptions of Kiujiken & Dubinski's models for 
 
 <h2 align="center">The Bulge</h2>
 
-Stand alone King's bulge
+<figure>
+	<img src="{{site.baseurl}}/images/nbody-cuda/bulge2.gif" style="padding-bottom:0.5em; width:100%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">Stand alone King's bulge</figcaption>
+</figure>
+
 The bulge utilizes King's model, which can be thought of as a truncated Isothermal Sphere. Model's such as these achieve stability by requiring inward gravitational forces to match outward "pressure" when forming a distribution. One must make corrections to an infinity which arises at the origin, as well as the truncation which must be made in a simulation, without which the sphere would go to infinity and contain theoretically infinite mass. Here's what that ends up looking like in the paper:
 
 
@@ -37,7 +41,11 @@ These are not very pretty! What matters here are the desired ρb value specifyi
 
 <h2 align="center">The Disk</h2>
 
-Stand alone Disk, with no central bodies to hold it stable
+<figure>
+	<img src="{{site.baseurl}}/images/nbody-cuda/disk.gif" style="padding-bottom:0.5em; width:100%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">Stand alone Disk, with no central bodies to hold it stable</figcaption>
+</figure>
+
 The model for the disk expects there to be central mass, from the bulge and halo, in order to be stable. As such, masses closest to the center are given more energy such that they don't collapse inward. Simulating the thing alone the results in an expansion of these masses, but I've done it anyway for the sake of completion. The distribution function below has become a function of 3 energy variables, w.r.t. planar motions, angular momentum, and the additional z energy component which the paper models simply as an oscillation across the plane of the disk:
 
 
@@ -46,8 +54,22 @@ the density and frequency parameters with a tilde are chosen to match observatio
 
 <h2 align="center">The Halo</h2>
 
-The dark matter halo, another ~ isothermal sphere with a softer decay
+<figure>
+	<img src="{{site.baseurl}}/images/nbody-cuda/halo.gif" style="padding-bottom:0.5em; width:100%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">The dark matter halo, another ~ isothermal sphere with a softer decay</figcaption>
+</figure>
+
+
 If you can make out the now tiny axes (which have remained the same size) through the artifacts in the gif you can see the halo is massive in comparison to the visible galaxy. It's also literally massive, ~94% of the entire system using this combined model. The distribution function is not too different from that of the bulge, it decays more slowly and most importantly, it is not spherical. It's known as an Evan's model and has slightly flattened poles, converging slightly inward towards the disk:
+
+$$
+	f_halo(E,L_z^2) = 
+		\begin{cases}
+		[(AL_z^2 + B)e^(-E/$sigma_0^2)] & \text{if $E < 0$,}
+		0 \text{otherwise.}
+		\end{cases}
+$$
+
 
 As described, the parameters A, B, and C, correspond to the density scale, the "core" radius, and the flattening parameter which is characteristic of Evan's model.
 
