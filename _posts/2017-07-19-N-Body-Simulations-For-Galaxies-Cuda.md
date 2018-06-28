@@ -85,7 +85,7 @@ the density and frequency parameters with a tilde are chosen to match observatio
 </figure>
 
 
-If you can make out the now tiny axes (which have remained the same size) through the artifacts in the gif you can see the halo is massive in comparison to the visible galaxy. It's also literally massive, ~94% of the entire system using this combined model. The distribution function is not too different from that of the bulge, it decays more slowly and most importantly, it is not spherical. It's known as an Evan's model and has slightly flattened poles, converging slightly inward towards the disk:
+If you can make out the now tiny axes (which have remained the same size) through the artifacts in the gif you can see the halo is massive in comparison to the visible galaxy. It's also literally massive, ~94% of the entire system using this combined model. The distribution function is not too different from that of the bulge, it decays more slowly and most importantly, it is not spherical. It's known as an Evan's model and has slightly flattened poles, converging slightly inward towards the disk
 
 <div style="font-size: 150%;">
 	$$
@@ -216,7 +216,7 @@ zero_accels( float3 *__restrict__ accels )
 
 {% endhighlight %} -->
 
-These are all called with the same thread dimensions using CUDA's "<<< >>>" syntax:
+<!-- These are all called with the same thread dimensions using CUDA's "<<< >>>" syntax:
 
 ```c++
 const int threadsPerBlock = 512;		// blockSize from NVDA_nbody
@@ -242,7 +242,7 @@ vel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
 
 zero_accels <<< numTiles, threadsPerBlock, sharedMemSize >>>
 		   (dev_accels);
-```
+``` -->
 
 <h2 align="center">Results</h2>
 
