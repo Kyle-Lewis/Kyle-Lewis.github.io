@@ -109,9 +109,11 @@ As described, the parameters A, B, and C, correspond to the density scale, t
 
 
 <h2 align="center">The Code</h2>
+
 The CUDA device code i've used is shown below. As demonstrated by NVDIA, the acceleration kernel is split into chunks ("tiles") which can access a smaller pool of shared memory while they run. The other kernels perform the leapfrog steps of the algorithm after acceleration has been calculated for each body. 
 
 {% highlight c++ %}
+
 		/* Single body-body interaction, sums the acceleration 
 		 * quantity across all interactions */
 __device__ float3
@@ -140,7 +142,7 @@ __device__ float3
 tile_accel(float4 threadPos, float4 *PosMirror, float3 accel, float softSquared,
 		   int numTiles) 
 {
-
+	
 	extern __shared__ float4 sharedPos[];
 
 	for (int tile = 0; tile < numTiles; tile++){
