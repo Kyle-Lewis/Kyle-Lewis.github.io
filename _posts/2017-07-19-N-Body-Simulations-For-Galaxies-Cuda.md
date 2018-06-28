@@ -216,7 +216,7 @@ zero_accels( float3 *__restrict__ accels )
 
 {% endhighlight %} -->
 
-<!-- These are all called with the same thread dimensions using CUDA's "<<< >>>" syntax:
+These are all called with the same thread dimensions using CUDA's "<<< >>>" syntax:
 
 ```c++
 const int threadsPerBlock = 512;		// blockSize from NVDA_nbody
@@ -242,7 +242,7 @@ vel_step <<< numTiles, threadsPerBlock, sharedMemSize >>>
 
 zero_accels <<< numTiles, threadsPerBlock, sharedMemSize >>>
 		   (dev_accels);
-``` -->
+```
 
 <h2 align="center">Results</h2>
 
