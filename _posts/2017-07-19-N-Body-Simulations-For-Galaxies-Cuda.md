@@ -4,6 +4,15 @@ title: "N-Body Simulations for Galaxies - CUDA"
 categories: [Physics, CUDA]
 date: 2017-07-19
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  CommonHTML: {
+    scale: 150
+  }
+});
+</script>
+<script type="text/javascript" async
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 <h2 align="center">References</h2>
