@@ -4,6 +4,7 @@ title: "N-Body Simulations for Galaxies - CUDA"
 categories: [Physics, CUDA]
 date: 2017-07-19
 ---
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 <h2 align="center">References</h2>
 
@@ -29,7 +30,7 @@ I'll break this portion into descriptions of Kiujiken & Dubinski's models for 
 <h2 align="center">The Bulge</h2>
 
 <figure>
-	<img src="{{site.baseurl}}/images/nbody-cuda/bulge2.gif" style="padding-bottom:0.5em; width:100%; margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/nbody-cuda/bulge2.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">Stand alone King's bulge</figcaption>
 </figure>
 
@@ -42,7 +43,7 @@ These are not very pretty! What matters here are the desired ρb value specifyi
 <h2 align="center">The Disk</h2>
 
 <figure>
-	<img src="{{site.baseurl}}/images/nbody-cuda/disk.gif" style="padding-bottom:0.5em; width:100%; margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/nbody-cuda/disk.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">Stand alone Disk, with no central bodies to hold it stable</figcaption>
 </figure>
 
@@ -55,7 +56,7 @@ the density and frequency parameters with a tilde are chosen to match observatio
 <h2 align="center">The Halo</h2>
 
 <figure>
-	<img src="{{site.baseurl}}/images/nbody-cuda/halo.gif" style="padding-bottom:0.5em; width:100%; margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/nbody-cuda/halo.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">The dark matter halo, another ~ isothermal sphere with a softer decay</figcaption>
 </figure>
 
