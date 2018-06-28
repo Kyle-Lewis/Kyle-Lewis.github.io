@@ -111,7 +111,7 @@ As described, the parameters A, B, and C, correspond to the density scale, t
 
 The CUDA device code i've used is shown below. As demonstrated by NVDIA, the acceleration kernel is split into chunks ("tiles") which can access a smaller pool of shared memory while they run. The other kernels perform the leapfrog steps of the algorithm after acceleration has been calculated for each body. 
 
-<!-- {% highlight c++ %}
+{% highlight c++ %}
 
 		/* Single body-body interaction, sums the acceleration 
 		 * quantity across all interactions */
@@ -214,7 +214,7 @@ zero_accels( float3 *__restrict__ accels )
 	accels[index].z = 0.0f;
 }
 
-{% endhighlight %} -->
+{% endhighlight %}
 
 These are all called with the same thread dimensions using CUDA's "<<< >>>" syntax:
 
