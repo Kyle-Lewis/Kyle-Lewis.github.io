@@ -72,7 +72,7 @@ the density and frequency parameters with a tilde are chosen to match observatio
 
 If you can make out the now tiny axes (which have remained the same size) through the artifacts in the gif you can see the halo is massive in comparison to the visible galaxy. It's also literally massive, ~94% of the entire system using this combined model. The distribution function is not too different from that of the bulge, it decays more slowly and most importantly, it is not spherical. It's known as an Evan's model and has slightly flattened poles, converging slightly inward towards the disk:
 
-<div style="zoom:0.5; -moz-transform:scale(1.5)">
+<div style="font-size: 150%; zoom:0.5; -moz-transform:scale(1.5)">
 	$$
 		f_{halo}(E,L_z^2) = 
 			\begin{cases}
