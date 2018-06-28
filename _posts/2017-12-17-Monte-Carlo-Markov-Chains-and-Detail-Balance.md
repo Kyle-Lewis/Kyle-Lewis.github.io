@@ -5,27 +5,47 @@ categories: [Notes and Proofs]
 date: 2018-06-25
 ---
 
-References
-Morten Hjorth-Jensen's Lecture notes on Computational Physics.
-Various wiki pages display discrete forms of common operators in use.
-Introduction and Motivation
-I realized while writing up {my post on the Quantum Variational Monte Carlo} that there was enough non-physics background information to warrant a separate post. I went back to one of those resources, Hjorth-Jensen's notes, which a professor of mine had provided as an extra resource and, at the time, I had completely passed over.
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  CommonHTML: {
+    scale: 150
+  }
+});
+</script>
+<script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<h2>References</h2>
+
+- Morten Hjorth-Jensen's <a href="http://www.uio.no/studier/emner/matnat/fys/FYS3150/h09/undervisningsmateriale/Lecture%20Notes/lectures2009.pdf" target="_blank">Lecture notes on Computational Physics.</a>
+- Various wiki pages display discrete forms of common operators in use.
+
+
+<h2>Introduction and Motivation</h2>	
+
+I realized while writing up [a relative link](2017-07-19-Variational-Monte-Carlo-in-QM.md "my post on the Quantum Variational Monte Carlo") that there was enough non-physics background information to warrant a separate post. I went back to one of those resources, Hjorth-Jensen's notes, which a professor of mine had provided as an extra resource and, at the time, I had completely passed over.
 
 It's too bad that I did because a few chapters I pull from in this post give wonderfully simplistic examples of Monte Carlo simulations, Markov processes, and the motivation behind the detail balance requirement. This post is more or less my notes from those notes. These are general approaches to problems which have probabilistic features, and extend in use cases beyond physics, so it would be good to explain their use before applying them.
 
-TL;DR
-Raw Monte Carlo, random importance sampling, is not very useful for even simple cases where methods fail to converge if the acceptances are small. Some Markov Process, a chain of states describing some system and linked by transition matrices, can be introduced to defeat this problem. The nature of the acceptance criteria for random moves between states must abide by both ergodicity and detailed balance constraints; an example which satisfies both being the Metropolis-Hastings algorithm.
+<h2>TL;DR</h2>
+
+Raw Monte Carlo, random importance sampling, is not very useful for even simple cases where methods fail to converge if the acceptances are small. Some Markov Process, a chain of states describing some system and linked by transition matrices, can be introduced to defeat this problem. The nature of the acceptance criteria for random moves between states must abide by both *ergodicity* and *detailed balance* constraints; an example which satisfies both being the Metropolis-Hastings algorithm.
 
 Algorithms like this are called Markov chain Monte Carlo methods, MCMC.
 
-Discrete forms for Vector Calculus Operators, a cheat sheet
+<h2>Discrete forms for Vector Calculus Operators, a cheat sheet</h2>
+
 Because computations are finite, simulations become discrete; continuous functions are represented in a space which is divided into small cells. In other words, the dx which we put at the end of our integrals is no longer infinitesimally small but has some real length (or time, or frequency, etc) value, and our integrals all become really long sums as a result. Below are some common calculus operators as they appear in a discrete 2 dimensional case:
 
+<figure>
+	<img src="{{site.baseurl}}/images/markov-chains/discreteoperatorsunaltered1.png" style="padding-bottom:0.5em; width:80%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;"></figcaption>
+</figure>
 
+Which I borrowed from [a link](http://meatfighter.com/fluiddynamics/GPU_Gems_Chapter_38.pdf "a chapter of Nvidias cuda gems book") to avoid the Latex work. I promise that thinking about these for a minute to check that they make sense is worth anyone's time here.
 
-Which I borrowed from a chapter of Nvidias cuda gems book to avoid the Latex work. I promise that thinking about these for a minute to check that they make sense is worth anyone's time here.
+<h2>Markov Chains, Discretized Diffusion example</h2>
 
-Markov Chains, Discretized Diffusion example
 We can apply a Markov chain to random walks simulating the evolution described by the diffusion equation:
 
 $latex \frac{\partial w(x, t)}{\partial t} = D \frac{\partial^2 w(x,t)}{\partial x^2} &bg=ffffff&s=3$
@@ -38,7 +58,10 @@ is the probability of finding a particle in some discrete region dx and at som
 
 The chain in a Markov chain is a chain between states of a system. The states of our system, for example, can be simply the set of [0, 1] values indicating the position of a particle on a discrete lattice in one dimensional space, with divisions of length l
 
-
+<figure>
+	<img src="{{site.baseurl}}/images/markov-chains/discretelineplot.png" style="padding-bottom:0.5em; width:80%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;"></figcaption>
+</figure>
 
 Additionally, we can introduce a probability that the particle will will move right or left by the distance l, Pl, and Pr during some (also discretized) time step $latex \Delta t = \epsilon &bg=ffffff$. This can be written:
 
@@ -107,7 +130,10 @@ $latex \vec{w}(t = \infty) = \hat{W}\vec{w}(t = \infty) &bg=ffffff&s=2 $
 
 For our Markov process to reach equilibrium we require some set of states which have no net flow of probability. I'll draw this out first:
 
-
+<figure>
+	<img src="{{site.baseurl}}/images/markov-chains/detailed-balance.png" style="padding-bottom:0.5em; width:80%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;"></figcaption>
+</figure>
 
 In this cycle of states, which could have easily included more than two states, there is no net flow of probability (or whatever it is your states are measuring!) between any pair of states. You might think of this as the equivalent of some chemical equilibrium in a reaction. This is the detailed balance condition that we want to impose on our process. Another way of describing this would be to say that a particular Markov chain is reversible. 
 

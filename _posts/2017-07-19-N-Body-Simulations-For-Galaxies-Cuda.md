@@ -222,7 +222,7 @@ zero_accels( float3 *__restrict__ accels )
 </div>
 <hr>
 
-These are all called with the same thread dimensions using CUDA's "<<< >>>" syntax:
+These are all called with the same thread dimensions using CUDA's kernel launch syntax:
 
 <hr>
 <div style="width:110%">
