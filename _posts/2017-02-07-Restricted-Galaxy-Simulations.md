@@ -3,7 +3,7 @@ layout: post
 title: "Restricted Galaxy Simulations"
 categories: [Physics]
 date: 2017-02-07
-image: {{site.baseurl}}/images/nbody-cuda/33kgalaxy7h.gif
+image: images/nbody-cuda/33kgalaxy7h.gif
 ---
 
 <h2 align="center">References</h2>

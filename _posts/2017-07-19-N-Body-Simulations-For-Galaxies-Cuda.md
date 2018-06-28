@@ -3,7 +3,7 @@ layout: post
 title: "N-Body Simulations for Galaxies - CUDA"
 categories: [Physics, CUDA]
 date: 2017-07-19
-image: {{site.baseurl}}/images/nbody-cuda/33kgalaxy7h.gif
+image: images/nbody-cuda/33kgalaxy7h.gif
 ---
 
 <script type="text/x-mathjax-config">
