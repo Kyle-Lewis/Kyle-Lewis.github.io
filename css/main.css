@@ -43,6 +43,8 @@ ul.posts li {
     list-style: none;
     font-size: 1.5em;
 }
-.MathJax{
-    font-size: 1.5em;
-}
+.MathJax.Hub.Config({
+    "HTML-CSS": {
+        scale: 150;
+    };
+});
