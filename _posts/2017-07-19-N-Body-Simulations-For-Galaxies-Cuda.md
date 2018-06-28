@@ -58,7 +58,13 @@ These are not very pretty! What matters here are the desired ρb value specifyi
 
 The model for the disk expects there to be central mass, from the bulge and halo, in order to be stable. As such, masses closest to the center are given more energy such that they don't collapse inward. Simulating the thing alone the results in an expansion of these masses, but I've done it anyway for the sake of completion. The distribution function below has become a function of 3 energy variables, w.r.t. planar motions, angular momentum, and the additional z energy component which the paper models simply as an oscillation across the plane of the disk:
 
-
+<div style="font-size: 150%;">
+	$$
+		f_{disk}(E_p, L_z, E_z) = 
+		\frac{\SIGNMA(R_c)}{((2\pi^3)^{1/2}\kappa(R_c))} * \frac{\ro_d(R_c)}{\sigma_R^2(R_c)\sigma_z(R_c)}
+		e^{-\frac{E_p - E_c(R_c)}{\sigma_R^2(R_c)}}
+	$$
+</div>
 
 the density and frequency parameters with a tilde are chosen to match observations, in particular light densities and rotation speeds of real disk galaxies, and likely for stability as well when the disk model is mixed with the other two. Energies and frequencies as a function of Rc are dependent on the energy of a circular orbit with the desired Lz parameter.
 
@@ -76,7 +82,7 @@ If you can make out the now tiny axes (which have remained the same size) throug
 	$$
 		f_{halo}(E,L_z^2) = 
 			\begin{cases}
-			[(AL_z^2 + B)e^(-E/\sigma_0^2)] * [e^(-E/\sigma_0^2) - 1] & \text{if $E < 0$,} \\
+			[(AL_z^2 + B)e^{-E/\sigma_0^2}] * [e^{-E/\sigma_0^2} - 1] & \text{if $E < 0$,} \\
 			0 & \text{otherwise.}
 			\end{cases}
 	$$
