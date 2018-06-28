@@ -48,3 +48,6 @@ ul.posts li {
         scale: 150;
     };
 });
+.MathJax{
+    font-size: 1.5em !important;
+}
