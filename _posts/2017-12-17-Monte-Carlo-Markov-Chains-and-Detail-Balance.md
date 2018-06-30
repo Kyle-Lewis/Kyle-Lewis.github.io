@@ -147,7 +147,7 @@ Which just says that some probability exists for the particle to be found at a l
 <div style="font-size: 150%;">
 	$$
 	\hat{w_i}(n\epsilon) = 
-		\frac{1}{2^n}{n \choose \frac{1}{2}(n + i)} & |i| \le n
+		\frac{1}{2^n}{n \choose \frac{1}{2}(n + i)} & |i| \le n \\
 	$$
 </div>
 
