@@ -38,7 +38,7 @@ Algorithms like this are called Markov chain Monte Carlo methods, MCMC.
 Because computations are finite, simulations become discrete; continuous functions are represented in a space which is divided into small cells. In other words, the dx which we put at the end of our integrals is no longer infinitesimally small but has some real length (or time, or frequency, etc) value, and our integrals all become really long sums as a result. Below are some common calculus operators as they appear in a discrete 2 dimensional case:
 
 <figure>
-	<img src="{{site.baseurl}}/images/markov-chains/discreteoperatorsunaltered1.png" style="padding-bottom:0.5em; width:80%; margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/markov-chains/discreteoperatorsunaltered1.png" style="padding-bottom:0.5em; width:80%; max-width:600px; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;"></figcaption>
 </figure>
 
@@ -61,7 +61,7 @@ is the probability of finding a particle in some discrete region dx and at som
 The *chain* in a Markov chain is a chain between states of a system. The states of *our* system, for example, can be simply the set of [0, 1] values indicating the position of a particle on a discrete lattice in one dimensional space, with divisions of length $l$
 
 <figure>
-	<img src="{{site.baseurl}}/images/markov-chains/discretelineplot.png" style="padding-bottom:0.5em; width:80%; margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/markov-chains/discretelineplot.png" style="padding-bottom:0.5em; width:80%; margin-left:auto; max-width:600px; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;"></figcaption>
 </figure>
 
@@ -189,7 +189,7 @@ $$ \vec{w}(t = \infty) = \hat{W}\vec{w}(t = \infty) $$
 For our Markov process to reach equilibrium we require some set of states which have no net flow of probability. I'll draw this out first:
 
 <figure>
-	<img src="{{site.baseurl}}/images/markov-chains/detailed-balance.png" style="padding-bottom:0.5em; width:80%; margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/markov-chains/detailed-balance.png" style="padding-bottom:0.5em; width:80%; margin-left:auto; max-width:600px; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;"></figcaption>
 </figure>
 
