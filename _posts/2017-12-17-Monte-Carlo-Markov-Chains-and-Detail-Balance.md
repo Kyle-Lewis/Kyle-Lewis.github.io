@@ -77,7 +77,7 @@ where:
 	$$ w(il - jl, \epsilon) = 
 		\begin{cases}
 			\frac{1}{2} & \text{if $|i - j| = 1$} 
-			= 0 & \text{otherwise}
+			0 & \text{otherwise}
 		\end{cases}
 	$$
 </div>
@@ -126,24 +126,48 @@ or, using binomial coefficients we can represent n timesteps:
 
 <div style="font-size: 150%;">
 	$$
-	\hat{W}^n(ne) = \frac{1}{2^n}\sum_{k=0}^n {n \choose k} \hat{R}^k\hat{L}^{n-k}
+	\hat{W}^n(n\epsilon) = \frac{1}{2^n}\sum_{k=0}^n {n \choose k} \hat{R}^k\hat{L}^{n-k}
 	$$
 </div>
 
 Where the 2^n term is a normalization factor. Moving from states i to j:
 
-
+<div style="font-size: 150%;">
+	$$
+	W(il - jl, n\epsilon) = 
+	\begin{cases}
+		\frac{1}{2^n}{n \choose \frac{1}{2}(n + i + j)} & |i - j| \le n,
+		0 & \text{otherwise}
+	\end{cases}
+	$$
+</div>
 
 Which just says that some probability exists for the particle to be found at a location as long as the location is within the maximum range the particle could have reached by that time. If the particle starts at zero the PDF for locations i becomes:
 
+<div style="font-size: 150%;">
+	$$
+	\hat{w_i}(n\epsilon) = 
+		\frac{1}{2^n}{n \choose \frac{1}{2}(n + i)} & |i| \le n,
+	$$
+</div>
 
+Converting $i$'s to $xl$'s and $n\epsilon$ to $t$, and using the recursion relation for binomial coefficients:
 
-Converting i's to xl's and $latex n\epsilon &bg=ffffff&s=0 $  to t, and using the recursion relation for binomial coefficients:
-
-
+<div style="font-size: 150%;">
+	$$
+	w(x, t + \epsilon) = 
+		\frac{1}{2}w(x + l, t) + \frac{1}{2}w(x - l,t)
+	$$
+</div>
 
 Which makes sense, the probability to find a particle at position x in the next time step would only be non-zero if there was a particle currently to the right or left. Subtracting w(x, t + e) to get the time derivative on the left side, and multiplying by the proper unit signature:
 
+<div style="font-size: 150%;">
+	$$
+	\frac{w(x, t + \epsilon) - w(x,t)}{\epsilon} = 
+		\frac{l^2}{2\epsilon}\frac{w(x + l,t) - 2w(x,t) + w(x - l,t)}{l^2}
+	$$
+</div>
 
 
 Looking at the cheat sheet for the gradient and laplacian discrete forms (and removing the extra terms because this is a 1D case) we've recovered exactly the discrete form of the diffusion equation from the application of our transition matrix. So, a Markov chain approximates a real physical process given enough states and a small enough time step.
