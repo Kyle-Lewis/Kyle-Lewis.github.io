@@ -120,13 +120,13 @@ $$ \hat{w}^2(2\epsilon) = \frac{1}{4}(\hat{L}^2 + \hat{R}^2 + 2\hat{R}\hat{L}) $
 </div>
 
 <div style="font-size: 150%;">
-$$ \hat{w}^2(2\epsilon) = \frac{1}{8}(\hat{L}^3 + \hat{R}^3 + 3\hat{R}^2\hat{L} + 3\hat{R}\hat{L}^2) $$
+$$ \hat{w}^2(3\epsilon) = \frac{1}{8}(\hat{L}^3 + \hat{R}^3 + 3\hat{R}^2\hat{L} + 3\hat{R}\hat{L}^2) $$
 </div>
 or, using binomial coefficients we can represent n timesteps:
 
 <div style="font-size: 150%;">
 	$$
-	\hat{W}^n(ne) = \frac{1}{2^n}\Sum_{k=0}^n {n \choose k} \hat{R}^k\hat{L}^{n-k}
+	\hat{W}^n(ne) = \frac{1}{2^n}\sum_{k=0}^n {n \choose k} \hat{R}^k\hat{L}^{n-k}
 	$$
 </div>
 
