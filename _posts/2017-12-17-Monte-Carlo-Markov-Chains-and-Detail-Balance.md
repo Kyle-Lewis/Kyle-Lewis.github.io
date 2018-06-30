@@ -99,11 +99,11 @@ Our transition matrix looks like the combination of two matrices which represent
 <div style="font-size: 150%;">
 	$$
 	\begin{pmatrix}
-	0 & \frac{1}{2} & 0 & 0 & 0 \\
-	\frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 \\
-	0 & \frac{1}{2} & 0 & \frac{1}{2} & 0 \\
-	0 & 0 & \frac{1}{2} & 0 & \frac{1}{2} \\
-	0 & 0 & 0 & \frac{1}{2} & 0 \\
+	0 & \frac{1}{2} & 0 & 0 & 0 \\\
+	\frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 \\\
+	0 & \frac{1}{2} & 0 & \frac{1}{2} & 0 \\\
+	0 & 0 & \frac{1}{2} & 0 & \frac{1}{2} \\\
+	0 & 0 & 0 & \frac{1}{2} & 0 \\\
 	\end{pmatrix}
 </div>
 
