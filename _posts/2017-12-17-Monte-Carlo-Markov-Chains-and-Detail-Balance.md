@@ -147,7 +147,7 @@ Which just says that some probability exists for the particle to be found at a l
 <div style="font-size: 150%;">
 	$$
 	\hat{w_i}(n\epsilon) = 
-		\frac{1}{2^n}{n \choose \frac{1}{2}(n + i)} & |i| \le n,
+		\frac{1}{2^n}{n \choose \frac{1}{2}(n + i)} & |i| \le n
 	$$
 </div>
 
@@ -168,7 +168,6 @@ Which makes sense, the probability to find a particle at position x in the next 
 		\frac{l^2}{2\epsilon}\frac{w(x + l,t) - 2w(x,t) + w(x - l,t)}{l^2}
 	$$
 </div>
-
 
 Looking at the cheat sheet for the gradient and laplacian discrete forms (and removing the extra terms because this is a 1D case) we've recovered exactly the discrete form of the diffusion equation from the application of our transition matrix. So, a Markov chain approximates a real physical process given enough states and a small enough time step.
 
