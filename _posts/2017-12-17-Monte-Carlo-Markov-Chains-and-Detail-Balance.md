@@ -66,7 +66,7 @@ The *chain* in a Markov chain is a chain between states of a system. The sta
 	<figcaption style="text-align:center;"></figcaption>
 </figure>
 
-Additionally, we can introduce a probability that the particle will will move right or left by the distance l, Pl, and Pr during some (also discretized) time step $latex \Delta t = \epsilon &bg=ffffff$. This can be written:
+Additionally, we can introduce a probability that the particle will will move right or left by the distance l, Pl, and Pr during some (also discretized) time step $\Delta t = \epsilon$$. This can be written:
 
 <div style="font-size: 150%;">
 	$$ W_{ij} (\epsilon) = w(il - jl, \epsilon) $$
@@ -124,7 +124,11 @@ $$ \hat{w}^2(2\epsilon) = \frac{1}{8}(\hat{L}^3 + \hat{R}^3 + 3\hat{R}^2\hat{L} 
 </div>
 or, using binomial coefficients we can represent n timesteps:
 
-
+<div style="font-size: 150%;">
+	$$
+	\hat{W}^n(ne) = \frac{1}{2^n}\Sum_{k=0}^n {n \choose k} \hat{R}^k\hat{L}^{n-k}
+	$$
+</div>
 
 Where the 2^n term is a normalization factor. Moving from states i to j:
 
