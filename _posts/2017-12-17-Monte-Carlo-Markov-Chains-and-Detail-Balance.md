@@ -70,7 +70,7 @@ The *chain* in a Markov chain is a chain between states of a system. The sta
 	<figcaption style="text-align:center;"></figcaption>
 </figure>
 
-Additionally, we can introduce a probability that the particle will will move right or left by the distance l, Pl, and Pr during some (also discretized) time step $\Delta t = \epsilon$$. This can be written:
+Additionally, we can introduce a probability that the particle will will move right or left by the distance l, Pl, and Pr during some (also discretized) time step $\Delta t = \epsilon$. This can be written:
 
 <div style="font-size: 150%;">
 	$$ W_{ij} (\epsilon) = w(il - jl, \epsilon) $$
