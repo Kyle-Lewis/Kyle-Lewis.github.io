@@ -10,6 +10,10 @@ MathJax.Hub.Config({
   CommonHTML: {
     scale: 150
   }
+  tex2jax: {
+  	inlineMath: [ ['$', '$'], ["\\(","\\)"] ],
+  	processEscapes: true
+  }
 });
 </script>
 <script type="text/javascript" async
@@ -97,14 +101,12 @@ and therefore:
 Our transition matrix looks like the combination of two matrices which represent right moves $\hat{R}$ and left moves $\hat{L}$ and we apply it to our state with the point at zero:
 
 <div style="font-size: 150%;">
-	$$
-	\begin{pmatrix}
-	0 & \frac{1}{2} & 0 & 0 & 0 \\\
-	\frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 \\\
-	0 & \frac{1}{2} & 0 & \frac{1}{2} & 0 \\\
-	0 & 0 & \frac{1}{2} & 0 & \frac{1}{2} \\\
-	0 & 0 & 0 & \frac{1}{2} & 0 \\\
-	\end{pmatrix}
+	$$ \begin{pmatrix}
+	0 & \frac{1}{2} & 0 & 0 & 0 \\\\
+	\frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 \\\\
+	0 & \frac{1}{2} & 0 & \frac{1}{2} & 0 \\\\
+	0 & 0 & \frac{1}{2} & 0 & \frac{1}{2} \\\\
+	0 & 0 & 0 & \frac{1}{2} & 0 \\\\ \end{pmatrix}
 </div>
 
 This sort transition matrix is sometimes called a Markov matrix, a Probability matrix, or a Stochastic matrix. Note that because all rows and all columns sum to 1 the transition preserves the number of particles in the state. The continued application a Markov matrix forms a Markov chain of states.
