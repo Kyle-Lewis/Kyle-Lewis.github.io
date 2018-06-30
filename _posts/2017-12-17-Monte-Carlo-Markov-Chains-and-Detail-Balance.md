@@ -177,11 +177,15 @@ Recreating diffusion isn't all too interesting because the equilibrium state, wh
 
 Generally we've been able to say this of our state:
 
-$latex \vec{w}(t + 1) = \hat{W}\vec{w}(t) &bg=ffffff&s=2 $
+<div style="font-size: 150%;">
+	$$ \vec{w}(t + 1) = \hat{W}\vec{w}(t) $$
+</div>	
 
 The state in the next time step is acquired by applying the transformation matrix to the previous timestep. An equilibrium will have been reached when repeated application of the matrix yields no change. e.g.
 
-$latex \vec{w}(t = \infty) = \hat{W}\vec{w}(t = \infty) &bg=ffffff&s=2 $
+<div style="font-size: 150%;">
+$$ \vec{w}(t = \infty) = \hat{W}\vec{w}(t = \infty) $$
+</div>
 
 For our Markov process to reach equilibrium we require some set of states which have no net flow of probability. I'll draw this out first:
 
@@ -194,42 +198,60 @@ In this cycle of states, which could have easily included more than two states, 
 
 Writing this out:
 
-
+<div style="font-size: 150%;">
+	$$W(j -> i)w_j = W(i -> j)w_i$$
+</div>
 
 or in the form of a ratio as we will use it:
 
+<div style="font-size: 150%;">
+	$$\frac{W(j -> i)}{W(i -> j)} = \frac{w_i}{w_j}$$
+</div>
 
-
-Again, for any state i, to and from any other state j.
+Again, for any state $i$, to and from any other state $j$.
 
 <h2 align="center">An example application to the Boltzmann Distribution using the Metropolis-Hastings algorithm</h2>
 
-To demonstrate the use of detailed balance in a markov process we can apply the concepts to generate the Boltzmann distribution. The Boltzmann distribution describes the probability of finding a microstate of particles (classically of some gas) with a certain energy Ei. It looks like:
+To demonstrate the use of detailed balance in a markov process we can apply the concepts to generate the Boltzmann distribution. The Boltzmann distribution describes the probability of finding a microstate of particles (classically of some gas) with a certain energy $E_i$. It looks like:
 
-
+<div style="font-size: 150%;">
+	$$ w_i = \frac{e^{-\Beta(E_i)}}{Z} $$
+</div>
 
 The states that we are dealing with now are much larger and more complex than the one dimensional single particle. Now we can think of some large distribution of particles in three dimensions, with each possible configuration of particles (within some discretization scheme) making up our explorable "state space".
 
-Z, the partition function, is a normalization coefficient which is the sum of all probabilities across all possible microstates of the system. There are essentially an infinite number of microstates for these systems so brute force population of the distribution via Monte Carlo would be pretty ineffective. However, we know the equilibrium will satisfy the detail balance condition, and so we can select for random movements between states which maintain the detail balance ratio which we described in the previous section. Doing so will bring us to the "solved" equilibrium state without ever having to explicitly integrate over all possible states.
+$Z$, the partition function, is a normalization coefficient which is the sum of all probabilities across all possible microstates of the system. There are essentially an infinite number of microstates for these systems so brute force population of the distribution via Monte Carlo would be pretty ineffective. However, we know the equilibrium will satisfy the detail balance condition, and so we can select for random movements between states which maintain the detail balance ratio which we described in the previous section. Doing so will bring us to the "solved" equilibrium state without ever having to explicitly integrate over all possible states.
 
 What i'm describing is the acceptance criteria used in the Metropolis algorithm. Given that a Markov process must satisfy a detail balance ratio, for the Boltzmann distribution this means:
 
-
+<div style="font-size: 150%;">
+	$$\frac{w_i}{w_j} = e^{-\Beta(E_i - E_j)}
+</div>
 
 And so, when applying randomized transitions to the state, we want our acceptance rate to conform to this ratio. This "guides" our state transitions towards the equilibrium described by Boltzmann.
 
 So if we make random moves among the particles in the system, and accept/deny those moves based on the criteria:
 
+<div style="font-size: 150%;">
+	$$\frac{A(j -> i)}{A(i -> j)} = e^{-\Beta(E_i - E_j)}
+</div>
 
+Where $A$ is an acceptance rate for the move between states $i$ and $j$.
 
-Where A is an acceptance rate for the move between states i and j.
+We know systems in equilibrium will inhabit the lowest energy states available to them, and so a simple test would be to only accept random state changes which lower the energy. This *would* give give us solutions, but would get stuck in any local minima which exist in our state space, generally speaking. This is another way of saying that such a simple acceptance criteria would violate [ergodicity](https://en.wikipedia.org/wiki/Ergodicity). Even given an infinite amount of computing time, we would not explore *all* available states and therefore never be sure that we had found the correct solution rather than a local minimum.
 
-We know systems in equilibrium will inhabit the lowest energy states available to them, and so a simple test would be to only accept random state changes which lower the energy. This would could give us solutions, but would get stuck in any local minima which exist in our state space, generally speaking. This is another way of saying that such a simple acceptance criteria would violate [ergodicity](https://en.wikipedia.org/wiki/Ergodicity). Even given an infinite amount of computing time, we would not explore all available states and therefore never be sure that we had found the correct solution rather than a local minimum.
+To make our Markov chain abide by this ergodic constraint we must accept moves which do not lower the energy of the state as well, but with a probability which corresponds to the ratio described by the detail balance condition. Detail balance gives us the proper form of the equilibrium distribution, ergodicity ensures that the chain does not get stuck forming that distribution in a local minima. That sums up the Metropolis algorithm, which reads:
 
-To make our Markov chain abide by this ergodic constraint we accept moves which do not lower the energy of the state as well, but with a probability which corresponds to the ratio described by the detail balance condition. Detail balance gives us the proper form of the equilibrium distribution, ergodicity ensures that the chain does not get stuck forming that distribution in a local minima. That sums up the Metropolis algorithm, which reads:
-
-
+<div style="font-size: 150%;">
+	$$
+	A(j -> i) = 
+		\begin{cases}
+			e^{-\Beta(E_i - E_j)} & E_i - E_j > 0 \\
+			1 & \text{otherwise}
+		\end{cases}
+	$$
+</div>
 
 To summarize, the Metropolis algorithm is an implementation of a Markov chain which abides by certain constraints such as detailed balance. The detail balance condition one comes up with determines the equilibrium state the chain trends towards, and you can use such a condition to find distributions which would have been intractable by brute force integration or Monte Carlo sampling.
 
-Keep in mind that this is just one sample application. You can see an application of the Metropolis algorithm in {one of my project posts}.
+Keep in mind that this is just one sample application. You can see an application of the Metropolis algorithm in [my follow up post on the Quantum Variational Monte Carlo](2017-07-19-Variational-Monte-Carlo-in-QM.md )
