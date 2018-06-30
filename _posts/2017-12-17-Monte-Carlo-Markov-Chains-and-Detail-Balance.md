@@ -136,7 +136,7 @@ Where the 2^n term is a normalization factor. Moving from states i to j:
 	$$
 	W(il - jl, n\epsilon) = 
 	\begin{cases}
-		\frac{1}{2^n}{n \choose \frac{1}{2}(n + i + j)} & |i - j| \le n,
+		\frac{1}{2^n}{n \choose \frac{1}{2}(n + i + j)} & |i - j| \le n \\
 		0 & \text{otherwise}
 	\end{cases}
 	$$
