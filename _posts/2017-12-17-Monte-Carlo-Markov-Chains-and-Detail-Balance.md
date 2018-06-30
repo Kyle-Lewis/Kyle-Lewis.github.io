@@ -7,14 +7,8 @@ date: 2018-06-25
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  CommonHTML: {
-    scale: 150
-  }
-  tex2jax: {
-  	inlineMath: [ ['$', '$'], ["\\(","\\)"] ],
-  	displayMath: [ ['$$','$$'], ['\[','\]'] ],
-  	processEscapes: true
-  }
+  CommonHTML: { scale: 150 },
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
 });
 </script>
 <script type="text/javascript" async
