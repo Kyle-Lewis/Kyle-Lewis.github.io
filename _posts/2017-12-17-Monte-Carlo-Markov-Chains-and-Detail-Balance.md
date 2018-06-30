@@ -215,7 +215,7 @@ Again, for any state $i$, to and from any other state $j$.
 To demonstrate the use of detailed balance in a markov process we can apply the concepts to generate the Boltzmann distribution. The Boltzmann distribution describes the probability of finding a microstate of particles (classically of some gas) with a certain energy $E_i$. It looks like:
 
 <div style="font-size: 150%;">
-	$$ w_i = \frac{e^{- \Beta(E_i)}}{Z} $$
+	$$ w_i = \frac{e^{- \beta(E_i)}}{Z} $$
 </div>
 
 The states that we are dealing with now are much larger and more complex than the one dimensional single particle. Now we can think of some large distribution of particles in three dimensions, with each possible configuration of particles (within some discretization scheme) making up our explorable "state space".
@@ -225,7 +225,7 @@ $Z$, the partition function, is a normalization coefficient which is the sum of 
 What i'm describing is the acceptance criteria used in the Metropolis algorithm. Given that a Markov process must satisfy a detail balance ratio, for the Boltzmann distribution this means:
 
 <div style="font-size: 150%;">
-	$$\frac{w_i}{w_j} = e^{- \Beta(E_i - E_j)}
+	$$\frac{w_i}{w_j} = e^{- \beta(E_i - E_j)}
 </div>
 
 And so, when applying randomized transitions to the state, we want our acceptance rate to conform to this ratio. This "guides" our state transitions towards the equilibrium described by Boltzmann.
@@ -233,7 +233,7 @@ And so, when applying randomized transitions to the state, we want our acceptanc
 So if we make random moves among the particles in the system, and accept/deny those moves based on the criteria:
 
 <div style="font-size: 150%;">
-	$$\frac{A(j \rightarrow i)}{A(i \rightarrow j)} = e^{- \Beta(E_i - E_j)}
+	$$\frac{A(j \rightarrow i)}{A(i \rightarrow j)} = e^{- \beta(E_i - E_j)}
 </div>
 
 Where $A$ is an acceptance rate for the move between states $i$ and $j$.
@@ -246,7 +246,7 @@ To make our Markov chain abide by this ergodic constraint we must accept moves w
 	$$
 	A(j \rightarrow i) = 
 		\begin{cases}
-			e^{- \Beta(E_i - E_j)} & E_i - E_j > 0 \\
+			e^{- \beta(E_i - E_j)} & E_i - E_j > 0 \\
 			1 & \text{otherwise}
 		\end{cases}
 	$$
