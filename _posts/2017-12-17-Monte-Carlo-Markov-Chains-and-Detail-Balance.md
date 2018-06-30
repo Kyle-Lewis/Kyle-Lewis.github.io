@@ -199,13 +199,13 @@ In this cycle of states, which could have easily included more than two states, 
 Writing this out:
 
 <div style="font-size: 150%;">
-	$$W(j -> i)w_j = W(i -> j)w_i$$
+	$$W(j \rightarrow i)w_j = W(i \rightarrow j)w_i$$
 </div>
 
 or in the form of a ratio as we will use it:
 
 <div style="font-size: 150%;">
-	$$\frac{W(j -> i)}{W(i -> j)} = \frac{w_i}{w_j}$$
+	$$\frac{W(j \rightarrow i)}{W(i \rightarrow j)} = \frac{w_i}{w_j}$$
 </div>
 
 Again, for any state $i$, to and from any other state $j$.
@@ -233,7 +233,7 @@ And so, when applying randomized transitions to the state, we want our acceptanc
 So if we make random moves among the particles in the system, and accept/deny those moves based on the criteria:
 
 <div style="font-size: 150%;">
-	$$\frac{A(j -> i)}{A(i -> j)} = e^{- \Beta(E_i - E_j)}
+	$$\frac{A(j \rightarrow i)}{A(i \rightarrow j)} = e^{- \Beta(E_i - E_j)}
 </div>
 
 Where $A$ is an acceptance rate for the move between states $i$ and $j$.
@@ -244,7 +244,7 @@ To make our Markov chain abide by this ergodic constraint we must accept moves w
 
 <div style="font-size: 150%;">
 	$$
-	A(j -> i) = 
+	A(j \rightarrow i) = 
 		\begin{cases}
 			e^{- \Beta(E_i - E_j)} & E_i - E_j > 0 \\
 			1 & \text{otherwise}
