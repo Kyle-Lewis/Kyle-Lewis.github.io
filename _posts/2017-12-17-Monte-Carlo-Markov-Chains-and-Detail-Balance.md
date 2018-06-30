@@ -146,8 +146,7 @@ Which just says that some probability exists for the particle to be found at a l
 
 <div style="font-size: 150%;">
 	$$
-	\hat{w_i}(n\epsilon) = 
-		\frac{1}{2^n}{n \choose \frac{1}{2}(n + i)} & |i| \le n \\
+	\hat{w_i}(n\epsilon) = \frac{1}{2^n}{n \choose \frac{1}{2}(n + i)}
 	$$
 </div>
 
@@ -225,7 +224,7 @@ $Z$, the partition function, is a normalization coefficient which is the sum of 
 What i'm describing is the acceptance criteria used in the Metropolis algorithm. Given that a Markov process must satisfy a detail balance ratio, for the Boltzmann distribution this means:
 
 <div style="font-size: 150%;">
-	$$\frac{w_i}{w_j} = e^{- \beta(E_i - E_j)}
+	$$ \frac{w_i}{w_j} = e^{- \beta(E_i - E_j)} $$
 </div>
 
 And so, when applying randomized transitions to the state, we want our acceptance rate to conform to this ratio. This "guides" our state transitions towards the equilibrium described by Boltzmann.
@@ -233,7 +232,7 @@ And so, when applying randomized transitions to the state, we want our acceptanc
 So if we make random moves among the particles in the system, and accept/deny those moves based on the criteria:
 
 <div style="font-size: 150%;">
-	$$\frac{A(j \rightarrow i)}{A(i \rightarrow j)} = e^{- \beta(E_i - E_j)}
+	$$ \frac{A(j \rightarrow i)}{A(i \rightarrow j)} = e^{- \beta(E_i - E_j)} $$
 </div>
 
 Where $A$ is an acceptance rate for the move between states $i$ and $j$.
