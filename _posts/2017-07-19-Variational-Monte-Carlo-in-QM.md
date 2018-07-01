@@ -17,12 +17,15 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 <h2 align="center">References</h2>
 
-An introduction to the Markov Chain detail balance
-Or a wiki page if you want to scratch that itch with less math.
-And finally, an introductory Khan video provides a great example to introduce the topic.
-My {GitHub repo} with the 1 dimensional CPU only implementation
-And {the repo for the CUDA implementation} in 2 dimensions and with openGL interoperability.
-{introduction to variational method / QM at all?}
+- An introduction to the <a href="http://pages.cs.wisc.edu/~jerryzhu/cs731/mcmc.pdf" target="_blank">Markov Chain detail balance</a>
+
+- Or a <a href="https://en.wikipedia.org/wiki/Detailed_balance" target="_blank">wiki page on the topic</a> if you want to scratch that itch with less math.
+
+- And finally, an introductory <a href="https://www.youtube.com/watch?time_continue=431&v=Ws63I3F7Moc" target="_blank">Khan video</a> provides a great example to introduce the topic.
+
+- My {GitHub repo} with the 1 dimensional CPU only implementation
+
+- And <a href="https://github.com/Hobbes1/CudaVariationalMonteCarloQM" target="_blank"> my GitHub repo for this project</a>
 
 <h2 align="center">Introduction and Motivation</h2>
 
