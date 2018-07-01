@@ -3,7 +3,7 @@ layout: post
 title: "Variational Monte Carlo in QM"
 categories: [Physics, CUDA]
 date: 2017-07-19
-image: images/nbody-cuda/4-node-potential.gif
+image: images/variational-mc/4-node-potential.gif
 ---
 
 <script type="text/x-mathjax-config">
@@ -23,7 +23,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 - And finally, an introductory <a href="https://www.youtube.com/watch?time_continue=431&v=Ws63I3F7Moc" target="_blank">Khan video</a> provides a great example to introduce the topic.
 
-- My {GitHub repo} with the 1 dimensional CPU only implementation
+<!-- - My {GitHub repo} with the 1 dimensional CPU only implementation -->
 
 - And <a href="https://github.com/Hobbes1/CudaVariationalMonteCarloQM" target="_blank"> my GitHub repo for this project</a>
 
@@ -93,9 +93,6 @@ __global__ void Step(float2* rawRingPoints,
 Another post in the making! I've developed CUDA accelerated and CPU side C++ code to perform approximations to quantum electrodynamics, known as Lattice QED. In particular there are codes to perform discrete path integration of an electron wavefunction in various potentials, as well as a Monte-Carlo approach to solving ground state and excited state energy levels and wavefunctions.
 
 And a bit of a teaser for my results in a double well potential . . .
-
-
-
 
 I've made up this potential. It's not a real potential. It just looks neat.
 
