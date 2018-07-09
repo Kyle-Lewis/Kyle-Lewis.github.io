@@ -39,16 +39,27 @@ This project is an application of the *Metropolis Hastings Algorithm* which is o
 
 So what distribution are we solving for, and what properties can we take advantage of? This will require *some* introductory QM work. Everything here can be found in an undergraduate level QM textbook, I'm partial to Griffiths. I'll cover stationary solutions of the Schr&ouml;dinger equation (in *nice* cases) and the *Variational Principle* which can be used to approximate solutions in some of the less than nice cases. It turns out MCMC will work to discover ground state distrubutions for potentials that we can't solve analytically. Which turns out to be most real potentials.
 
+We'll start with the Schr&ouml;dinger equation itself, a second order differential equation: 
+
 <div style="font-size: 150%;">
 	$$
 	i\hbar\frac{\partial \Psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2\Psi}{\partial x^2} + V\Psi
 	$$
 </div>
 
-Solving for the stationary solutions to the Shrodinger 
+It describes the evolution of a wave-function, $$ \Psi $$ in time, in response to its initial conditions and the potential $$V$$. $$ \Psi $$ itself is a quantum mechanical description of a particle; no longer discrete but distributed in space with some probability of observing it in a given region. The wave-function itself is not *physical*, it's more of a mathematical artefact; what really matters are *observable* quantities like the *expected* position, which can be calculated $$ \braket{x} = \integral_{-\inf}^{+\inf} x |\Psi(x,t)|^2dx$$. 
 
-*Intro QM: explain shrodinger, wavefunctions, and expectation values (energy)
-Explain Variational Principle / method*
+There are any number of solutions to the equation, but it turns out that there exists a class of solutions which are time independant, and that these solutions are very important. Through separation of variables the Schr&ouml;dinger equation can be split into two independant equations of time and of position:
+
+<div style="font-size: 150%;">
+	$$
+	\Psi(x,t) = \psi(x)\phi(t) \text{  where  } \frac{d\phi}{dt} = -\frac{iE}{\hbar}\phi \text{  and  } -\frac{\hbar^2}{2m}\frac{d^2\psi}{dx^2} + V\psi = E\psi 
+	$$
+</div>
+
+
+
+
 
 <h2 align="center">Code Samples</h2>
 
