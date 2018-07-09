@@ -31,14 +31,24 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 I wanted to revisit a quick topic which was presented to me during my undergrad because it turns out so called Markov Chains are in fact a very useful tool in certain branches of machine learning as well. Additionally, while the basic implementation and proof of concept is entirely possible without any accelerating hardware or algorithm, I still wanted to introduce CUDA to more problems; in this case by upping the dimensionality of the problem. I've also gotten CUDA and openGL to play nicely together so I can do away with the pesky third party post-simulation animations, as well as the limiting data transfers from my graphics devices to the host CPU.
 
-<h2 align="center">Physics</h2>
-
-Intro QM: explain shrodinger, wavefunctions, and expectation values (energy)
-Explain Variational Principle / method
-
 <h2 align="center">The Markov Business</h2>
 
-You can read about the Markov Chain Monte Carlo in [my notes on the subject.](2017-12-17-Monte-Carlo-Markov-Chains-and-Detail-Balance )
+This project is an application of the *Metropolis Hastings Algorithm* which is of a class of Markov Chain Monte Carlo (MCMC) methods used for deriving probability distrubutions like those found in quantum mechanics. I've generally discussed the Markov Chain Monte Carlo in [my notes on the subject.](2017-12-17-Monte-Carlo-Markov-Chains-and-Detail-Balance ) The algorithm can be used to discover distributions, given that you know desired properties of the distribution.
+
+<h2 align="center">Physics</h2>
+
+So what distribution are we solving for, and what properties can we take advantage of? This will require *some* introductory QM work. Everything here can be found in an undergraduate level QM textbook, I'm partial to Griffiths. I'll cover stationary solutions of the Schr&ouml;dinger equation (in *nice* cases) and the *Variational Principle* which can be used to approximate solutions in some of the less than nice cases. It turns out MCMC will work to discover ground state distrubutions for potentials that we can't solve analytically. Which turns out to be most real potentials.
+
+<div style="font-size: 150%;">
+	$$
+	i\hbar\frac{\partial \Psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2\Psi}{\partial x^2} + V\Psi
+	$$
+</div>
+
+Solving for the stationary solutions to the Shrodinger 
+
+*Intro QM: explain shrodinger, wavefunctions, and expectation values (energy)
+Explain Variational Principle / method*
 
 <h2 align="center">Code Samples</h2>
 
