@@ -47,19 +47,35 @@ We'll start with the Schr&ouml;dinger equation itself, a second order differenti
 	$$
 </div>
 
-It describes the evolution of a wave-function, $$ \Psi $$ in time, in response to its initial conditions and the potential $$V$$. $$ \Psi $$ itself is a quantum mechanical description of a particle; no longer discrete but distributed in space with some probability of observing it in a given region. The wave-function itself is not *physical*, it's more of a mathematical artefact; what really matters are *observable* quantities like the *expected* position, which can be calculated $$ \braket{x} = \integral_{-\inf}^{+\inf} x |\Psi(x,t)|^2dx$$. 
+It describes the evolution of a wave-function, $ \Psi $ in time, in response to its initial conditions and the potential $V$. $ \Psi $ itself is a quantum mechanical description of a particle; no longer discrete but distributed in space with some probability of observing it in a given region. The wave-function itself is not *physical*, it's more of a mathematical artefact; what really matters are *observable* quantities like the *expected* position, which can be calculated $ \braket{x} = \integral_{-\inf}^{+\inf} x |\Psi(x,t)|^2dx$. 
 
-There are any number of solutions to the equation, but it turns out that there exists a class of solutions which are time independant, and that these solutions are very important. Through separation of variables the Schr&ouml;dinger equation can be split into two independant equations of time and of position:
+There are any number of solutions to the equation, but it turns out that there exists a class of solutions which are time independant, and that these solutions are very important. Through separation of variables and some substitution the Schr&ouml;dinger equation can be split into two ordinary differential equations of time and of position:
 
 <div style="font-size: 150%;">
 	$$
-	\Psi(x,t) = \psi(x)\phi(t) \text{  where  } \frac{d\phi}{dt} = -\frac{iE}{\hbar}\phi \text{  and  } -\frac{\hbar^2}{2m}\frac{d^2\psi}{dx^2} + V\psi = E\psi 
+	\Psi(x,t) = \psi(x)\phi(t)   \text{  where  }   \frac{d\phi}{dt} = -\frac{iE}{\hbar}\phi   \text{  and  }   -\frac{\hbar^2}{2m}\frac{d^2\psi}{dx^2} + V\psi = E\psi 
 	$$
 </div>
 
+You can solve the time dependant equation easily though integration and write out our new $ \psi $:
 
+<div style="font-size: 150%;">
+	$$
+	\Psi(x,t) = \psi(x)e^{\frac{-iEt}{\hbar}}
+	$$
+</div>
 
+Functions of this form have a stationary *probability density*. (That term under the integral before). The complex exponential terms cancel as per Euler's formula.
 
+<div style="font-size: 150%;">
+	$$
+	|\Psi(x,t)|^2 = \Psi^*\Psi = \psi^*e^{\frac{iEt}{\hbar}}\psie^{\frac{-iEt}{\hbar}} = |\psi(x)|^2
+	$$
+</div>
+
+So the wave functions which satisfy the product form of the Schr&ouml;dinger equation correspond to stationary states. Not only the expected position, but all observable quantities are constant for these states; the expected energy is constant, and of course momentum which is zero for a stationary state. *Most importantly* these stationary solutions are eigenfunctions - or eigenvectors if you like - of the observables of the state as represented by hermitian operators. This means that the general time-independant Schr&ouml;dinger equation, can be written as a linear combination of the stationary states written above. So,  Thats a lot of linear algebra in a few sentences, and unfortunately I won't be proving or going into more detail here. I'd recommend the back of Griffiths for a very brifef, physics-relevant view; or any math textbook on the subject if you are curious. 
+
+Ok cool, if we've found the eigenstates of the system, we've in fact solved for states which are time dependant as well, as they can be written as a weighted sum of stationary states, which is of course normalized. However, it turns out that outside of [certain cases](https://en.wikipedia.org/wiki/List_of_quantum-mechanical_systems_with_analytical_solutions) we cannot solve for these states analytically. Instead we often have to rely on numerical methods. 
 
 <h2 align="center">Code Samples</h2>
 
