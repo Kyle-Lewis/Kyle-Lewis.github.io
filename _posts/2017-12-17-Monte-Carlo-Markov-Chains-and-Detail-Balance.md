@@ -254,4 +254,4 @@ To make our Markov chain abide by this ergodic constraint we must accept moves w
 
 To summarize, the Metropolis algorithm is an implementation of a Markov chain which abides by certain constraints such as detailed balance. The detail balance condition one comes up with determines the equilibrium state the chain trends towards, and you can use such a condition to find distributions which would have been intractable by brute force integration or Monte Carlo sampling.
 
-Keep in mind that this is just one sample application. You can see an application of the Metropolis algorithm in [my follow up post on the Quantum Variational Monte Carlo](2017-07-19-Variational-Monte-Carlo-in-QM.md )
+Keep in mind that this is just one sample application. You can see an application of the Metropolis algorithm in [my follow up post on the Quantum Variational Monte Carlo](https://kyle-lewis.github.io/physics/cuda/2017/07/19/Variational-Monte-Carlo-in-QM.html)
