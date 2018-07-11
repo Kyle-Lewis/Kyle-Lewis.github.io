@@ -24,7 +24,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 - And finally, an introductory <a href="https://www.youtube.com/watch?time_continue=431&v=Ws63I3F7Moc" target="_blank">Khan video</a> provides a great example to introduce the topic.
 
 <!-- - My {GitHub repo} with the 1 dimensional CPU only implementation -->
-
 - And <a href="https://github.com/Hobbes1/CudaVariationalMonteCarloQM" target="_blank"> my GitHub repo for this project</a>
 
 <h2 align="center">Introduction and Motivation</h2>
