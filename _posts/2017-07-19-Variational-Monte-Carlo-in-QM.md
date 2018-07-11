@@ -46,7 +46,7 @@ We'll start with the Schr&ouml;dinger equation itself, a second order differenti
 	$$
 </div>
 
-It describes the evolution of a wave-function, $ \Psi $ in time, in response to its initial conditions and the potential $V$. $ \Psi $ itself is a quantum mechanical description of a particle; no longer discrete but distributed in space with some probability of observing it in a given region. The wave-function itself is not *physical*, it's more of a mathematical artefact; what really matters are *observable* quantities like the *expected* position, which can be calculated $ \braket{x} = \integral_{-\inf}^{+\inf} x |\Psi(x,t)|^2dx$. 
+It describes the evolution of a wave-function, $ \Psi $ in time, in response to its initial conditions and the potential $V$. $ \Psi $ itself is a quantum mechanical description of a particle; no longer discrete but distributed in space with some probability of observing it in a given region. The wave-function itself is not *physical*, it's more of a mathematical artefact; what really matters are *observable* quantities like the *expected* position, which can be calculated $ \braket{x} = \integral_{-\inf}^{+\inf} x |\Psi(x,t)|^2dx $. 
 
 There are any number of solutions to the equation, but it turns out that there exists a class of solutions which are time independant, and that these solutions are very important. Through separation of variables and some substitution the Schr&ouml;dinger equation can be split into two ordinary differential equations of time and of position:
 
@@ -80,7 +80,7 @@ Speaking of numerical methods; we should find a proof of the *Variational Princi
 
 <div style="font-size: 150%;">
 	$$
-	E_{gs} \leq \bra\psi\H\psi\ket \equiv \braH\ket.
+	E_{gs} \leq \braket{\psi|H|\psi} \equiv \braket{H}
 	$$
 </div>
  
@@ -188,30 +188,37 @@ I forgot to mention that rather than using the *energy* of a particle as the qua
 The following two outputs come from a python script implementation of the algorithm; it's not so computationally expensive to get good results in one dimension for fairly simple potentials:
 
 <figure>
-	<img src="{{site.baseurl}}/images/nbody-cuda/oscillator2d.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/variational-mc/oscillator2d.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">Running the algorithm on the 1D Harmonic Oscilator potential, the discovered energy is found to match our expectations, $\frac{1}{2}$ in natural units</figcaption>
 </figure>
 
 <figure>
-	<img src="{{site.baseurl}}/images/nbody-cuda/DW_scaled.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/variational-mc/DW_scaled.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">Running the algorithm on the double well potential for which there is no analytical solution</figcaption>
 </figure>
 
 At this point I wanted to implement the algorithm in higher dimensions and with a nicer visualization. Honestly I spent too much time here, but I got to learn more CUDA - openGL interoperability which is always great for visualization when running GPU accelerated algorithms:
 
 <figure>
-	<img src="{{site.baseurl}}/images/nbody-cuda/QH02.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/variational-mc/QH02.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">The same harmonic oscillator in 2 dimensions. The trial function begins as a localized point </figcaption>
 </figure>
 
 I also tried a potential with four nodes, as an extension to the double well potential. I suppose this might make for a crude model of a very small lattice potential, but I wouldn't claim it's representational of any real physical system (as if that has ever stopped anybody). It looks like this, with the following form and a plot from wolfram alpha:
 
 <div style="font-size: 150%;">
+	$$
 	\alpha \cdot x^4 = \beta \cdot x^2 + \alpha \cdot y^4 - \beta * y^2 + 2 \cdot \frac{\beta^2}{\alpha^4} \\
 	\text{where } \alpha = 10.0 \text{ and } \beta = 0.1
+	$$
 </div>
 
 <figure>
-	<img src="{{site.baseurl}}/images/nbody-cuda/4-node-potential.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
-	<figcaption style="text-align:center;">A potential i've made up with 4 "nodes", because why not. </figcaption>
+	<img src="{{site.baseurl}}/images/variational-mc/4-node-potential.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;"></figcaption>
+</figure>
+
+<figure>
+	<img src="{{site.baseurl}}/images/variational-mc/4-node-potential.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">Distibution for a potential i've made up with 4 "nodes", because why not. </figcaption>
 </figure>
