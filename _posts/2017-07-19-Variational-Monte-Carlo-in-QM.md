@@ -49,7 +49,7 @@ We'll start with the Schr&ouml;dinger equation itself, a second order differenti
 It describes the evolution of a wave-function, $ \Psi $ in time, in response to its initial conditions and the potential $V$. $ \Psi $ itself is a quantum mechanical description of a particle; no longer discrete but distributed in space with some probability of observing it in a given region. The wave-function itself is not *physical*, it's more of a mathematical artefact; what really matters are *observable* quantities like the *expected* position, which can be calculated 
 
 <div style="font-size: 150%;">
-	$$ \braket{x} = \integral_{-\inf}^{+\inf} x |\Psi(x,t)|^2dx $$ 
+	$$ \langle{x}\rangle = \int_{-\inf}^{+\inf} x |\Psi(x,t)|^2dx $$ 
 </div>
 
 There are any number of solutions to the equation, but it turns out that there exists a class of solutions which are time independant, and that these solutions are very important. Through separation of variables and some substitution the Schr&ouml;dinger equation can be split into two ordinary differential equations of time and of position:
