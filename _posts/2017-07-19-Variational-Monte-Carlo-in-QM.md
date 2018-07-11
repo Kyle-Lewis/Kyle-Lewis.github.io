@@ -33,7 +33,7 @@ I wanted to revisit a quick topic which was presented to me during my undergrad 
 
 <h2 align="center">The Markov Business</h2>
 
-This project is an application of the *Metropolis Hastings Algorithm* which is of a class of Markov Chain Monte Carlo (MCMC) methods used for deriving probability distrubutions like those found in quantum mechanics. I've generally discussed the Markov Chain Monte Carlo in [my notes on the subject.](2017-12-17-Monte-Carlo-Markov-Chains-and-Detail-Balance ) The algorithm can be used to discover distributions, given that you know desired properties of the distribution.
+This project is an application of the *Metropolis Hastings Algorithm* which is of a class of Markov Chain Monte Carlo (MCMC) methods used for deriving probability distrubutions like those found in quantum mechanics. I've generally discussed the Markov Chain Monte Carlo in [my notes here.](2017-12-17-Monte-Carlo-Markov-Chains-and-Detail-Balance ) The algorithm can be used to discover distributions, given that you know desired properties of the distribution.
 
 <h2 align="center">Physics</h2>
 
@@ -69,7 +69,7 @@ Functions of this form have a stationary *probability density*. (That term under
 
 <div style="font-size: 150%;">
 	$$
-	|\Psi(x,t)|^2 = \Psi^*\Psi = \psi^*e^{\frac{iEt}{\hbar}}\psie^{\frac{-iEt}{\hbar}} = |\psi(x)|^2
+	|\Psi(x,t)|^2 = \Psi^*\Psi = \psi^*e^{\frac{iEt}{\hbar}}\psi^{\frac{-iEt}{\hbar}} = |\psi(x)|^2
 	$$
 </div>
 
@@ -77,12 +77,67 @@ So the wave functions which satisfy the product form of the Schr&ouml;dinger equ
 
 Ok cool, if we've found the eigenstates of the system, we've in fact solved for states which are time dependant as well, as they can be written as a weighted sum of stationary states, which is of course normalized. However, it turns out that outside of [certain cases](https://en.wikipedia.org/wiki/List_of_quantum-mechanical_systems_with_analytical_solutions) we cannot solve for these states analytically. Instead we often have to rely on numerical methods. 
 
+Speaking of numerical methods; we should find a proof of the *Variational Principle* some chapters into our favorite QM textbook. For cases not included in the link above, we can resort to using the Variational Principle to calculate *at least an upper bound* on the ground state energy and corresponding eigenfunction for a particular potential. It goes as follows, for *any normalized wave-function $\psi$, which we can choose at random*
+
+<div style="font-size: 150%;">
+	$$
+	E_{gs} \leq \bra\psi\H\psi\ket \equiv \braH\ket.
+	$$
+</div>
+ 
+In words, this *must* be true because we know we can decompose our chosen *\psi* into an equivalent sum of orthogonal eigenstates. Any eigenstate which takes part in this series and is also not the ground state will be contributing more energy than it would have if it had been the ground state to begin with, by definition of the ground state being the lowest energy eigenstate. 
+
+In less words, while any $E_n \geq E_0$:
+
+<div style="font-size: 150%;">
+	\begin{align}\langle\psi|H|\psi\rangle&=\bra(\sum_mc_m^*\langle\phi_m|H\sum_nc_n|\phi_n\rangle\ket)\\
+	&=\sum_{m,n}c_m^*c_nE_n\langle\phi_m|\phi_n\rangle \\
+	&=\sum_n|c_n|^2E_n\\
+	&\geq \sum_n|c_n|^2E_0=E_0,
+	\end{align}
+</div>
+
+Thats it for the physics. The property we were looking for to use in the MCMC algorithm is exactly the property described by the Variational Principle. A physicist can make educated guesses as to the trial function to use, and even provide that function with tuning parameters to minimize the rezulting energy for the form of the function. However, introducing MCMC as i've described [here](2017-12-17-Monte-Carlo-Markov-Chains-and-Detail-Balance) will allow us to explore the entire space of possible distributions. So now we can get to the code and results.
+
 <h2 align="center">Code Samples</h2>
 
 <hr>
 <div style="width:110%">
 
 {% highlight c++ %}
+
+	 /* measure the action change and roll for a result
+	 * if necessary. This metd just compacts the repeated uses
+	 * within Step() */
+
+__device__ float2 MCTest(float2* rawRingPoints,
+						 float2 newPoint,
+						 int mode,
+						 float tau,
+						 float dt,
+						 int numPoints,
+						 unsigned int thdIdx)
+{
+	curandState state;
+	curand_init((unsigned long long)clock(), thdIdx, 0, &state);
+	float S_old = Action(rawRingPoints, rawRingPoints[thdIdx], mode, dt, numPoints, thdIdx);
+	float S_new = Action(rawRingPoints, newPoint, mode, dt, numPoints, thdIdx);
+		// If action is decreased by the path always accept 
+	if(S_new < S_old)
+	{
+		return newPoint;
+	}
+		// If action is increased accept w/ probability 
+	else
+	{
+		float roll = curand_uniform(&state);
+		float prob = expf(-S_new/(1.0/tau)) / expf(-S_old/(1.0/tau));
+		if(roll < prob){
+			return newPoint;
+		}
+	}	
+	return rawRingPoints[thdIdx]; // simply return the existing point
+}
 
 		/* Steps alternating even/odd "red/black" points in the path
 		 * with the chance of acceptance being related to the change 
@@ -127,10 +182,37 @@ __global__ void Step(float2* rawRingPoints,
 </div>
 <hr>
 
-Another post in the making! I've developed CUDA accelerated and CPU side C++ code to perform approximations to quantum electrodynamics, known as Lattice QED. In particular there are codes to perform discrete path integration of an electron wavefunction in various potentials, as well as a Monte-Carlo approach to solving ground state and excited state energy levels and wavefunctions.
+I forgot to mention that rather than using the *energy* of a particle as the quantity of interest for MCMC, I have used the *action* of *its path* instead. It is equivalently minimized given a certain [Wick Rotation](https://en.wikipedia.org/wiki/Wick_rotation) has been applied to the state $\psi$. Given that you view many paths, this results in the same distribution and lowest eigenenergy.
 
-And a bit of a teaser for my results in a double well potential . . .
+<h2 align="center">Results</h2>
 
-I've made up this potential. It's not a real potential. It just looks neat.
+The following two outputs come from a python script implementation of the algorithm; it's not so computationally expensive to get good results in one dimension for fairly simple potentials:
 
-Populating a simple harmonic oscillator.
+<figure>
+	<img src="{{site.baseurl}}/images/nbody-cuda/oscillator2d.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">Running the algorithm on the 1D Harmonic Oscilator potential, the discovered energy is found to match our expectations, $\frac{1}{2}$ in natural units</figcaption>
+</figure>
+
+<figure>
+	<img src="{{site.baseurl}}/images/nbody-cuda/DW_scaled.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">Running the algorithm on the double well potential for which there is no analytical solution</figcaption>
+</figure>
+
+At this point I wanted to implement the algorithm in higher dimensions and with a nicer visualization. Honestly I spent too much time here, but I got to learn more CUDA - openGL interoperability which is always great for visualization when running GPU accelerated algorithms:
+
+<figure>
+	<img src="{{site.baseurl}}/images/nbody-cuda/QH02.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">The same harmonic oscillator in 2 dimensions. The trial function begins as a localized point </figcaption>
+</figure>
+
+I also tried a potential with four nodes, as an extension to the double well potential. I suppose this might make for a crude model of a very small lattice potential, but I wouldn't claim it's representational of any real physical system (as if that has ever stopped anybody). It looks like this, with the following form and a plot from wolfram alpha:
+
+<div style="font-size: 150%;">
+	\alpha \cdot x^4 = \beta \cdot x^2 + \alpha \cdot y^4 - \beta * y^2 + 2 \cdot \frac{\beta^2}{\alpha^4} \\
+	\text{where } \alpha = 10.0 \text{ and } \beta = 0.1
+</div>
+
+<figure>
+	<img src="{{site.baseurl}}/images/nbody-cuda/4-node-potential.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">A potential i've made up with 4 "nodes", because why not. </figcaption>
+</figure>
