@@ -14,14 +14,14 @@ MathJax.Hub.Config({
 <script type="text/javascript" async
 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<h2>References</h2>
+<h2 align="center">References</h2>
 
 - Morten Hjorth-Jensen's <a href="http://www.uio.no/studier/emner/matnat/fys/FYS3150/h09/undervisningsmateriale/Lecture%20Notes/lectures2009.pdf" target="_blank">Lecture notes on Computational Physics.</a>
 
 - Various wiki pages display discrete forms of common operators in use.
 
 
-<h2>Introduction and Motivation</h2>	
+<h2 align="center">Introduction and Motivation</h2>	
 
 I realized while writing up [my post on the Quantum Variational Monte Carlo](2017-07-19-Variational-Monte-Carlo-in-QM.md ) that there was enough non-physics background information to warrant a separate post. I went back to one of those resources, Hjorth-Jensen's notes, which a professor of mine had provided as an extra resource and, at the time, I had completely passed over.
 
