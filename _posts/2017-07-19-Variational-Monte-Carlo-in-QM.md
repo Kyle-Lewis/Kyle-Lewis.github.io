@@ -80,7 +80,7 @@ Speaking of numerical methods; we should find a proof of the *Variational Princi
 
 <div style="font-size: 150%;">
 	$$
-	E_{gs} \leq \braket{\psi|H|\psi} \equiv \braket{H}
+	E_{gs} \leq \langle\psi|H|\psi\rangle \equiv \langle{H}\rangle
 	$$
 </div>
  
@@ -89,7 +89,7 @@ In words, this *must* be true because we know we can decompose our chosen *\psi*
 In less words, while any $E_n \geq E_0$:
 
 <div style="font-size: 150%;">
-	\begin{align}\langle\psi|H|\psi\rangle&=\bra(\sum_mc_m^*\langle\phi_m|H\sum_nc_n|\phi_n\rangle\ket)\\
+	\begin{align}\langle\psi|H|\psi\rangle&=\langle(\sum_mc_m^*\langle\phi_m|H\sum_nc_n|\phi_n\rangle\rangle)\\
 	&=\sum_{m,n}c_m^*c_nE_n\langle\phi_m|\phi_n\rangle \\
 	&=\sum_n|c_n|^2E_n\\
 	&\geq \sum_n|c_n|^2E_0=E_0,
@@ -188,7 +188,7 @@ I forgot to mention that rather than using the *energy* of a particle as the qua
 The following two outputs come from a python script implementation of the algorithm; it's not so computationally expensive to get good results in one dimension for fairly simple potentials:
 
 <figure>
-	<img src="{{site.baseurl}}/images/variational-mc/oscillator2d.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/variational-mc/QHO2.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">Running the algorithm on the 1D Harmonic Oscilator potential, the discovered energy is found to match our expectations, $\frac{1}{2}$ in natural units</figcaption>
 </figure>
 
@@ -200,7 +200,7 @@ The following two outputs come from a python script implementation of the algori
 At this point I wanted to implement the algorithm in higher dimensions and with a nicer visualization. Honestly I spent too much time here, but I got to learn more CUDA - openGL interoperability which is always great for visualization when running GPU accelerated algorithms:
 
 <figure>
-	<img src="{{site.baseurl}}/images/variational-mc/QH02.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/variational-mc/oscillator2d.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">The same harmonic oscillator in 2 dimensions. The trial function begins as a localized point </figcaption>
 </figure>
 
@@ -208,7 +208,7 @@ I also tried a potential with four nodes, as an extension to the double well pot
 
 <div style="font-size: 150%;">
 	$$
-	\alpha \cdot x^4 = \beta \cdot x^2 + \alpha \cdot y^4 - \beta * y^2 + 2 \cdot \frac{\beta^2}{\alpha^4} \\
+	V(x,y) = \alpha \cdot x^4 \beta \cdot x^2 + \alpha \cdot y^4 - \beta * y^2 + 2 \cdot \frac{\beta^2}{\alpha^4} \\
 	\text{where } \alpha = 10.0 \text{ and } \beta = 0.1
 	$$
 </div>
