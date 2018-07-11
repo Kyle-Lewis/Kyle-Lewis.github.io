@@ -32,7 +32,7 @@ I wanted to revisit a quick topic which was presented to me during my undergrad 
 
 <h2 align="center">The Markov Business</h2>
 
-This project is an application of the *Metropolis Hastings Algorithm* which is of a class of Markov Chain Monte Carlo (MCMC) methods used for deriving probability distrubutions like those found in quantum mechanics. I've generally discussed the Markov Chain Monte Carlo in [my notes here.](2017-12-17-Monte-Carlo-Markov-Chains-and-Detail-Balance.md) The algorithm can be used to discover distributions, given that you know desired properties of the distribution.
+This project is an application of the *Metropolis Hastings Algorithm* which is of a class of Markov Chain Monte Carlo (MCMC) methods used for deriving probability distrubutions like those found in quantum mechanics. I've generally discussed the Markov Chain Monte Carlo in [my notes here.](Monte-Carlo-Markov-Chains-and-Detail-Balance.md) The algorithm can be used to discover distributions, given that you know desired properties of the distribution.
 
 <h2 align="center">Physics</h2>
 
@@ -100,7 +100,7 @@ In less words, while any $E_n \geq E_0$:
 	\end{align}
 </div>
 
-Thats it for the physics. The property we were looking for to use in the MCMC algorithm is exactly the property described by the Variational Principle. A physicist can make educated guesses as to the trial function to use, and even provide that function with tuning parameters to minimize the rezulting energy for the form of the function. However, introducing MCMC as i've described [here](2017-12-17-Monte-Carlo-Markov-Chains-and-Detail-Balance.md) will allow us to explore the entire space of possible distributions. So now we can get to the code and results.
+Thats it for the physics. The property we were looking for to use in the MCMC algorithm is exactly the property described by the Variational Principle. A physicist can make educated guesses as to the trial function to use, and even provide that function with tuning parameters to minimize the rezulting energy for the form of the function. However, introducing MCMC as i've described [here](Monte-Carlo-Markov-Chains-and-Detail-Balance.md) will allow us to explore the entire space of possible distributions. So now we can get to the code and results.
 
 <h2 align="center">Code Samples</h2>
 
