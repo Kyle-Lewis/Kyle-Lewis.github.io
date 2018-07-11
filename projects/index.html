@@ -6,10 +6,16 @@ title: Kyle Lewis's Projects
 <h1>{{ page.title }}</h1>
 <ul class="posts">
 
-	{% for post in site.posts %}
-      <li><span>{{ post.date | date_to_string }}</span> <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
-      <img src="{{ site.baseurl }}/{{ post.image }}" style="padding-bottom:0.5em; width:25%; margin-left:auto; margin-right:auto; display:block;" />
-      <hr>
-    {% endfor %}
+{% for post in site.posts %}
+	<div class="column" style="width:25%">
+		<img src="{{ site.baseurl }}/{{ post.image }}" style="padding-bottom:0.5em; width:25%; margin-right:auto; display:block;" />
+  	</div>
+	<div class="column" style="width:75%">
+		<li><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+		<li><span>{{ post.date | date_to_string }}</span> </li>
+	</div>
+
+	<hr>
+{% endfor %}
 
 </ul>
