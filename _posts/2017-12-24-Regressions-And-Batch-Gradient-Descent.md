@@ -46,7 +46,7 @@ where $i$ just denotes the index of the input vector you are looking at. You c
 We can then try to minimize the error. We know from basic calc that the minima of a function will be found at a place where its derivative is equal to zero, so set:
 
 <div style="font-size: 150%;">
-	$$ \frac{\partial E(h_{theta}(\vec{x}), \vec{y})}{\partial\theta} = 2\sum_{i=0}^n(h_{theta}(\vec{x_i}) - \vec{y_i}) \cdot \frac{\partial h_{theta})(\vec{x})}{\partial\theta} $$
+	$$ \frac{\partial E(h_{\theta}(\vec{x}), \vec{y})}{\partial\theta} = 2\sum_{i=0}^n(h_{\theta}(\vec{x_i}) - \vec{y_i}) \cdot \frac{\partial h_{\theta}(\vec{x})}{\partial\theta} $$
 </div>
 
 Which is described in slightly different notation in Andrew Ng's lecture, he defines a stand in J(theta) function and finds its derivative specifically for a linear case.
@@ -91,7 +91,7 @@ def firstOrderPolyErrors(weightIdx, vectorIdx, Weights, InputVectors, TargetVect
 		sumOfDerivativeErrors += (Weights[0] + Weights[1] * InputVectors[weightIdx][vectorIdx] - TargetVector[vectorIdx]) * InputVectors[weightIdx][vectorIdx]
 
 	return sumOfDerivativeErrors
-	
+
 def batchGradientDescentStep(Weights, InputVectors, TargetVector, Alphas):
 
 	for weightIdx in range(len(Weights)):
