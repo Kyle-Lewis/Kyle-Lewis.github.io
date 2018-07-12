@@ -14,6 +14,28 @@ MathJax.Hub.Config({
 <script type="text/javascript" async
 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
+<h2 align="center">References</h2>
+
+I'm cross referencing quite a few resources while I get into this subject, but the core resources are lectures provided online. For this particular post:
+
+The first of Andrew Ng's lectures on Machine Learning, provided by Stanford:
+
+	- Lecture 1: Introduction
+
+	- Lecture 2: linear regression, gradient descent
+
+- The third of Yaser Abu-Mostafa's lectures, provided by CalTech:
+
+	- Lecture 3: The Linear Model
+
+- Data from UC Irvine's machine learning repository
+
+- The code for these regressions on my GitHub in the LSR folder
+
+<h2 align="center">Motivation</h2>
+
+There are plenty of reasons these days to explore Machine Learning. For me, in reviewing the math behind MCMC methods in a previous project I'd been coming across a lot of people discussing the topic not for Computational Physics applications, but for Machine Learning. A quick look revealed that many of the more advanced topics in Machine Learning share a mathematical foundation with QM (high dimensionality and linear algebra) and at that point I was sold. So in some of the project posts I make from here on out, i'll be going through Andrew Ng and other freely available lecture resources and picking out examples to implement; hopefully getting better with CUDA as I go.
+
 <h2 align="center">The Algorithm</h2>
 
 A least squares regression algorithm is a means to fit functions to datasets by way of minimizing the error incrementally. For a given input vector $\vec{X}$ you form a guess $h(\vec{X}_i)$ which will have some square error $E_i = (h(\vec{X}_i) - Y_i)^2$
@@ -23,7 +45,7 @@ where $i$ just denotes the index of the input vector you are looking at. You c
 We can then try to minimize the error. We know from basic calc that the minima of a function will be found at a place where its derivative is equal to zero, so set:
 
 <div style="font-size: 150%;">
-	$$ \frac{\divE(h_{theta}(\vec{x}), \vec{y})}{\div\theta} = 2\sum_{i=0}^n(h_{theta}(\vec{x_i}) - \vec{y_i}) \cdot \frac{\divh_{theta})(\vec{x})}{\div\theta} $$
+	$$ \frac{\partialE(h_{theta}(\vec{x}), \vec{y})}{\partial\theta} = 2\sum_{i=0}^n(h_{theta}(\vec{x_i}) - \vec{y_i}) \cdot \frac{\partialh_{theta})(\vec{x})}{\partial\theta} $$
 </div>
 
 Which is described in slightly different notation in Andrew Ng's lecture, he defines a stand in J(theta) function and finds its derivative specifically for a linear case.
@@ -74,23 +96,17 @@ Where the polynomial error functions are just the derivative error function I de
 
 I did a linear fit to a selection of temperature data which had somewhat of a constant run up. Then I expanded the data set to include the winter months, and did a second order polynomial fit to that data.
 
+<figure>
+	<img src="{{site.baseurl}}/images/gradient-descent/newlsr.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">Linear regression on the first ~half of a years worth of data</figcaption>
+</figure>
 
-Linear regression on the first ~half of a years worth of data
 There were some things which I hadn't thought of while taking notes from the online lectures. For one, the regression rates for different weights need to be different, very different in fact. In general it seems to me that lower order terms should be 'learned' faster than higher order, so that the general location of the proper minima is found. With a quick linear rate for example, the above regression got stuck with a constant offset around zero, as the line quickly found a slope intersecting the data and locking the constant weight from moving, as doing so would increase error (even though there would be a better solution found by doing so)
 
 After working on an MCMC application  using randomness and Markov chains with detail balance I know a more probabilistic approach could potentially make quick work of all this alpha parameter tuning, and get rid of the local minima problem entirely. I'll hold off for now however.
 
+<figure>
+	<img src="{{site.baseurl}}/images/gradient-descent/secondorderpoly.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">I realized that I normalized the temperature data after making the gif . . . you get the idea though</figcaption>
+</figure>
 
-I realized that I normalized the temperature data after making the gif . . . you get the idea though
-
-<h2 align="center">References</h2>
-
-I'm cross referencing quite a few resources while I get into this subject, but the core resources are lectures provided online. For this particular post:
-
-The first of Andrew Ng's lectures on Machine Learning, provided by Stanford:
-Lecture 1: Introduction
-Lecture 2: linear regression, gradient descent
-The third of Yaser Abu-Mostafa's lectures, provided by CalTech:
-Lecture 3: The Linear Model
-Data from UC Irvine's machine learning repository
-The code for these regressions on my GitHub in the LSR folder
