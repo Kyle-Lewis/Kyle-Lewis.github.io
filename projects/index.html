@@ -7,10 +7,10 @@ title: Kyle Lewis's Projects
 <ul class="posts">
 
 {% for post in site.posts %}
-	<div class="one-fourth">
+	<div class="one-fourth" style="width:50%">
 		<img src="{{ site.baseurl }}/{{ post.image }}" style="padding-bottom:0.5em; margin-right:auto; display:block;" />
   	</div>
-	<div class="three-fourths">
+	<div class="three-fourths" style="margin-left:auto">
 		<li><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
 		<li><span>{{ post.date | date_to_string }}</span> </li>
 	</div>

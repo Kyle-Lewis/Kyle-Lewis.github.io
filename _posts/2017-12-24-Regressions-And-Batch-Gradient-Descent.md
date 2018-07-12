@@ -19,19 +19,19 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 I'm cross referencing quite a few resources while I get into this subject, but the core resources are lectures provided online. For this particular post:
 
-The first of Andrew Ng's lectures on Machine Learning, provided by Stanford:
+- The first of Andrew Ng's lectures on Machine Learning, provided by Stanford:
 
-	- Lecture 1: Introduction
+	- Lecture 1: <a href="https://www.youtube.com/watch?v=UzxYlbK2c7E&list=PLA89DCFA6ADACE599&index=1" target="_blank">Introduction</a>
 
-	- Lecture 2: linear regression, gradient descent
+	- Lecture 2: <a href="https://www.youtube.com/watch?v=5u4G23_OohI&list=PLA89DCFA6ADACE599&index=2" target="_blank">linear regression, gradient descent</a>
 
 - The third of Yaser Abu-Mostafa's lectures, provided by CalTech:
 
-	- Lecture 3: The Linear Model
+	- Lecture 3: <a href="https://www.youtube.com/watch?v=FIbVs5GbBlQ&index=3&list=PLD63A284B7615313A" target="_blank">The Linear Model</a>
 
-- Data from UC Irvine's machine learning repository
+- Data from <a href="http://archive.ics.uci.edu/ml/index.php" target="_blank">UC Irvine's machine learning repository</a>
 
-- The code for these regressions on my GitHub in the LSR folder
+- The code for these regressions <a href="https://github.com/Hobbes1/MachineLearningProjects/tree/464d9dd47d9d2ab7ba62cfc863c1eb4c0d99b360/1_LSR" target="_blank">on my GitHub in the LSR folder</a>
 
 <h2 align="center">Motivation</h2>
 
@@ -46,7 +46,7 @@ where $i$ just denotes the index of the input vector you are looking at. You c
 We can then try to minimize the error. We know from basic calc that the minima of a function will be found at a place where its derivative is equal to zero, so set:
 
 <div style="font-size: 150%;">
-	$$ \frac{\partialE(h_{theta}(\vec{x}), \vec{y})}{\partial\theta} = 2\sum_{i=0}^n(h_{theta}(\vec{x_i}) - \vec{y_i}) \cdot \frac{\partialh_{theta})(\vec{x})}{\partial\theta} $$
+	$$ \frac{\partial E(h_{theta}(\vec{x}), \vec{y})}{\partial\theta} = 2\sum_{i=0}^n(h_{theta}(\vec{x_i}) - \vec{y_i}) \cdot \frac{\partial h_{theta})(\vec{x})}{\partial\theta} $$
 </div>
 
 Which is described in slightly different notation in Andrew Ng's lecture, he defines a stand in J(theta) function and finds its derivative specifically for a linear case.
