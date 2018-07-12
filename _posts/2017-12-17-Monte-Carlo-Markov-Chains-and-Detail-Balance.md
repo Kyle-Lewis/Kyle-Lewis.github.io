@@ -2,7 +2,7 @@
 layout: post
 title: "Monte Carlo, Markov Chains, and Detail Balance"
 categories: [Notes and Proofs]
-date: 2018-06-25
+date: 2017-12-17
 image: images/markov-chains/detailed-balance.png
 ---
 
