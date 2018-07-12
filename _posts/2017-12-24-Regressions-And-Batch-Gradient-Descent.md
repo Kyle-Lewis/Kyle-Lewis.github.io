@@ -62,14 +62,39 @@ Where the gradient is defined in the formula above for one dimension at least. T
 
 The algorithm is very simple to implement. Most of my time was spent figuring out (again) how to get matplotlib and pyplot to do what I wanted. There was also some pre-processing which needed to be done; the data sets I found to play with, some Chinese weather data provided by UC Irvine, had a few negatives / nulls which needed to be interpolated. Additionally, I found it quite helpful when tuning alpha values to normalize target data sets.
 
-Here's the algorithm itself though, after that work has been done:
+Here's the algorithm itself though, after that work has been done. I haven't bothered to generalize it at all:
 
 <hr>
 <div style="width:110%">
 
 {% highlight python %}
 
-def batchGradientDescentStep(Weights, InputVectors, TargetVector, Alphas):for weightIdx in range(len(Weights)):
+def squareError(Weights, InputVectors, TargetVector):
+
+	err = 0.0
+	for weightSet in range(len(Weights)):
+		tempGuess = 0.0
+		for idx in range(len(InputVectors[0])):
+			tempGuess = Weights[0] * InputVectors[0][idx] #h_theta(X) from Andrew's lecture
+			err += (tempGuess - TargetVector[idx]) ** 2
+
+	return err
+
+		# Performing sum of derivs for each order of polynomial asked for
+		# Higher order polys get more derivatives and terms added to all weightDerivatives
+
+def firstOrderPolyErrors(weightIdx, vectorIdx, Weights, InputVectors, TargetVector):
+	sumOfDerivativeErrors = 0
+	if weightIdx == 0:
+		sumOfDerivativeErrors += ((Weights[0] + Weights[1] * InputVectors[weightIdx][vectorIdx] - TargetVector[vectorIdx]))
+	elif weightIdx == 1:
+		sumOfDerivativeErrors += (Weights[0] + Weights[1] * InputVectors[weightIdx][vectorIdx] - TargetVector[vectorIdx]) * InputVectors[weightIdx][vectorIdx]
+
+	return sumOfDerivativeErrors
+	
+def batchGradientDescentStep(Weights, InputVectors, TargetVector, Alphas):
+
+	for weightIdx in range(len(Weights)):
 		sumOfDerivativeErrors = 0.0
 		for idx in range(len(InputVectors[0])):
 
