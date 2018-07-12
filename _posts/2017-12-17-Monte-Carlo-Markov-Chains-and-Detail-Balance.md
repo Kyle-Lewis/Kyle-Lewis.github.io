@@ -24,7 +24,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 <h2 align="center">Introduction and Motivation</h2>	
 
-I realized while writing up [my post on the Quantum Variational Monte Carlo](2017-07-19-Variational-Monte-Carlo-in-QM.md ) that there was enough non-physics background information to warrant a separate post. I went back to one of those resources, Hjorth-Jensen's notes, which a professor of mine had provided as an extra resource and, at the time, I had completely passed over.
+I realized while writing up [my post on the Quantum Variational Monte Carlo](https://kyle-lewis.github.io/physics/cuda/2017/07/19/Variational-Monte-Carlo-in-QM.html ) that there was enough non-physics background information to warrant a separate post. I went back to one of those resources, Hjorth-Jensen's notes, which a professor of mine had provided as an extra resource and, at the time, I had completely passed over.
 
 It's too bad that I did because a few chapters I pull from in this post give wonderfully simplistic examples of Monte Carlo simulations, Markov processes, and the motivation behind the detail balance requirement. This post is more or less my notes from those notes. These are general approaches to problems which have probabilistic features, and extend in use cases beyond physics, so it would be good to explain their use before applying them.
 

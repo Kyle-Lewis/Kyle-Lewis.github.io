@@ -21,10 +21,11 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 - Or a <a href="https://en.wikipedia.org/wiki/Detailed_balance" target="_blank">wiki page on the topic</a> if you want to scratch that itch with less math.
 
-- And finally, an introductory <a href="https://www.youtube.com/watch?time_continue=431&v=Ws63I3F7Moc" target="_blank">Khan video</a> provides a great example to introduce the topic.
+- And finally, an introductory <a href="https://youtu.be/Ws63I3F7Moc" target="_blank">Khan video</a> provides a great example to introduce the topic.
 
 - And <a href="https://github.com/Hobbes1/CudaVariationalMonteCarloQM" target="_blank"> my GitHub repo for this project</a>
 
+- Introduction to Quantum Mechanics, 2nd ed. David Griffiths
 
 <h2 align="center">Introduction and Motivation</h2>
 
