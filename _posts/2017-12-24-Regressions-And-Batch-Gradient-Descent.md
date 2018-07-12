@@ -3,6 +3,7 @@ layout: post
 title: "Regressions and Batch Gradient Descent"
 categories: [Machine Learning]
 date: 2017-12-24
+image: images/gradient-descent/secondorderpoly.gif
 ---
 
 <script type="text/x-mathjax-config">
