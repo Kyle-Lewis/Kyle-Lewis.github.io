@@ -35,7 +35,7 @@ I'm cross referencing quite a few resources while I get into this subject, but t
 
 <h2 align="center">Motivation</h2>
 
-There are plenty of reasons these days to explore Machine Learning. For me, in reviewing the math behind MCMC methods in a previous project I'd been coming across a lot of people discussing the topic not for Computational Physics applications, but for Machine Learning. A quick look revealed that many of the more advanced topics in Machine Learning share a mathematical foundation with QM (high dimensionality and linear algebra) and at that point I was sold. So in some of the project posts I make from here on out, i'll be going through Andrew Ng and other freely available lecture resources and picking out examples to implement; hopefully getting better with CUDA as I go.
+There are plenty of reasons these days to explore Machine Learning. For me, in reviewing the math behind MCMC methods in a previous project I'd been coming across a lot of people discussing the topic not for Computational Physics applications, but for Machine Learning. A quick look revealed that many of the more advanced topics in Machine Learning share a mathematical foundation with QM (high dimensionality and linear algebra) and at that point I was sold. So in some of the project posts I make from here on out, i'll be going through freely available lecture resources from Andrew Ng and others and picking out examples to implement.
 
 <h2 align="center">The Algorithm</h2>
 
