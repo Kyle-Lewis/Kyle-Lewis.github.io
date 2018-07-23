@@ -45,8 +45,9 @@ Typically another change is made. The regression is made such that the *log like
 
 <div style="font-size: 150%;">
 	$$ 
-	\begin{align}L(\theta) \equiv P(\vec{y}|x;\theta) \\
-	&=\prod_{i=1}^mP(y^i|x^i;\theta) 
+	\begin{align} L(\theta) \equiv P(\vec{y}|x;\theta) \\
+	&=\prod_{i=1}^mP(y^i|x^i;\theta)
+	\end{align}
 	$$
 </div>
 
@@ -57,6 +58,7 @@ Which you would read "Likelihood of a set of weights $\theta$ is the probability
 	\begin{align}P(y=1|x;\theta) = h_{\theta}(x)\\
 	&P(y=0}x;\theta) = 1 - h_{\theta}(x)
 	&P(y|x;\theta) = h_{\theta}(x)^y(1 - h_{\theta}(x))^(1-y)
+	\end{align}	
 	$$
 </div>
 
@@ -74,6 +76,7 @@ As with least squares regression we want to apply gradient descent, though this 
 	\frac{\partial}{\partial\theta_j}log(L(\theta))
 	\begin{align} = \sum_{i, y_i=1}\frac{\partial}{\partial\theta_j}log(h_i) + \sum_{i, y=0}\frac{\partial}{\partial\theta_j}log(1-h_i) \\
 	&= \sum_{i, y_i=1}frac{1}{h_i}
+	\end{align}
 	$$
 </div>
 
