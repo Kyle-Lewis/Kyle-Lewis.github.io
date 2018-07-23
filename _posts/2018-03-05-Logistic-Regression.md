@@ -19,6 +19,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 - Andrew ng lecture 3
 
+- Logreg proof http://cseweb.ucsd.edu/~elkan/250B/logreg.pdf
+
 - Github
 
 <h2 align="center">Motivation</h2>
@@ -69,13 +71,15 @@ As with least squares regression we want to apply gradient descent, though this 
 	log(L(\theta)) = \sum_{i=1}^my^ilog(h_{\theta}(x^i) + (1-y^i)log(1-h_{\theta}(x^i))) \\
 	$$
 </div>
-Taking h_{\theta}(x_i) \equiv h_i to simplify the notation a bit, and splitting the sum before taking a derivative w.r.t. the j'th parameter weight $\theta$:
+Letting $h_{\theta}(x_i) \equiv h_i$ to simplify the notation a bit, and splitting the sum before taking a derivative w.r.t. the j'th parameter weight $\theta$:
 <div style="font-size: 150%;">
+	$$
 	log(L(\theta)) = \sum_{i, y_i=1}log(h_i) + \sum_{i, y=0}log(1-h_i)
 	\frac{\partial}{\partial\theta_j}log(L(\theta))
 	\begin{align} = \sum_{i, y_i=1}\frac{\partial}{\partial\theta_j}log(h_i) + \sum_{i, y=0}\frac{\partial}{\partial\theta_j}log(1-h_i) \\
 	&= \sum_{i, y_i=1}frac{1}{h_i}frac{\partial}{\partial\theta_j}h_i + \sum_{i, y=0}\frac{1}{1-h_i}(\frac{-\partial}{\partial\theta_j}h_i)
 	\end{align}
+	$$
 </div>
 
 
