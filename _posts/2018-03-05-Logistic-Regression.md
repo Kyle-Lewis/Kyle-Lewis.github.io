@@ -71,15 +71,44 @@ As with least squares regression we want to apply gradient descent, though this 
 	log(L(\theta)) = \sum_{i=1}^my^ilog(h_{\theta}(x^i) + (1-y^i)log(1-h_{\theta}(x^i))) \\
 	$$
 </div>
-Letting $h_{\theta}(x_i) \equiv h_i$ to simplify the notation a bit, and splitting the sum before taking a derivative w.r.t. the j'th parameter weight $\theta$:
+Letting $h_{\theta}(x_i) \equiv h_i$ to simplify the notation a bit, and splitting the sum before taking a derivative with respect to the j'th parameter weight $\theta_j$:
 <div style="font-size: 150%;">
 	$$
 	log(L(\theta)) = \sum_{i, y_i=1}log(h_i) + \sum_{i, y=0}log(1-h_i) \\
 	\begin{align}\frac{\partial}{\partial\theta_j}log(L(\theta)) & = \sum_{i, y_i=1}\frac{\partial}{\partial\theta_j}log(h_i) + \sum_{i, y=0}\frac{\partial}{\partial\theta_j}log(1-h_i) \\
-	&= \sum_{i, y_i=1}\frac{1}{h_i}\frac{\partial}{\partial\theta_j}h_i + \sum_{i, y=0}\frac{1}{1-h_i}(\frac{-\partial}{\partial\theta_j}h_i)
+	&= \sum_{i, y_i=1}\frac{1}{h_i}\frac{\partial}{\partial\theta_j}h_i + \sum_{i, y=0}\frac{1}{1-h_i}(-\frac{\partial}{\partial\theta_j}h_i)
 	\end{align}
 	$$
 </div>
+Then sub back in the full form form of the hypothesis function. With $h \equiv \frac{1}{1+E}$ and $E \equiv e^{-\sum_{j=0}^n \theta_jx_j}$.
+<div style="font-size: 150%;">
+	$$
+		\begin{align}\frac{\partial}{\partial\theta_j}h & = \frac{-\frac{\partial}{\partial\theta_j}E}{1+E)^2}
+		&= \frac{-E\frac{\partial}{\partial\theta_j}(-\sum_{j=0}^n\theta_jx_j)}{1+E}^2
+		&= \frac{Ex_j}{1+E)^2}
+		&= h(1-h)x_j
+	$$
+</div>
+Then substituting the derivative into each of the split sum terms again, and re-joining the sum terms to get the singular form of the derivative: 
+<div style="font-size: 150%;">
+	$$
+		\begin{align}log(L(\theta)) & = \sum_{i, y_i = 1}^m(1-h_i)x_{ij} + \sum_{i, y_i=0}^m-h_ix_{ij} \\
+		&= \sum_{i=0}^my_i - h_theta(x_i))x_{ij}
+	$$
+</div>
+To maximize the likelihood function then is to add the derivative term with respect to each weight $\theta_j$ and scaled by some factor $\alpha$. You must do this for *each* feature of your data on every iteration, at least in the naive implementation:
+<div style="font-size: 150%;">
+	$$
+	\theta_j := \theta_j + \alpha \sum_{i=0}^m(y_i - \frac{1}{1+e^{-\theta^Tx}})x_{ij}
+	$$
+</div>
+And that is exactly the form of the algorithm as it is typically provided. You can also write in gradient notation:
+<div style="font-size: 150%;">
+	$$
+		\theta := \theta + \alpha\nabla_{\theta}log(L(\theta))
+	$$
+</div>
+
 
 
 
