@@ -45,9 +45,8 @@ Typically another change is made. The regression is made such that the *log like
 
 <div style="font-size: 150%;">
 	$$ 
-	L(\theta) \\
-	\begin{align} \equiv P(\vec{y} | x;\theta) \\
-	&=\prod_{i=1}^mP(y^i | x^i;\theta)
+	\begin{align}L(\theta) & \equiv P(\vec{y} | x;\theta) \\
+	&= \prod_{i=1}^mP(y^i | x^i;\theta)
 	\end{align}
 	$$
 </div>
@@ -56,9 +55,9 @@ Which you would read "Likelihood of a set of weights $\theta$ is the probability
 
 <div style="font-size: 150%;">
 	$$ 
-	P(y=1|x;\theta) = h_{\theta}(x)
-	P(y=0}x;\theta) = 1 - h_{\theta}(x)
-	P(y|x;\theta) = h_{\theta}(x)^y(1 - h_{\theta}(x))^(1-y)
+	P(y=1 | x;\theta) = h_{\theta}(x)
+	P(y=0 | x;\theta) = 1 - h_{\theta}(x)
+	P(y | x;\theta) = h_{\theta}(x)^y(1 - h_{\theta}(x))^{1-y}
 	$$
 </div>
 
