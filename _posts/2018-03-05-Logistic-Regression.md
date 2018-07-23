@@ -84,7 +84,7 @@ Then sub back in the full form form of the hypothesis function. With $h \equiv \
 <div style="font-size: 150%;">
 	$$
 		\begin{align}\frac{\partial}{\partial\theta_j}h & = \frac{-\frac{\partial}{\partial\theta_j}E}{(1+E)^2} \\
-		&= \frac{-E\frac{\partial}{\partial\theta_j}(-\sum_{j=0}^n\theta_jx_j)}{1+E}^2 \\
+		&= \frac{-E\frac{\partial}{\partial\theta_j}(-\sum_{j=0}^n\theta_jx_j)}{(1+E)^2} \\
 		&= \frac{Ex_j}{(1+E)^2} \\
 		&= h(1-h)x_j \\
 		\end{align}
