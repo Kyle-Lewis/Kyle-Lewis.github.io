@@ -74,9 +74,9 @@ As with least squares regression we want to apply gradient descent, though this 
 Letting $h_{\theta}(x_i) \equiv h_i$ to simplify the notation a bit, and splitting the sum before taking a derivative w.r.t. the j'th parameter weight $\theta$:
 <div style="font-size: 150%;">
 	$$
-	log(L(\theta)) = \sum_{i, y_i=1}log(h_i) + \sum_{i, y=0}log(1-h_i)
-	\frac{\partial}{\partial\theta_j}log(L(\theta))
-	\begin{align} = \sum_{i, y_i=1}\frac{\partial}{\partial\theta_j}log(h_i) + \sum_{i, y=0}\frac{\partial}{\partial\theta_j}log(1-h_i) \\
+	log(L(\theta)) = \sum_{i, y_i=1}log(h_i) + \sum_{i, y=0}log(1-h_i) \\
+	\frac{\partial}{\partial\theta_j}log(L(\theta)) \\
+	\begin{align} & = \sum_{i, y_i=1}\frac{\partial}{\partial\theta_j}log(h_i) + \sum_{i, y=0}\frac{\partial}{\partial\theta_j}log(1-h_i) \\
 	&= \sum_{i, y_i=1}frac{1}{h_i}frac{\partial}{\partial\theta_j}h_i + \sum_{i, y=0}\frac{1}{1-h_i}(\frac{-\partial}{\partial\theta_j}h_i)
 	\end{align}
 	$$
