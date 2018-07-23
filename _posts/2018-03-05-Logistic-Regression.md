@@ -45,12 +45,12 @@ Typically another change is made. The regression is made such that the *log like
 
 <div style="font-size: 150%;">
 	$$ 
-	\begin{align}L(\theta) \equiv P(\vecy|x;\theta) \\
-	&=\prod_{i=1}^mP(y^i|x^i;\theta)
+	\begin{align}L(\theta) \equiv P(\vec{y}|x;\theta) \\
+	&=\prod_{i=1}^mP(y^i|x^i;\theta) 
 	$$
 </div>
 
-Which you would read "Likelihood of a set of weights $\theta$ is the probability of seeing the values (classes, $\vecy$) given the data points $x$ as parameterized by $\theta$". And in our case, we mean parameterized by $\theta$ in the logistic function above, though in general it could be parameterized by any function. The second line has broken out of the vector form; products are used when considering join probability, and here we are considering the joint probability of many points being of a certain class. For the logistic hypothesis function the probability of a point being of a certain class is split into two cases and can be combined with a powers trick:
+Which you would read "Likelihood of a set of weights $\theta$ is the probability of seeing the values (classes, $\vec{y}$) given the data points $x$ as parameterized by $\theta$". And in our case, we mean parameterized by $\theta$ in the logistic function above, though in general it could be parameterized by any function. The second line has broken out of the vector form; products are used when considering join probability, and here we are considering the joint probability of many points being of a certain class. For the logistic hypothesis function the probability of a point being of a certain class is split into two cases and can be combined with a powers trick:
 
 <div style="font-size: 150%;">
 	$$ 
