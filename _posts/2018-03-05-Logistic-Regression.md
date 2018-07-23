@@ -45,8 +45,9 @@ Typically another change is made. The regression is made such that the *log like
 
 <div style="font-size: 150%;">
 	$$ 
-	\begin{align} L(\theta) \equiv P(\vec{y}|x;\theta) \\
-	&=\prod_{i=1}^mP(y^i|x^i;\theta)
+	L(\theta) \\
+	\begin{align} \equiv P(\vec{y} | x;\theta) \\
+	&=\prod_{i=1}^mP(y^i | x^i;\theta)
 	\end{align}
 	$$
 </div>
@@ -55,10 +56,9 @@ Which you would read "Likelihood of a set of weights $\theta$ is the probability
 
 <div style="font-size: 150%;">
 	$$ 
-	\begin{align}P(y=1|x;\theta) = h_{\theta}(x)\\
-	&P(y=0}x;\theta) = 1 - h_{\theta}(x)
-	&P(y|x;\theta) = h_{\theta}(x)^y(1 - h_{\theta}(x))^(1-y)
-	\end{align}	
+	P(y=1|x;\theta) = h_{\theta}(x)
+	P(y=0}x;\theta) = 1 - h_{\theta}(x)
+	P(y|x;\theta) = h_{\theta}(x)^y(1 - h_{\theta}(x))^(1-y)
 	$$
 </div>
 
@@ -67,7 +67,7 @@ As with least squares regression we want to apply gradient descent, though this 
 <div style="font-size: 150%;">
 	$$
 	L(\theta) = \prod_ih_{\theta}(x^i)^y^i(1 - h_{\theta}(x^i))^(1-y^i)
-	log(L(\theta)) 
+	log(L(\theta)) \\
 	\begin{align} = \sum_{i=1}^my^ilog(h_{\theta}(x^i) + (1-y^i)log(1-h_{\theta}(x^i))) \\
 	\text{Taking h_{\theta}(x_i) \equiv h_i and splitting the sum:}
 	&= \sum_{i, y_i=1}log(h_i) + \sum_{i, y=0}log(1-h_i) \equiv LCL
