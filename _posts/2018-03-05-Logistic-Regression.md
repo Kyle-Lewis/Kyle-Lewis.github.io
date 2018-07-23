@@ -68,16 +68,19 @@ As with least squares regression we want to apply gradient descent, though this 
 	L(\theta) = \prod_i h_{\theta}(x^i)^{y^i}(1 - h_{\theta}(x^i))^{1-y^i}
 
 	\begin{align}log(L(\theta)) & = \sum_{i=1}^my^ilog(h_{\theta}(x^i) + (1-y^i)log(1-h_{\theta}(x^i))) \\
-	&= \sum_{i, y_i=1}log(h_i) + \sum_{i, y=0}log(1-h_i) \equiv LCL
+	&= \sum_{i, y_i=1}log(h_i) + \sum_{i, y=0}log(1-h_i)
 	\end{align}
-	\frac{\partial}{\partial\theta_j}log(L(\theta))
-	\begin{align} = \sum_{i, y_i=1}\frac{\partial}{\partial\theta_j}log(h_i) + \sum_{i, y=0}\frac{\partial}{\partial\theta_j}log(1-h_i) \\
-	&= \sum_{i, y_i=1}frac{1}{h_i}
-	\end{align}
+	
 
 	$$
 </div>
 
+
+\frac{\partial}{\partial\theta_j}log(L(\theta))
+	\begin{align} = \sum_{i, y_i=1}\frac{\partial}{\partial\theta_j}log(h_i) + \sum_{i, y=0}\frac{\partial}{\partial\theta_j}log(1-h_i) \\
+	&= \sum_{i, y_i=1}frac{1}{h_i}
+	\end{align}
+	
 	\text{Taking h_{\theta}(x_i) \equiv h_i and splitting the sum:}
 	\text{Apply a derivative w.r.t. the j'th parameter weight \theta}
 
