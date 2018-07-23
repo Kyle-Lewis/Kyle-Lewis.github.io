@@ -87,13 +87,15 @@ Then sub back in the full form form of the hypothesis function. With $h \equiv \
 		&= \frac{-E\frac{\partial}{\partial\theta_j}(-\sum_{j=0}^n\theta_jx_j)}{1+E}^2
 		&= \frac{Ex_j}{1+E)^2}
 		&= h(1-h)x_j
+		\end{align}
 	$$
 </div>
 Then substituting the derivative into each of the split sum terms again, and re-joining the sum terms to get the singular form of the derivative: 
 <div style="font-size: 150%;">
 	$$
-		\begin{align}log(L(\theta)) & = \sum_{i, y_i = 1}^m(1-h_i)x_{ij} + \sum_{i, y_i=0}^m-h_ix_{ij} \\
-		&= \sum_{i=0}^my_i - h_theta(x_i))x_{ij}
+	\begin{align}log(L(\theta)) & = \sum_{i, y_i = 1}^m(1-h_i)x_{ij} + \sum_{i, y_i=0}^m-h_ix_{ij} \\
+	&= \sum_{i=0}^my_i - h_theta(x_i))x_{ij}
+	\end{align}
 	$$
 </div>
 To maximize the likelihood function then is to add the derivative term with respect to each weight $\theta_j$ and scaled by some factor $\alpha$. You must do this for *each* feature of your data on every iteration, at least in the naive implementation:
