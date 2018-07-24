@@ -80,7 +80,7 @@ Letting $h_{\theta}(x_i) \equiv h_i$ to simplify the notation a bit, and splitti
 	\end{align}
 	$$
 </div>
-Then sub back in the full form form of the hypothesis function. With $h \equiv \frac{1}{1+E}$ and $E \equiv e^{-\sum_{j=0}^n \theta_jx_j}$.
+Then sub back in the full form form of the hypothesis function. With $h \equiv \frac{1}{1+E}$, $(1 - h) = \frac{E}{1+E} and $E \equiv e^{-\sum_{j=0}^n \theta_jx_j}$.
 <div style="font-size: 150%;">
 	$$
 		\begin{align}\frac{\partial}{\partial\theta_j}h & = \frac{-\frac{\partial}{\partial\theta_j}E}{(1+E)^2} \\
@@ -110,6 +110,62 @@ And that is exactly the form of the algorithm as it is typically provided. You c
 		\theta := \theta + \alpha\nabla_{\theta}log(L(\theta))
 	$$
 </div>
+
+<h2 align="center">Code</h2>
+That was a good bit of proof to read through. Thankfully any implementation will only care about the last line. 
+
+<hr>
+<div style="width:110%">
+
+{% highlight python %}
+
+def gradientAscent2(x0s, x1s, classes, alphas, weights, index):
+	#inner product term for the sigmoid
+    res = weights[index]
+
+    dlogLikelyhood = 0
+
+    for i in range(len(classes)): 
+
+	    # update the constant term:	
+		if index == 0:
+			dlogLikelyhood += alphas[0] * (classes[i] - sigmoid(innerProd2(weights, x0s[i], x1s[i])))
+		# update the x0 (x) term:
+		elif index == 1:
+			dlogLikelyhood += alphas[1] * \
+    						 (classes[i] - \
+	                         sigmoid(innerProd2(weights, x0s[i], x1s[i]))) * x0s[i]
+
+	    # update the x1 (y) term:
+		elif index == 2:
+			dlogLikelyhood += alphas[2] * \
+    						 (classes[i] - \
+	                         sigmoid(innerProd2(weights, x0s[i], x1s[i]))) * x1s[i]
+
+    res += dlogLikelyhood
+    return res
+
+{% endhighlight %}
+
+</div>
+<hr>
+
+This is then called in a loop iterating over the different weights for some number of steps. Obviously its not a robust solution for a data set of any dimensionality.
+
+<h2 align="center">Results</h2>
+
+Running with alpha scaling values that are lower than they should be here's the algorithm in action. I've drawn points as they are classified logistic function as it rotates between two gaussian datasets. I've also plotted the real logistic surface in a seperate animation.
+
+<figure>
+	<img src="{{site.baseurl}}/images/logistic-regression/TwoClassLogisticRegression.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">Classifying two datasets</figcaption>
+</figure>
+
+<figure>
+	<img src="{{site.baseurl}}/images/logistic-regression/TwoClassLogisticRegression3d.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">Plotting the sigmoid surface for the same regression run</figcaption>
+</figure>
+
 
 
 
