@@ -133,14 +133,14 @@ def gradientAscent2(x0s, x1s, classes, alphas, weights, index):
 		# update the x0 (x) term:
 		elif index == 1:
 			dlogLikelyhood += alphas[1] * \
-    						 (classes[i] - \
-	                         sigmoid(innerProd2(weights, x0s[i], x1s[i]))) * x0s[i]
+						 (classes[i] - \
+	                         	sigmoid(innerProd2(weights, x0s[i], x1s[i]))) * x0s[i]
 
 	    # update the x1 (y) term:
 		elif index == 2:
 			dlogLikelyhood += alphas[2] * \
-    						 (classes[i] - \
-	                         sigmoid(innerProd2(weights, x0s[i], x1s[i]))) * x1s[i]
+						 (classes[i] - \
+	                         	sigmoid(innerProd2(weights, x0s[i], x1s[i]))) * x1s[i]
 
     res += dlogLikelyhood
     return res
@@ -165,7 +165,6 @@ Running with alpha scaling values that are lower than they should be here's the 
 	<img src="{{site.baseurl}}/images/logistic-regression/TwoClassLogisticRegression3d.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">Plotting the sigmoid surface for the same regression run</figcaption>
 </figure>
-
 
 
 
