@@ -80,7 +80,7 @@ Letting $h_{\theta}(x_i) \equiv h_i$ to simplify the notation a bit, and splitti
 	\end{align}
 	$$
 </div>
-Then sub back in the full form form of the hypothesis function. With $h \equiv \frac{1}{1+E}$, $(1 - h) = \frac{E}{1+E} and $E \equiv e^{-\sum_{j=0}^n \theta_jx_j}$.
+Then sub back in the full form form of the hypothesis function. With $h \equiv \frac{1}{1+E}$, $(1 - h) = \frac{E}{1+E}$ and $E \equiv e^{-\sum_{j=0}^n \theta_jx_j}$.
 <div style="font-size: 150%;">
 	$$
 		\begin{align}\frac{\partial}{\partial\theta_j}h & = \frac{-\frac{\partial}{\partial\theta_j}E}{(1+E)^2} \\
