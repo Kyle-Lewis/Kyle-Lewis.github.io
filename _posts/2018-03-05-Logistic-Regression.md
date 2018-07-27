@@ -17,11 +17,11 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 <h2 align="center">References</h2>
 
-- Andrew ng lecture 3
+- <a href="https://youtu.be/HZ4cvaztQEs" target="_blank">Andrew Ng's lecture</a> on logistic regression and other topics 
 
-- Logreg proof http://cseweb.ucsd.edu/~elkan/250B/logreg.pdf
+- <a href="http://cseweb.ucsd.edu/~elkan/250B/logreg.pdf" target="_blank">Lecture notes</a> on the same subject from a UCSD AI course taught by Charles Elkan. 
 
-- Github
+- Code for the regression on <a href="https://github.com/Kyle-Lewis/MachineLearningProjects" target="_blank">My Github</a>. You really could write this one on a napkin though. 
 
 <h2 align="center">Motivation</h2>
 
@@ -160,6 +160,8 @@ Running with alpha scaling values that are lower than they should be here's the 
 	<img src="{{site.baseurl}}/images/logistic-regression/TwoClassLogisticRegression.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">Classifying two datasets</figcaption>
 </figure>
+
+I was more impressed with the results from this naive implementation than I was with least squares regression. Because the goal is just classification, the choice of alpha parameters was less impactful on the "correct-ness" of the output. It would of course change the number of iterations required, and in this linear case it modifies the final "rotation" of the line with respect to the data. We could of course think of better lines, ones which do not just separate the data into classes, but are also as far as possible from the classes (on average). Thats a task for another time however. 
 
 <figure>
 	<img src="{{site.baseurl}}/images/logistic-regression/TwoClassLogisticRegression3d.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
