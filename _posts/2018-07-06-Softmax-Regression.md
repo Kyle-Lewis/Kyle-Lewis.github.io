@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Logistic Regression"
+title: "Softmax Regression"
 categories: [Machine Learning]
 date: 2018-06-25
 image: images/logistic-regression/regression.gif
@@ -42,8 +42,8 @@ Where the inclusion of the inner product lets us know that $\eta$ can generally 
 Often you want to represent the parameter vector $\eta$ as a linear combination of the form:
 <div style="font-size: 150%;">
 	$$ 
-	\vec{\eta} = \phi(\theta) 
-	\text{and so:}
+	\vec{\eta} = \phi(\theta) \\
+	\text{and so:} \\
 	p(y|\phi(\theta)) = h(y)e^{\phi(\theta)^TT(y)-A(\phi(\theta))}
 	$$
 </div>
@@ -53,13 +53,13 @@ Though of course there are cases where $\eta$ cannot be represented in this way,
 
 <div style="font-size: 150%;">
 	$$ 
-	\begin{align}P(y | \phi) & = \phi^y(1 - \phi)^{1-y}
+	\begin{align}P(y | \phi) & = \phi^y(1 - \phi)^{1-y} \\
 	&= e^{y log(\phi) + log(1-\phi)}
 	\end{align}
-	\therefore
-	\eta = log(\frac{\phi}{(1-\phi)})
-	T(y) = y
-	A(\eta) = -log(1 - \phi) = log(1 + e^{\eta})
+	\therefore \\
+	\eta = log(\frac{\phi}{(1-\phi)}) \\
+	T(y) = y \\
+	A(\eta) = -log(1 - \phi) = log(1 + e^{\eta}) 
 	$$
 </div>
 
@@ -77,8 +77,6 @@ Now for multiple classes we have a new multinomial probability distrubution to t
 	p(y | \phi) = \frac{M!}{\prod_{k=1}^K{y_k!}}\prod_{\phi_k^{y_k}}
 	$$
 </div>
-
-
 
 
 <h2 align="center">Code</h2>
