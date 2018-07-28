@@ -49,7 +49,7 @@ Often you want to represent the parameter vector $\eta$ as a linear combination 
 </div>
 Though of course there are cases where $\eta$ cannot be represented in this way, these cases are considered non-linear or of the *curved exponential family*. I'm also not dealing with those here. 
 
-*If* however we can represent our probability in this way, our hypothesis function falls out of the exponential family form by inverting the parameter vector; now $\phi(\theta)$. Now we get to actually getting our probability function into the form of the exponential family. There's a really neat trick, simply taking the exponent of the log of the probability will get you most if not all the way there. For example, when classifying between two cases $y=0 \text{and} y=1$ in the previous post we used the Bernoulli distribution. Using the trick:
+*If* however we can represent our probability in this way, our hypothesis function falls out of the exponential family form by inverting the parameter vector; now $\phi(\theta)$. All we have to do first is convert our probability function into the form of the exponential family. There's a really neat trick, simply taking the exponent of the log of the probability will get you most if not all the way there. For example, when classifying between two cases $y=0 \text{and} y=1$ in the previous post we used the Bernoulli distribution. Using the trick:
 
 <div style="font-size: 150%;">
 	$$ 
@@ -74,7 +74,7 @@ Which was exactly the logistic hypothesis function from before.
 Now for multiple classes we have a new multinomial probability distrubution to try out. For $M$ trials on data comprised of $K$ classes 
 <div style="font-size: 150%;">
 	$$
-	p(y | \phi) = \frac{M!}{\prod_{k=1}^K{y_k!}}\prod_{\phi_k^{y_k}}
+	p(y | \phi) = \frac{M!}{\prod_{k=1}^K{y_k!}}\prod_{k=1}^K{\phi_k^{y_k}}
 	$$
 </div>
 
