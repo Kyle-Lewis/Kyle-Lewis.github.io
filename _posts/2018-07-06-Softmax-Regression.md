@@ -54,12 +54,12 @@ Though of course there are cases where $\eta$ cannot be represented in this way,
 <div style="font-size: 150%;">
 	$$ 
 	\begin{align}P(y | \phi) & = \phi^y(1 - \phi)^{1-y} \\
-	&= e^{y log(\phi) + log(1-\phi)}
-	\end{align}
+	&= e^{y log(\phi) + log(1-\phi)} \\
 	\therefore \\
-	\eta = log(\frac{\phi}{(1-\phi)}) \\
-	T(y) = y \\
-	A(\eta) = -log(1 - \phi) = log(1 + e^{\eta}) 
+	\eta & = log(\frac{\phi}{(1-\phi)}) \\
+	T(y) & = y \\
+	A(\eta) & = -log(1 - \phi) = log(1 + e^{\eta}) 
+	\end{align}
 	$$
 </div>
 
