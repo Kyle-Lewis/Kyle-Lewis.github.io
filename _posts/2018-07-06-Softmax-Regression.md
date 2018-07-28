@@ -53,28 +53,43 @@ Though of course there are cases where $\eta$ cannot be represented in this way,
 
 <div style="font-size: 150%;">
 	$$ 
-	\begin{align}P(y | \phi) & = \phi^y(1 - \phi)^{1-y} \\
+	\begin{align}p(y | \phi) & = \phi^y(1 - \phi)^{1-y} \\
 	&= e^{y log(\phi) + log(1-\phi)} \\
-	\therefore \\
-	\eta & = log(\frac{\phi}{(1-\phi)}) \\
-	T(y) & = y \\
-	A(\eta) & = -log(1 - \phi) = log(1 + e^{\eta}) 
 	\end{align}
 	$$
 </div>
 
+Which gives us the forms of the functions:
+
+<div style="font-size: 150%;">
+	\eta = log(\frac{\phi}{(1-\phi)}) \\
+	T(y) = y \\
+	A(\eta) = -log(1 - \phi) = log(1 + e^{\eta}) 
+</div>
+
 And inverting the equation for $\eta$:
+
 <div style="font-size: 150%;">
 	$$
 	\phi = \frac{1}{1+e^{-\eta}}
 	$$
 </div>
+
 Which was exactly the logistic hypothesis function from before. 
 
 Now for multiple classes we have a new multinomial probability distrubution to try out. For $M$ trials on data comprised of $K$ classes 
+
 <div style="font-size: 150%;">
 	$$
 	p(y | \phi) = \frac{M!}{\prod_{k=1}^K{y_k!}}\prod_{k=1}^K{\phi_k^{y_k}}
+	$$
+</div>
+
+Now, Ng chooses to drop the scaling factor out front and focus only on the product of the natural parameters $\phi$. We can use the same trick on this form of the equation. We also break out the $K^{th}$ component of $phi$ from the rest of the sum to achieve a *minimal* representation for the distribution. This makes sense; as Ng describes, once we have up to $K-1$ terms, the $K$ term can be represented by one minus the sum of the rest. 
+
+<div style="font-size: 150%;">
+	$$
+	p(y | \phi) = \exp{\sum_{k=1}^Ky_k\log{\phi_k}}
 	$$
 </div>
 
