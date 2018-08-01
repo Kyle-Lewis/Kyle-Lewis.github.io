@@ -89,10 +89,11 @@ Now, Ng chooses to drop the scaling factor out front and focus only on the produ
 
 <div style="font-size: 150%;">
 	$$
-	\begin{cases}
+	\begin{align}
 	p(y | \phi) & = \exp\big\{\sum_{k=1}^Ky_k\log{\phi_k}}\big\} \\
-	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log{\phi_k} + (1-\sum_{k=1}^{K-1}y_k)\log{1-1-\sum_{k=1}^{K-1}\phi_k}\big\} \\
-	\end{cases}
+	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log{\phi_k} + (1-\sum_{k=1}^{K-1}y_k)\log{1-\sum_{k=1}^{K-1}\phi_k}\big\} \\
+	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log{\phi_k} - \sum_{k=1}^{K-1}y_k\log{1-\sum_{k=1}^{K-1}\phi_k} + \log{1-\sum_{k=1}^{K-1}\phi_k}\big\big}\\
+	\end{align}
 	$$
 </div>
 
