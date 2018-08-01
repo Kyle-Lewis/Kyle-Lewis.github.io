@@ -89,7 +89,8 @@ Speaking of numerical methods; we should find a proof of the *Variational Princi
 	$$
 </div>
  
-In words, this *must* be true because we know we can decompose our chosen *\psi* into an equivalent sum of orthogonal eigenstates. Any eigenstate which takes part in this series and is also not the ground state will be contributing more energy than it would have if it had been the ground state to begin with, by definition of the ground state being the lowest energy eigenstate. 
+In words, this *must* be true because we know we can decompose our chosen $\psi$ into an equivalent sum of orthogonal eigenstates. Any eigenstate which takes part in this series and is also not the ground state will be contributing more energy than it would have if it had been the ground state to begin with, by definition of the ground state being the lowest energy eigenstate. 
+
 
 In less words, while any $E_n \geq E_0$:
 
