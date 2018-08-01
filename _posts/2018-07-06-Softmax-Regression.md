@@ -92,10 +92,22 @@ Now, Ng chooses to drop the scaling factor out front and focus only on the produ
 	\begin{align}
 	p(y | \phi) & = \exp\big\{\sum_{k=1}^Ky_k\log(\phi_k)}\big\} \\
 	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log(\phi_k) + (1-\sum_{k=1}^{K-1}y_k)\log(1-\sum_{k=1}^{K-1}\phi_k)\big\} \\
-	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log(\phi_k) - \sum_{k=1}^{K-1}y_k\log(1-\sum_{k=1}^{K-1}\phi_k) + \log(1-\sum_{k=1}^{K-1}\phi_k)\big} \\
-	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log(\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k})} \\
+	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log(\phi_k) - \sum_{k=1}^{K-1}y_k\log(1-\sum_{k=1}^{K-1}\phi_k) + \log(1-\sum_{k=1}^{K-1}\phi_k)\big\} \\
+	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log(\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k})\big\} \\
 	\end{align}
 	$$
+</div>
+<div style="font-size: 150%;">
+	p(y | \phi) & = \exp\big\{\sum_{k=1}^Ky_k\log(\phi_k)}\big\} \\
+
+</div>
+<div style="font-size: 150%;">
+	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log(\phi_k) + (1-\sum_{k=1}^{K-1}y_k)\log(1-\sum_{k=1}^{K-1}\phi_k)\big\} \\
+
+</div>
+<div style="font-size: 150%;">
+		& = \exp\big\{\sum_{k=1}^{K-1}y_k\log(\phi_k) - \sum_{k=1}^{K-1}y_k\log(1-\sum_{k=1}^{K-1}\phi_k) + \log(1-\sum_{k=1}^{K-1}\phi_k)\big\} \\
+
 </div>
 
 
