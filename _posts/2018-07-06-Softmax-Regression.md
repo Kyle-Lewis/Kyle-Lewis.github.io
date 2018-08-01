@@ -100,7 +100,7 @@ Now, Ng chooses to drop the scaling factor out front and focus only on the produ
 
 <div style="font-size: 150%;">
 	$$
-	p(y | \phi) & = \exp \sum_{k=1}^{K} y_k \log{\phi_k} 
+	p(y | \phi) = \exp \sum_{k=1}^{K} y_k \log{\phi_k} 
 	$$
 </div>
 <div style="font-size: 150%;">
