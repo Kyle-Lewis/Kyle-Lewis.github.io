@@ -92,21 +92,21 @@ Now, Ng chooses to drop the scaling factor out front and focus only on the produ
 <div style="font-size: 150%;">
 	$$
 	\begin{align}
-	p(y | \phi) &= \exp \big\{ \sum_{k=1}^{K} y_k \log{\phi_k} \big\}\\
-	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log\big\{\phi_k\big\} + (1-\sum_{k=1}^{K-1}y_k)\log\big\{1-\sum_{k=1}^{K-1}\phi_k\big\}\big\} \\
-	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log\big\{\phi_k\big\} - \sum_{k=1}^{K-1}y_k\log\big\{1-\sum_{k=1}^{K-1}\phi_k\big\} + \log\big\{1-\sum_{k=1}^{K-1}\phi_k\big\}\big\} \\
-	& = \exp\big\{\sum_{k=1}^{K-1}\log\big\{\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k}\big\}y_k + \log\big\{1-\sum_{k=1}^{K-1}\phi_k\big\}\big\} \\
+	p(y | \phi) &= \exp \Big\{ \sum_{k=1}^{K} y_k \log{\phi_k} \Big\}\\
+	& = \exp\Big\{\sum_{k=1}^{K-1}y_k\log\Big\{\phi_k\Big\} + (1-\sum_{k=1}^{K-1}y_k)\log\Big\{1-\sum_{k=1}^{K-1}\phi_k\Big\}\Big\} \\
+	& = \exp\Big\{\sum_{k=1}^{K-1}y_k\log\Big\{\phi_k\Big\} - \sum_{k=1}^{K-1}y_k\log\Big\{1-\sum_{k=1}^{K-1}\phi_k\Big\} + \log\Big\{1-\sum_{k=1}^{K-1}\phi_k\Big\}\Big\} \\
+	& = \exp\Big\{\sum_{k=1}^{K-1}\log\Big\{\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k}\Big\}y_k + \log\Big\{1-\sum_{k=1}^{K-1}\phi_k\Big\}\Big\} \\
 	\end{align}
 	$$
 </div>
-Where in the last line we've retrieved the form of the exponential family and we get each of our $k$ hypothesis function by by inverting the natural parameter and solving for $\phi_k$, making the same assumption that $\eta$ is a linear combination of weighted terms $\vec{\theta}^{T}\vec{x}$: 
+Where in the last line we've retrieved the form of the exponential family and we get each of our $k$ hypothesis function by by inverting the natural parameter and solving for $\phi_k$, making the same assumption that $\eta$ is a linear combination of weighted terms $\vec{\theta_k}^{T}\vec{x}$ for weights associated with each class: 
 
 <div style="font-size: 150%;">
 	$$
-	\eta_k = \log\big\{\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k}\big\}
+	\eta_k = \log\Big\{\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k}\Big\}
 	\phi_k = \frac{e^{\eta_k}}{\sum_{j=1}^{K}e^{\eta_j}}
 	or 
-	\phi_k = 
+	\phi_k = \frac{e^{\vec{\theta_k}^{T}\vec{x}}{\sum_{j=1}^{K}e^{\vec{\theta_k}^{T}\vec{x}}}
 	$$
 </div>
 
