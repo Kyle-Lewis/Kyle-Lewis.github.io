@@ -49,7 +49,7 @@ Often you want to represent the parameter vector $\eta$ as a linear combination 
 </div>
 Though of course there are cases where $\eta$ cannot be represented in this way, these cases are considered non-linear or of the *curved exponential family*. I'm also not dealing with those here. 
 
-*If* however we can represent our probability in this way, our hypothesis function falls out of the exponential family form by inverting the parameter vector; now $\phi(\theta)$. All we have to do first is convert our probability function into the form of the exponential family. There's a really neat trick, simply taking the exponent of the log of the probability will get you most if not all the way there. For example, when classifying between two cases $y=0 \text{and} y=1$ in the previous post we used the Bernoulli distribution. Using the trick:
+*If* however we can represent our probability in this way, our hypothesis function falls out of the exponential family form by inverting the parameter vector; now $\phi(\theta)$. All we have to do first is convert our probability function into the form of the exponential family. There's a really neat trick, simply taking the exponent of the log of the probability will get you most if not all the way there. For example, when classifying between two cases $y=0$ and $y=1$ in the previous post we used the Bernoulli distribution. Using the trick:
 
 <div style="font-size: 150%;">
 	$$ 
@@ -90,10 +90,10 @@ Now, Ng chooses to drop the scaling factor out front and focus only on the produ
 <div style="font-size: 150%;">
 	$$
 	\begin{align}
-	p(y | \phi) & = \exp\big\{\sum_{k=1}^Ky_k\log(\phi_k)}\big\} \\
-	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log(\phi_k) + (1-\sum_{k=1}^{K-1}y_k)\log(1-\sum_{k=1}^{K-1}\phi_k)\big\} \\
-	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log(\phi_k) - \sum_{k=1}^{K-1}y_k\log(1-\sum_{k=1}^{K-1}\phi_k) + \log(1-\sum_{k=1}^{K-1}\phi_k)\big\} \\
-	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log(\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k})\big\} \\
+	p(y | \phi) &= \exp \big\{ \sum_{k=1}^{K} y_k \log{\phi_k} \big\}\\
+	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log{\phi_k} + (1-\sum_{k=1}^{K-1}y_k)\log{1-\sum_{k=1}^{K-1}\phi_k}\big\} \\
+	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log{\phi_k} - \sum_{k=1}^{K-1}y_k\log{1-\sum_{k=1}^{K-1}\phi_k} + \log{1-\sum_{k=1}^{K-1}\phi_k}\big\} \\
+	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log{\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k}}\big\} \\
 	\end{align}
 	$$
 </div>
@@ -105,7 +105,7 @@ Now, Ng chooses to drop the scaling factor out front and focus only on the produ
 </div>
 <div style="font-size: 150%;">
 	$$
-	= \exp\big\{\sum_{k=1}^{K-1}y_k\log{\phi_k} + (1-\sum_{k=1}^{K-1}y_k)\log{1-\sum_{k=1}^{K-1}\phi_k}\big\} 
+	\exp\big\{\sum_{k=1}^{K-1}y_k\log{\phi_k} + (1-\sum_{k=1}^{K-1}y_k)\log{1-\sum_{k=1}^{K-1}\phi_k}\big\} 
 	$$
 </div>
 <div style="font-size: 150%;">
