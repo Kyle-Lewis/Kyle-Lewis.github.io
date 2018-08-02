@@ -99,22 +99,24 @@ Now, Ng chooses to drop the scaling factor out front and focus only on the produ
 	\end{align}
 	$$
 </div>
-Where in the last line we've retrieved the form of the exponential family and we get each of our $k$ hypothesis function by by inverting the natural parameter and solving for $\phi_k$, making the same assumption that $\eta$ is a linear combination of weighted terms $\vec{\theta_k}^{T}\vec{x}$ for weights associated with each class: 
+Where in the last line we've retrieved the form of the exponential family and we get each of our $k$ hypothesis function by inverting the natural parameter and solving for $\phi_k$, making the same assumption that $\eta$ is a linear combination of weighted terms $\vec{\theta_k}^{T}\vec{x}$ for weights associated with each class: 
 
 <div style="font-size: 150%;">
 	$$
 	\eta_k = \log\Big\{\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k}\Big\}
 	\phi_k = \frac{e^{\eta_k}}{\sum_{j=1}^{K}e^{\eta_j}}
 	or 
-	\phi_k = \frac{e^{\vec{\theta_k}^{T}\vec{x}}{\sum_{j=1}^{K}e^{\vec{\theta_k}^{T}\vec{x}}}
+	\phi_k = \frac{e^{\vec{\theta_k}^{T}\vec{x}}}{\sum_{j=1}^{K}e^{\vec{\theta_k}^{T}\vec{x}}}
 	$$
 </div>
 
-
+*There's probably a better way to get vector transposes to display through LaTeX* 
 
 <h2 align="center">Derivative of Log Likelihood to Retrieve Update Rule</h2>
 
 <h2 align="center">Code</h2>
+
+The CUDA kernel that calculates the derivative terms for every point is really the crux of the algorithm. Much of the rest of the code is really just calculating and scalling the resulting probability field so it can be displayed through openGL interoperability. Here's that kernel and its launch:
 
 <hr>
 <div style="width:110%">
@@ -186,6 +188,77 @@ Where in the last line we've retrieved the form of the exponential family and we
 
 </div>
 <hr>
+
+The derivative kernel is called in a driving loop alongside visualization code. Here's the important part of the loop that corresponds to the algorithm. [Thrust](https://docs.nvidia.com/cuda/thrust/index.html) is great for fast reduction algorithms like sums and filling operations. 
+
+<hr>
+<div style="width:110%">
+
+{% highlight c++ %}
+
+		// Take dLogL for each class, filling each derivative vector
+
+	for (int classIdx = 0; classIdx < mSettings->numClasses; ++classIdx)
+	{
+
+		divLogLikelihood<<<mRegressionBlocks, mRegressionTPB>>> 
+			(mData->devPointsPtr,
+			 mData->devDivLogLPtrs[classIdx][0],	// x divs
+		     mData->devDivLogLPtrs[classIdx][1],	// y divs
+		     mData->devWeightsPtr,
+		     mSettings->numPoints,																																	 
+  		     classIdx,
+  		     mSettings->numClasses);
+			
+		gpuErrchk(cudaDeviceSynchronize());
+	}
+
+	gpuErrchk(cudaDeviceSynchronize());
+
+		// Sum the derivative vectors
+
+	for (int classIdx = 0; classIdx < mSettings->numClasses; ++classIdx)
+	{
+		for (int featureIdx = 0; featureIdx < mSettings->numFeatures; ++featureIdx)
+		{
+	        dLogLSums[classIdx][featureIdx] = thrust::reduce(mData->devDivLogLTerms[classIdx][featureIdx].begin(), 
+	        									             mData->devDivLogLTerms[classIdx][featureIdx].end());						  				  		 
+		}
+	}
+
+	gpuErrchk(cudaDeviceSynchronize());
+
+		// reset the derivative vectors for the next iteration
+
+	for (int classIdx = 0; classIdx < mSettings->numClasses; ++classIdx)
+	{
+		for (int f = 0; f < mSettings->numFeatures; ++f)
+		{
+			thrust::fill(mData->devDivLogLTerms[classIdx][f].begin(), 
+				         mData->devDivLogLTerms[classIdx][f].end(),
+				         0.0);
+		}
+	}	
+
+		// update the weights using the sums and scaling factors
+
+	for (int classIdx = 0; classIdx < mSettings->numClasses; ++classIdx)
+	{
+		mData->hostWeights[classIdx].x += mData->hostAlphas[classIdx].x * dLogLSums[classIdx][0];
+		mData->hostWeights[classIdx].y += mData->hostAlphas[classIdx].y * dLogLSums[classIdx][1];
+	}
+
+		// copy the updated weights from the host to the device for the next iteration
+
+	mData->devWeights = mData->hostWeights;
+	mData->devWeightsPtr = thrust::raw_pointer_cast(mData->devWeights.data());
+
+{% endhighlight %}
+
+</div>
+<hr>
+
+The rest of the code is just management of data and kernels to produce the following visualizations.
 
 <h2 align="center">Results</h2>
 
