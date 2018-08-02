@@ -27,7 +27,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 Logistic regression only worked with two classes, surely we should be able to distinguish between more. This post will contain a description of the softmax regression algorithm with a proof that gets us from the hypothesis function to the weight update rule which comprises the algorithm. I'll also discuss the code for this project which utilizes CUDA to speed up the main update algorithm, as well as visualization functions. This particular implementation is general in the number of classes for our data, but specifically expects two input features, so that we can plot them easily. To grow the input feature set would be to grow a vector here or there. 
 
-<h2 align="center">Exponential Family </h2>
+<h2 align="center">Exponential Family to Retrieve the Softmax Hypothesis Function</h2>
 
 As with all these regressions, we are attempting to apply gradient descent to the parameters of a hypothesis function such that likelihood is maximized. Before, the sigmoid function of logistic regression was ideal in that it had an output on $[0, 1]$ and could distinguish between two regions. It turns out that the sigmoid can be retrieved generally from inverting a certain *natural parameter* of a probability distribution which lives in the exponential family. The exponential family contains probability distributions parameterized by $\eta$ (the natural parameter) in the following form:
 
@@ -62,9 +62,11 @@ Though of course there are cases where $\eta$ cannot be represented in this way,
 Which gives us the forms of the functions:
 
 <div style="font-size: 150%;">
+	$$
 	\eta = log(\frac{\phi}{(1-\phi)}) \\
 	T(y) = y \\
 	A(\eta) = -log(1 - \phi) = log(1 + e^{\eta}) 
+	$$
 </div>
 
 And inverting the equation for $\eta$:
@@ -85,35 +87,27 @@ Now for multiple classes we have a new multinomial probability distrubution to t
 	$$
 </div>
 
-Now, Ng chooses to drop the scaling factor out front and focus only on the product of the natural parameters $\phi$. We can use the same trick on this form of the equation. We also break out the $K^{th}$ component of $\phi$ from the rest of the sum to achieve a *minimal* representation for the distribution. This makes sense; as Ng describes, once we have up to $K-1$ terms, the $K$ term can be represented by one minus the sum of the rest. 
+Now, Ng chooses to drop the scaling factor out front and focus only on the product of the natural parameters $\phi$. We can use the same trick on this form of the equation. We also break out the $K^{th}$ component of $\phi$ from the rest of the sum to achieve a *minimal* representation for the distribution. This makes sense; as Ng describes, once we have up to $K-1$ terms, the $K$ term can be represented by one minus the sum of the rest. Using that replacement:
 
 <div style="font-size: 150%;">
 	$$
 	\begin{align}
 	p(y | \phi) &= \exp \big\{ \sum_{k=1}^{K} y_k \log{\phi_k} \big\}\\
-	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log{\phi_k} + (1-\sum_{k=1}^{K-1}y_k)\log{1-\sum_{k=1}^{K-1}\phi_k}\big\} \\
-	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log{\phi_k} - \sum_{k=1}^{K-1}y_k\log{1-\sum_{k=1}^{K-1}\phi_k} + \log{1-\sum_{k=1}^{K-1}\phi_k}\big\} \\
-	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log{\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k}}\big\} \\
+	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log\big\{\phi_k\big\} + (1-\sum_{k=1}^{K-1}y_k)\log\big\{1-\sum_{k=1}^{K-1}\phi_k\big\}\big\} \\
+	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log\big\{\phi_k\big\} - \sum_{k=1}^{K-1}y_k\log\big\{1-\sum_{k=1}^{K-1}\phi_k\big\} + \log\big\{1-\sum_{k=1}^{K-1}\phi_k\big\}\big\} \\
+	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log\big\{\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k}\big\}\big\ + \log\big\{1-\sum_{k=1}^{K-1}\phi_k\big\}\big\} \\
 	\end{align}
 	$$
 </div>
+Where in the last line we've retrieved the form of the exponential family and we get each of our $k$ hypothesis function by by inverting the natural parameter and solving for $\phi_k$, making the same assumption that $\eta$ is a linear combination of weighted terms $\vec{\theta}^{T}\vec{x}$: 
 
 <div style="font-size: 150%;">
 	$$
-	p(y | \phi) = \exp \big\{ \sum_{k=1}^{K} y_k \log{\phi_k} \big\}
-	$$
-</div>
-<div style="font-size: 150%;">
-	$$
-	\exp\big\{\sum_{k=1}^{K-1}y_k\log{\phi_k} + (1-\sum_{k=1}^{K-1}y_k)\log{1-\sum_{k=1}^{K-1}\phi_k}\big\} 
-	$$
-</div>
-<div style="font-size: 150%;">
-	$$
-	\exp\big\{\sum_{k=1}^{K-1}y_k\log{\phi_k} - \sum_{k=1}^{K-1}y_k\log{1-\sum_{k=1}^{K-1}\phi_k} + \log{1-\sum_{k=1}^{K-1}\phi_k}\big\} \\
-	$$
-</div>
+	\eta_k = log{\frac{}}
 
+
+
+<h2 align="center">Derivative of Log Likelihood to Retrieve Update Rule</h2>
 
 <h2 align="center">Code</h2>
 
