@@ -95,7 +95,7 @@ Now, Ng chooses to drop the scaling factor out front and focus only on the produ
 	p(y | \phi) &= \exp \big\{ \sum_{k=1}^{K} y_k \log{\phi_k} \big\}\\
 	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log\big\{\phi_k\big\} + (1-\sum_{k=1}^{K-1}y_k)\log\big\{1-\sum_{k=1}^{K-1}\phi_k\big\}\big\} \\
 	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log\big\{\phi_k\big\} - \sum_{k=1}^{K-1}y_k\log\big\{1-\sum_{k=1}^{K-1}\phi_k\big\} + \log\big\{1-\sum_{k=1}^{K-1}\phi_k\big\}\big\} \\
-	& = \exp\big\{\sum_{k=1}^{K-1}y_k\log\big\{\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k}\big\}\big\ + \log\big\{1-\sum_{k=1}^{K-1}\phi_k\big\}\big\} \\
+	& = \exp\big\{\sum_{k=1}^{K-1}\log\big\{\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k}\big\}y_k + \log\big\{1-\sum_{k=1}^{K-1}\phi_k\big\}\big\} \\
 	\end{align}
 	$$
 </div>
@@ -103,7 +103,12 @@ Where in the last line we've retrieved the form of the exponential family and we
 
 <div style="font-size: 150%;">
 	$$
-	\eta_k = log{\frac{}}
+	\eta_k = \log\big\{\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k}\big\}
+	\phi_k = \frac{e^{\eta_k}}{\sum_{j=1}^{K}e^{\eta_j}}
+	or 
+	\phi_k = 
+	$$
+</div>
 
 
 
