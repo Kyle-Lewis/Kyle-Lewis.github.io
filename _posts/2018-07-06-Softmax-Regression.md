@@ -103,14 +103,14 @@ Where in the last line we've retrieved the form of the exponential family and we
 
 <div style="font-size: 150%;">
 	$$
-	\eta_k = \log\Big\{\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k}\Big\}
-	\phi_k = \frac{e^{\eta_k}}{\sum_{j=1}^{K}e^{\eta_j}}
-	or 
-	\phi_k = \frac{e^{\vec{\theta_k}^{T}\vec{x}}}{\sum_{j=1}^{K}e^{\vec{\theta_k}^{T}\vec{x}}}
+	\eta_k = \log\Big\{\frac{\phi_k}{1-\sum_{k=1}^{K-1}\phi_k}\Big\} \\
+	\phi_k = \frac{e^{\eta_k}}{\sum_{j=1}^{K}e^{\eta_j}} \\
+	or \\
+	\phi_k = \frac{e^{\vec{\theta_k}^{T}\vec{x}}}{\sum_{j=1}^{K}e^{\vec{\theta_k}^{T}\vec{x}}} \\
 	$$
 </div>
 
-*There's probably a better way to get vector transposes to display through LaTeX* 
+*There's probably a better way to get vector transposes to display through LaTeX . . .* 
 
 <h2 align="center">Derivative of Log Likelihood to Retrieve Update Rule</h2>
 
