@@ -100,7 +100,7 @@ Now, Ng chooses to drop the scaling factor out front and focus only on the produ
 
 <div style="font-size: 150%;">
 	$$
-	p(y | \phi) = \exp \{ \sum_{k=1}^{K} y_k \log{\phi_k} \}
+	p(y | \phi) = \exp \big\{ \sum_{k=1}^{K} y_k \log{\phi_k} \big\}
 	$$
 </div>
 <div style="font-size: 150%;">
@@ -133,7 +133,7 @@ Now, Ng chooses to drop the scaling factor out front and focus only on the produ
 	 * @param dxTerms       A device pointer to be populated with derivative terms corresponding to the first feature "x"
 	 * @param dyTerms       A device pointer to be populated with derivative terms corresponding to the first feature "y"
 	 * @param devWeights    A device pointer to the parameter weights (Theta's) at the current iteration, float2 x numClasses
-	 * @param numPoints     The total number of points being classified, for bounds checking with maximum thread index
+	 * @param numPoints     The total number of points per class, for bounds checking with maximum thread index
 	 * @param classNum      The class number for which the derivative is being calculated.
 	 * @param numClasses    THe total number of classes in the model
 	 **/
