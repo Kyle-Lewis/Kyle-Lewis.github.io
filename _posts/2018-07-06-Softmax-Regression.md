@@ -112,11 +112,11 @@ Where in the last line we've retrieved the form of the exponential family and we
 
 *There's probably a better way to get vector transposes to display through LaTeX . . .* 
 
-Pictures always help so here's what that function looks in two dimensions for $\theta$ weights $[1, 1], [3, 0.5]$ plotting for the first class:
+Pictures always help so here's what that function looks in two dimensions for $\theta$ weights $[1, 1], [3, 0.5]$ plotting for the first class, you can think of it as a region selector for your feature space:
 
 <figure>
 	<img src="{{site.baseurl}}/images/softmax/softmax-2d-wolfram.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
-	<figcaption style="text-align:center;"></figcaption>
+	<figcaption style="text-align:center;">Getting a feel for the form of the hypothesis function</figcaption>
 </figure>
 
 <h2 align="center">Derivative of Log Likelihood to Retrieve Update Rule</h2>
