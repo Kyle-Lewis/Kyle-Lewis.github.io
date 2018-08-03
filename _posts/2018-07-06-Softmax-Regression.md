@@ -121,7 +121,14 @@ Pictures always help so here's what that function looks in two dimensions for $\
 
 <h2 align="center">Derivative of Log Likelihood to Retrieve Update Rule</h2>
 
-What we recovered above was the hypothesis function for a point *of a class $k$* (note the subscript). The function for all classes must represent the joint probability of the classes at hand. When you have joint probabilties, you multiply the individual terms. [Go ahead and check if that doesn't make sense](https://en.wikipedia.org/wiki/Joint_probability_distribution). Because of this, the likelihood function this time around must be a product. Remeber that before, for logistic regression between two classes, it was a sum. Here's what that looks like:
+Remember that the general form of log likelihood maximization goes:
+<div style="font-size: 150%;">
+	$$
+	\theta := \theta + \alpha\nabla_{\theta}L(\theta)
+	$$
+</div>
+
+So we'll need to get the likelihood function and take its derivative. What we recovered above was the hypothesis function for a point *of a class $k$* (note the subscript). The function for all classes must represent the joint probability of the classes at hand. When you have joint probabilties, you multiply the individual terms. [Go ahead and check if that doesn't make sense](https://en.wikipedia.org/wiki/Joint_probability_distribution). Because of this, the likelihood function this time around must be a product. Remeber that before, for logistic regression between two classes, it was a sum. Here's what that looks like:
 
 <div style="font-size: 150%;">
 	$$
@@ -143,6 +150,19 @@ And $I\{y_i = n\}$ is an indicator function, just the boolean test: $class\space
 	$$
 	L(\theta_k) = \phi_1(\vec{X_1}) + \phi_1(\vec{X_2}) + \phi_2(\vec{X_3}) + \phi_3(\vec{X_4}) + \phi_3(\vec{X_5}) \\
 	L(\theta_k) = \frac{e^{\theta_k^TX_1}}{1+\sum_{j=1}^{K-1}e^{\theta_j^TX_1}} + \ldots + \frac{e^{\theta_k^TX_5}}{1+\sum_{j=1}^{K-1}e^{\theta_j^TX_5}}
+	$$
+</div>
+I'll return to this pretend set of data to write out the derivative term explicitely. Speaking of the derivative (of the log): 
+
+<div style="font-size: 150%;">
+	$$
+	L(\theta) = \prod_{i=1}^{m}\phi_1^{I\{y_i=1\}}...\phi_K^{I\{y_i=K\}} \\
+	log(L(\theta)) = \sum_{i=1}^m\theta_k^TX_i - log(1+\sum{j=1}^{k-1}e^{\theta}) \\
+	\frac{\partial{log(L)}}{\partial{\theta_{k}}} = \sum_{i=1}^mI\{X_i\} - \frac{X_ie^{\theta_{k}^TX_i}}{1+\sum_{j=1}^{K-1}e^\theta_jX_i} \\ 
+	\\
+	\text{Or, individually for each feature j:}
+	\\
+	\frac{\partial{log(L)}}{\partial{\theta_{jk}}} = \sum_{i=1}^mI\{X_{ij}\} - \frac{X_{ij}e^{\theta_{k}^TX_i}}{1+\sum_{j=1}^{K-1}e^\theta_{jk}X_{ij}} \\
 	$$
 </div>
 
