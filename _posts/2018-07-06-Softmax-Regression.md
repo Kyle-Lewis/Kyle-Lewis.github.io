@@ -142,8 +142,8 @@ And $I\{y_i = n\}$ is an indicator function, just the boolean test: $class\space
 <div style="font-size: 150%;">
 	$$
 	L(\theta_k) = \phi_1(\vec{X_1}) + \phi_1(\vec{X_2}) + \phi_2(\vec{X_3}) + \phi_3(\vec{X_4}) + \phi_3(\vec{X_5}) \\
-	L(\theta_k) = \frac{e^{\theta_k^TX_1}{1+\sum_{j=1}^{K-1}e^{\theta_j^TX_1} + \ldots +
-	              \frac{e^{\theta_k^TX_5}{1+\sum_{j=1}^{K-1}e^{\theta_j^TX_5}\\
+	L(\theta_k) = \frac{e^{\theta_k^TX_1}{1+\sum_{j=1}^{K-1}e^{\theta_j^TX_1}} + \ldots +
+	              \frac{e^{\theta_k^TX_5}{1+\sum_{j=1}^{K-1}e^{\theta_j^TX_5}}
 	$$
 </div>
 
