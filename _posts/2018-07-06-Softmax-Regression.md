@@ -110,7 +110,7 @@ Where in the last line we've retrieved the form of the exponential family and we
 	$$
 </div>
 
-*There's probably a better way to get vector transposes to display through LaTeX . . .* 
+*There's probably a better way to get vector transposes to display through LaTeX . . . i'll drop the arrow from now on but keep it in mind* 
 
 Pictures always help so here's what that function looks in two dimensions for $\theta$ weights $[1, 1], [3, 0.5]$ plotting for the first class, you can think of it as a region selector for your feature space:
 
@@ -127,19 +127,24 @@ What we recovered above was the hypothesis function for a point *of a class $k$*
 	$$
 	\begin{align}
 	L(\theta) &= \prod_{i=1}^{m}p(y_i | x_i; \theta) \\
-	&= \prod_{i=1}^{m}\phi_1^{I{y_i=1}}...\phi_K^{I{y_i=K}}
+	&= \prod_{i=1}^{m}\phi_1^{I\{y_i=1\}}...\phi_K^{I\{y_i=K\}}
 	\end{align}
 	$$
 </div>
 Where
 <div style="font-size: 150%;">
 	$$
-	\phi_k = \frac{e^{\vec{\theta_k}^{T}\vec{x}}}{\sum_{j=1}^{K}e^{\vec{\theta_k}^{T}\vec{x}}}
+	\phi_k = \frac{e^{\theta_k^{T}x}}{\sum_{j=1}^{K}e^{\theta_k^{T}x}}
 	$$
 </div>
-And $I{y_i = n}$ is an indicator function, just the boolean test: $class of point == this class$. This is just a nice way of representing the joint probability. At this point I definitely lost track of subscripts and products and I didn't have a very good feel for what the function was doing. If you feel this way, here is it written explicitely for a dataset of three points, of three classes, defined by two features:
+And $I\{y_i = n\}$ is an indicator function, just the boolean test: $class\space of\space point == this\space class$. This is just a nice way of representing the joint probability. At this point I definitely lost track of subscripts and products and I didn't have a very good feel for what the function was doing. If you feel this way, here is it written *very* explicitely for a dataset of 5 points, of three classes, defined by two features. Points $[1,2,3,4,5]$ are of classes $[1,1,2,3,3]$ in this example, and take on features $[x, y]$
 
-
+<div style="font-size: 150%;">
+	$$
+	L(\theta_k) = (\phi_1(\vec(X_1)) + \phi_1(\vec(X_2)) + \phi_2(\vec(X_3)) + \phi_3(\vec(X_4)) + \phi_3(\vec(X_5))) \\
+	L(\theta_k) = \frac{e^{\theta_k}^TX_1}{1+\sum_{j=1}^{K-1}e^{\theta_j}^TX_1} + . . . + \frac{e^{\theta_k}^TX_5}{1+\sum_{j=1}^{K-1}e^{\theta_j}^TX_5}\\
+	$$
+</div>
 
 
 <h2 align="center">Code</h2>
@@ -195,7 +200,7 @@ The CUDA kernel that calculates the derivative terms for every point is really t
 	    float sumxTerm = 0.0;
 	    float sumyTerm = 0.0;
 
-	    expxTerm = expf(devWeights[pointClass].x * point.x);
+	    expxTerm = expf(devWeights[classNum].x * point.x);
 	    for (int classIdx = 0; classIdx < numClasses; ++classIdx)
 	    {
 	        sumxTerm += expf(devWeights[classIdx].x * point.x);
@@ -203,7 +208,7 @@ The CUDA kernel that calculates the derivative terms for every point is really t
 	    float testx = point.x * (indicatorTerm - (expxTerm / (1.0 + sumxTerm)));
 	    dxTerms[pointIdx] = testx;
 
-	    expyTerm = expf(devWeights[pointClass].y * point.y);
+	    expyTerm = expf(devWeights[classNum].y * point.y);
 	    for (int classIdx = 0; classIdx < numClasses; ++classIdx)
 	    {
 	        sumyTerm += expf(devWeights[classIdx].y * point.y);
