@@ -338,8 +338,19 @@ The rest of the code is just management of data and kernels to produce the follo
 
 <h2 align="center">Results</h2><hr>
 
+First, a nice pretty run with really low $\alpha$ values to capture the behavior of the regression. Here i've cut each of the distributions $\phi_k$ at the point where they dip below 50%, and then normalized each $phi$ such that I could scale color with probability. 
+
 <figure>
 	<img src="{{site.baseurl}}/images/softmax/softmax.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
-	<figcaption style="text-align:center;">Running Softmax regression slowly on some easy dataset+</figcaption>
+	<figcaption style="text-align:center;">Running Softmax regression slowly on some easy dataset</figcaption>
 </figure>
+
+Of course we can break this naiive implementation. These are some of the nicest behaved gaussians I've ever seen. Additionally, I haven't put any of the clusters "behind" another; because of the linear nature of our parameter weights we can't make nice curves and circles around classes that would potentially allow us to classify the following set. There's also no constant parameter weight, that may allow us to get past this issue:
+
+<figure>
+	<img src="{{site.baseurl}}/images/softmax/BlockingClass.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">Softmax getting stuck</figcaption>
+</figure>
+
+
 
