@@ -165,9 +165,13 @@ I'll return to this pretend set of data to write out the derivative term explici
 	\frac{\partial{log(L)}}{\partial{\theta_{jk}}} = \sum_{i=1}^mI\{X_{ij}\} - \frac{X_{ij}e^{\theta_{k}^TX_i}}{1+\sum_{j=1}^{K-1}e^\theta_{jk}X_{ij}} \\
 	$$
 </div>
+Then if we just factor out the common $X_{ij}$ term we have our update rule:
 
-
-
+<div style="font-size: 150%;">
+	$$
+	\theta_{jk} := \alpha\sum_{i=1}^mx_{ij}(I\{k==X_k}\ - \frac{e^{\theta_{jk}x_{ij}}}{1+\sum{j=1}^{K-1}\theta_{jk}x_{ij}})
+	$$
+</div>
 <h2 align="center">Code</h2>
 
 The CUDA kernel that calculates the derivative terms for every point is really the crux of the algorithm. Much of the rest of the code is really just calculating and scalling the resulting probability field so it can be displayed through openGL interoperability. Here's that kernel and its launch:
