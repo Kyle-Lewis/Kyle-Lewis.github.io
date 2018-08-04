@@ -15,7 +15,7 @@ MathJax.Hub.Config({
 <script type="text/javascript" async
 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<h2 align="center">References</h2>
+<h2 align="center">References</h2><hr>
 
 - <a href="https://people.eecs.berkeley.edu/~jordan/courses/260-spring10/other-readings/chapter8.pdf" target="_blank">A general introduction to the exponential family</a>, I believe this was extra material provided as a part of a course taught at Berkely, it was very helpful in expanding upon Ng's introduction.
 
@@ -23,11 +23,11 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 - The Softmax code discussed here is on <a href="https://github.com/Kyle-Lewis/CudaSoftmax" target="_blank">my Github</a>
 
-<h2 align="center">Motivation</h2>
+<h2 align="center">Motivation</h2><hr>
 
 Logistic regression only worked with two classes, surely we should be able to distinguish between more. This post will contain a description of the softmax regression algorithm with a proof that gets us from the hypothesis function to the weight update rule which comprises the algorithm. I'll also discuss the code for this project which utilizes CUDA to speed up the main update algorithm, as well as visualization functions. This particular implementation is general in the number of classes for our data, but specifically expects two input features, so that we can plot them easily. To grow the input feature set would be to grow a vector here or there. 
 
-<h2 align="center">Exponential Family to Retrieve the Softmax Hypothesis Function</h2>
+<h2 align="center">Exponential Family to Retrieve the Softmax Hypothesis Function</h2><hr>
 
 As with all these regressions, we are attempting to apply gradient descent to the parameters of a hypothesis function such that likelihood is maximized. Before, the sigmoid function of logistic regression was ideal in that it had an output on $[0, 1]$ and could distinguish between two regions. It turns out that the sigmoid can be retrieved generally from inverting a certain *natural parameter* of a probability distribution which lives in the exponential family. The exponential family contains probability distributions parameterized by $\eta$ (the natural parameter) in the following form:
 
@@ -119,7 +119,7 @@ Pictures always help so here's what that function looks in two dimensions for $\
 	<figcaption style="text-align:center;">Getting a feel for the form of the hypothesis function</figcaption>
 </figure>
 
-<h2 align="center">Derivative of Log Likelihood to Retrieve Update Rule</h2>
+<h2 align="center">Derivative of Log Likelihood to Retrieve Update Rule</h2><hr>
 
 Remember that the general form of log likelihood maximization goes:
 <div style="font-size: 150%;">
@@ -159,23 +159,38 @@ I'll return to this pretend set of data to write out the derivative term explici
 	\begin{align}
 	L(\theta) & = \prod_{i=1}^{m}\phi_1^{I\{y_i=1\}}...\phi_K^{I\{y_i=K\}} \\
 	log(L(\theta)) & = \sum_{i=1}^m\theta_k^TX_i - log(1+\sum_{j=1}^{k-1}e^{\theta_j^TX_i}) \\
-	\frac{\partial{log(L)}}{\partial{\theta_{k}}} & = \sum_{i=1}^mI\{X_k == k\}X_i - \frac{X_ie^{\theta_{k}^TX_i}}{1+\sum_{j=1}^{K-1}e^{\theta_jX_i}} \\ 
+	\frac{\partial{log(L)}}{\partial{\theta_{k}}} & = \sum_{i=1}^mI\{X_k == k\}X_i - \frac{X_ie^{\theta_{k}^TX_i}}{1+\sum_{j=1}^{K-1}e^{\theta_j^TX_i}} \\ 
 	\\
 	\text{Or, individually for each feature j:}
 	\\
-	\frac{\partial{log(L)}}{\partial{\theta_{jk}}} & = \sum_{i=1}^mI\{X_k == k\}X_{ij} - \frac{X_{ij}e^{\theta_{k}^TX_i}}{1+\sum_{j=1}^{K-1}e^\theta_{jk}X_{ij}} \\
+	\frac{\partial{log(L)}}{\partial{\theta_{jk}}} & = \sum_{i=1}^mI\{X_k == k\}X_{ij} - \frac{X_{ij}e^{\theta_{k}^TX_i}}{1+\sum_{j=1}^{K-1}e^{\theta_{jk}X_{ij}}} \\
 	\end{align}
 	$$
 </div>
-Then if we just factor out the common $X_{ij}$ term we have our update rule:
+Note that the Indicator function fell out here when taking the derivative of the lone inner product on the left with respect to $\theta_k$. Then if we just factor out the common $X_{ij}$ term we have our update rule:
 
 <div style="font-size: 150%;">
 	$$
 	\boxed{\theta_{jk} := \theta_{jk} + \alpha\sum_{i=1}^mx_{ij}\Big(I\{k==X_k\} - \frac{e^{\theta_{jk}^Tx_{ij}}}{1+\sum_{j=1}^{K-1}e^{\theta_{jk}^Tx_{ij}}}\Big ) }
 	$$
 </div>
-Note that our parameter weights now come in the form of a matrix of dimensions $j\spacex\spacek$ for each $k$ class and $j$ feature, so a full iteration of gradient descent now must take this derivative term for all points $j\cdotk$ times. 
-<h2 align="center">Code</h2>
+Note that our parameter weights now come in the form of a matrix of dimensions $j\space x\space k$ for each $k$ class and $j$ feature, so a full iteration of gradient descent now must take this derivative term for all points $j\cdot k$ times. 
+
+To illustrate what the derivative looks like explicitely, for the same pretend weights from before, when taking the derivative with respect to $j=x$ and $k=1$
+<div style="font-size: 150%;">
+	$$
+	\frac{\partial{log(L)}}{\partial{\theta_{1,x}}} = 
+	X_{1,x}\Big(\textcolor{red}{1} - \frac{e^{\theta_{1,x}^TX_{1,x}}}{1+e^{\theta_{1,x}^TX_{1,x}}+e^{\theta_{2,x}^TX_{1,x}}} \Big)\ldots} 
+	+ \ldots + 
+	X_{1,x}\Big(\textcolor{red}{0} - \frac{e^{\theta_{1,x}^TX_{3,x}}}{1+e^{\theta_{1,x}^TX_{1,x}}+e^{\theta_{2,x}^TX_{1,x}}} \Big)
+	$$
+</div>
+
+Note that as a result of the state of the indicator terms for the various derivative sums, the derivative will approach zero as $\vec{\theta}$ causes the function to encapsulate points of the class, *and as it excludes points **not** of the class*. This is nice, we won't get false positives!
+
+Hopefully that does it for the mathy bits for this post. As usual, all we really needed was the update rule in the box above; but we really wouldn't have known how to come up with these things in the future then would we?
+
+<h2 align="center">Code</h2><hr>
 
 The CUDA kernel that calculates the derivative terms for every point is really the crux of the algorithm. Much of the rest of the code is really just calculating and scalling the resulting probability field so it can be displayed through openGL interoperability. Here's that kernel and its launch:
 
@@ -321,7 +336,7 @@ The derivative kernel is called in a driving loop alongside visualization code. 
 
 The rest of the code is just management of data and kernels to produce the following visualizations.
 
-<h2 align="center">Results</h2>
+<h2 align="center">Results</h2><hr>
 
 <figure>
 	<img src="{{site.baseurl}}/images/softmax/softmax.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
