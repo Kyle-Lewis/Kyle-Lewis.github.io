@@ -355,15 +355,11 @@ Of course we can break this naiive implementation. These are some of the nicest 
 On the other hand, this implementation doesn't suffer the same issue that log-regression did; the exact "line" drawn between classes tends to relax towards a common configuration regardless of the "learning" rates $\alpha$:
 
 <div class="row">
-<figure>
 	<img src="{{site.baseurl}}/images/softmax/Weights0.gif" style="padding-bottom:0.5em; width:40%; margin-left:auto; margin-right:auto; display:block; float:left" />
-	<figcaption style="text-align:center;">With balanced weights</figcaption>
-</figure>
-<figure>
 	<img src="{{site.baseurl}}/images/softmax/Weights1.gif" style="padding-bottom:0.5em; width:40%; margin-left:auto; margin-right:auto; display:block; float:left" />
-	<figcaption style="text-align:center;">With weights which are scewed for one class</figcaption>
-</figure>
 </div>
+
+
 
 
 
