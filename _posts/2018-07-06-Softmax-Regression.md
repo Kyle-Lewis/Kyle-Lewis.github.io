@@ -172,7 +172,7 @@ Then if we just factor out the common $X_{ij}$ term we have our update rule:
 <div style="font-size: 150%;">
 	$$
 	\[
-	\boxed{\theta_{jk} := \theta_{jk} + \alpha\sum_{i=1}^mx_{ij}\Big(I\{k==X_k\} - \frac{e^{\theta_{jk}^Tx_{ij}}}{1+\sum_{j=1}^{K-1}\theta_{jk}^Tx_{ij}}\Big)}
+	\boxed{\theta_{jk} := \theta_{jk} + \alpha\sum_{i=1}^mx_{ij}\Big(I\{k==X_k\} - \frac{e^{\theta_{jk}^Tx_{ij}}}{1+\sum_{j=1}^{K-1}e^{\theta_{jk}^Tx_{ij}}}\Big ) }
 	$$
 </div>
 
