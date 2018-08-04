@@ -338,7 +338,7 @@ The rest of the code is just management of data and kernels to produce the follo
 
 <h2 align="center">Results</h2><hr>
 
-First, a nice pretty run with really low $\alpha$ values to capture the behavior of the regression. Here i've cut each of the distributions $\phi_k$ at the point where they dip below 50%, and then normalized each $\phi$ such that I could scale color with probability. 
+First, a nice pretty run with really low $\alpha$ values to capture the behavior of the regression. Here i've cut each of the distributions $\phi_k$ at the point where they dip below 50%, and then normalized each $\phi$ such that I could scale color with probability. I haven't yet looked for *real* data to run this on, for visualization purposes it would have to be something trivial with two features. For now I'm just using some generated guassians with 512 points per class (nice cuda numbers).  
 
 <figure>
 	<img src="{{site.baseurl}}/images/softmax/softmax.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
@@ -355,11 +355,15 @@ Of course we can break this naiive implementation. These are some of the nicest 
 On the other hand, this implementation doesn't suffer the same issue that log-regression did; the exact "line" drawn between classes tends to relax towards a common configuration regardless of the "learning" rates $\alpha$:
 
 <div class="row">
-	<img src="{{site.baseurl}}/images/softmax/Weights0.gif" style="padding-bottom:0.5em; width:40%; margin-left:auto; margin-right:auto; display:block; float:left" />
-	<img src="{{site.baseurl}}/images/softmax/Weights1.gif" style="padding-bottom:0.5em; width:40%; margin-left:auto; margin-right:auto; display:block; float:left" />
+<figure>
+	<img src="{{site.baseurl}}/images/softmax/Weights0.gif" style="padding-bottom:0.5em; width:40%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">With balanced weights</figcaption>
+</figure>
+<figure>
+	<img src="{{site.baseurl}}/images/softmax/Weights1.gif" style="padding-bottom:0.5em; width:40%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">With weights which are scewed for one class</figcaption>
+</figure>
 </div>
-
-
 
 
 
