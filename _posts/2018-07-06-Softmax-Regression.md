@@ -342,15 +342,29 @@ First, a nice pretty run with really low $\alpha$ values to capture the behavior
 
 <figure>
 	<img src="{{site.baseurl}}/images/softmax/softmax.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
-	<figcaption style="text-align:center;">Running Softmax regression slowly on some easy dataset</figcaption>
+	<figcaption style="text-align:center;">Running Softmax regression slowly on some easy dataset. It's easy to get this to converge in only a handful of iterations.</figcaption>
 </figure>
 
 Of course we can break this naiive implementation. These are some of the nicest behaved gaussians I've ever seen. Additionally, I haven't put any of the clusters "behind" another; because of the linear nature of our parameter weights we can't make nice curves and circles around classes that would potentially allow us to classify the following set. There's also no constant parameter weight, that may allow us to get past this issue:
 
 <figure>
 	<img src="{{site.baseurl}}/images/softmax/BlockingClass.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
-	<figcaption style="text-align:center;">Softmax getting stuck</figcaption>
+	<figcaption style="text-align:center;">Softmax getting stuck. Also, the grey dots floating around are just a rezult of my colormap screwing up as a result of overlapping probabilities.</figcaption>
 </figure>
+
+On the other hand, this implementation doesn't suffer the same issue that log-regression did; the exact "line" drawn between classes tends to relax towards a common configuration regardless of the "learning" rates $\alpha$:
+
+<div class="row">
+<figure>
+	<img src="{{site.baseurl}}/images/softmax/Weights0.gif" style="padding-bottom:0.5em; width:40%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">With ballanced weights</figcaption>
+</figure>
+<figure>
+	<img src="{{site.baseurl}}/images/softmax/Weights1.gif" style="padding-bottom:0.5em; width:40%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">With weights which are scewed for one class</figcaption>
+</figure>
+</div>
+
 
 
 
