@@ -171,9 +171,11 @@ Then if we just factor out the common $X_{ij}$ term we have our update rule:
 
 <div style="font-size: 150%;">
 	$$
-	\theta_{jk} := \alpha\sum_{i=1}^mx_{ij}\Big(I\{k==X_k\} - \frac{e^{\theta_{jk}^Tx_{ij}}}{1+\sum_{j=1}^{K-1}\theta_{jk}^Tx_{ij}}\Big)
+	\[
+	\boxed{\theta_{jk} := \theta_{jk} + \alpha\sum_{i=1}^mx_{ij}\Big(I\{k==X_k\} - \frac{e^{\theta_{jk}^Tx_{ij}}}{1+\sum_{j=1}^{K-1}\theta_{jk}^Tx_{ij}}\Big)}
 	$$
 </div>
+
 <h2 align="center">Code</h2>
 
 The CUDA kernel that calculates the derivative terms for every point is really the crux of the algorithm. Much of the rest of the code is really just calculating and scalling the resulting probability field so it can be displayed through openGL interoperability. Here's that kernel and its launch:
