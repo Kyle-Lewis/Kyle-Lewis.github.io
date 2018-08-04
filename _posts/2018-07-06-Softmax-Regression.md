@@ -158,12 +158,12 @@ I'll return to this pretend set of data to write out the derivative term explici
 	$$
 	\begin{align}
 	L(\theta) & = \prod_{i=1}^{m}\phi_1^{I\{y_i=1\}}...\phi_K^{I\{y_i=K\}} \\
-	log(L(\theta)) & = \sum_{i=1}^m\theta_k^TX_i - log(1+\sum{j=1}^{k-1}e^{\theta}) \\
-	\frac{\partial{log(L)}}{\partial{\theta_{k}}} & = \sum_{i=1}^mI\{X_i\} - \frac{X_ie^{\theta_{k}^TX_i}}{1+\sum_{j=1}^{K-1}e^\theta_jX_i} \\ 
+	log(L(\theta)) & = \sum_{i=1}^m\theta_k^TX_i - log(1+\sum_{j=1}^{k-1}e^{\theta_j^TX_i}) \\
+	\frac{\partial{log(L)}}{\partial{\theta_{k}}} & = \sum_{i=1}^mI\{X_k == k\}X_i - \frac{X_ie^{\theta_{k}^TX_i}}{1+\sum_{j=1}^{K-1}e^\theta_jX_i} \\ 
 	\\
-	\text{Or, individually for each feature j:}
+	\text{Or,& individually for each feature j:}
 	\\
-	\frac{\partial{log(L)}}{\partial{\theta_{jk}}} & = \sum_{i=1}^mI\{X_{ij}\} - \frac{X_{ij}e^{\theta_{k}^TX_i}}{1+\sum_{j=1}^{K-1}e^\theta_{jk}X_{ij}} \\
+	\frac{\partial{log(L)}}{\partial{\theta_{jk}}} & = \sum_{i=1}^mI\{X_k == k\}X_{ij} - \frac{X_{ij}e^{\theta_{k}^TX_i}}{1+\sum_{j=1}^{K-1}e^\theta_{jk}X_{ij}} \\
 	\end{align}
 	$$
 </div>
@@ -171,7 +171,7 @@ Then if we just factor out the common $X_{ij}$ term we have our update rule:
 
 <div style="font-size: 150%;">
 	$$
-	\theta_{jk} := \alpha\sum_{i=1}^mx_{ij}\Big(I\{k==X_k\} - \frac{e^{\theta_{jk}^Tx_{ij}}}{1+\sum{j=1}^{K-1}\theta_{jk}^Tx_{ij}}\Big)
+	\theta_{jk} := \alpha\sum_{i=1}^mx_{ij}\Big(I\{k==X_k\} - \frac{e^{\theta_{jk}^Tx_{ij}}}{1+\sum_{j=1}^{K-1}\theta_{jk}^Tx_{ij}}\Big)
 	$$
 </div>
 <h2 align="center">Code</h2>
