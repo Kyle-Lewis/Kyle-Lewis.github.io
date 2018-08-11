@@ -180,13 +180,13 @@ To illustrate what the derivative looks like explicitely, for the same pretend w
 <div style="font-size: 150%;">
 	$$
 	\frac{\partial{log(L)}}{\partial{\theta_{1,x}}} = 
-	X_{1,x}\Big(1 - \frac{e^{\theta_{1,x}^TX_{1,x}}}{1+e^{\theta_{1,x}^TX_{1,x}}+e^{\theta_{2,x}^TX_{1,x}}} \Big) 
+	X_{1,x}\Big(1 - \frac{e^{\theta_{1,x}^TX_{1,x}}}{1+e^{\theta_{1,x}^TX_{1,x}}+e^{\theta_{2,x}^TX_{1,x}} + \ldots} \Big) 
 	+ \ldots + 
-	X_{1,x}\Big(0 - \frac{e^{\theta_{1,x}^TX_{3,x}}}{1+e^{\theta_{1,x}^TX_{1,x}}+e^{\theta_{2,x}^TX_{1,x}}} \Big)
+	X_{1,x}\Big(0 - \frac{e^{\theta_{1,x}^TX_{3,x}}}{1+e^{\theta_{1,x}^TX_{1,x}}+e^{\theta_{2,x}^TX_{1,x}} + \ldots} \Big)
 	$$
 </div>
 
-Note that as a result of the state of the indicator terms for the various derivative sums, the derivative will approach zero as $\vec{\theta}$ causes the function to encapsulate points of the class, *and as it excludes points **not** of the class*. This is nice, we won't get false positives!
+Note the difference between the two terms; as a result of the state of the indicator terms for the various derivative sums, the derivative will approach zero as $\vec{\theta}$ causes the function to encapsulate points of the class, *and as it excludes points **not** of the class*. This is nice, we won't get false positives!
 
 Hopefully that does it for the mathy bits for this post. As usual, all we really needed was the update rule in the box above; but we really wouldn't have known how to come up with these things in the future then would we?
 
