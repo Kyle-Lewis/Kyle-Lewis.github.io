@@ -180,9 +180,9 @@ To illustrate what the derivative looks like explicitely, for the same pretend w
 <div style="font-size: 150%;">
 	$$
 	\frac{\partial{log(L)}}{\partial{\theta_{1,x}}} = 
-	X_{1,x}\Big(\textcolor{red}{1} - \frac{e^{\theta_{1,x}^TX_{1,x}}}{1+e^{\theta_{1,x}^TX_{1,x}}+e^{\theta_{2,x}^TX_{1,x}}} \Big) 
+	X_{1,x}\Big(1 - \frac{e^{\theta_{1,x}^TX_{1,x}}}{1+e^{\theta_{1,x}^TX_{1,x}}+e^{\theta_{2,x}^TX_{1,x}}} \Big) 
 	+ \ldots + 
-	X_{1,x}\Big(\textcolor{red}{0} - \frac{e^{\theta_{1,x}^TX_{3,x}}}{1+e^{\theta_{1,x}^TX_{1,x}}+e^{\theta_{2,x}^TX_{1,x}}} \Big)
+	X_{1,x}\Big(0 - \frac{e^{\theta_{1,x}^TX_{3,x}}}{1+e^{\theta_{1,x}^TX_{1,x}}+e^{\theta_{2,x}^TX_{1,x}}} \Big)
 	$$
 </div>
 
