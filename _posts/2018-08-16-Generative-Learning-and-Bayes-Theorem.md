@@ -2,7 +2,7 @@
 layout: post
 title: "Generative Learning and Bayes' theorem"
 categories: [Machine Learning]
-date: 2018-06-25
+date: 2018-08-16
 image: images/logistic-regression/regression.gif
 ---
 
