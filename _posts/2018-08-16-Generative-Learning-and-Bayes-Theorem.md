@@ -57,7 +57,26 @@ We do have to come up with some model for the distribution of features. Of cours
 </div>
 If you aren't familiar with the concept of covariance, Ng has some really nice pictures in [his notes](http://cs229.stanford.edu/notes/cs229-notes2.pdf) that I won't bother reproducing. Simply put, the matrix describes the shape of the distribution, while the means describe the position. 
 
+We can very very easily come up with best fit gaussians for a given datasets and get right to predictions. I'm not even going to prove it, but know that you can in the same way that you usually do, by maximizing the log likelihood of the distributions parameterized by $\mu$ and $\Sigma$. The best fit mean values for a distribution are going to be the mean values of the data points you have available to you, in each direction. The best fit covariance matrix will have terms that simply match the measured covariances between variables in the data points you have available to you. 
 
+For a binomial classification problem we have our usual Bernoulli model.
+
+<div style="font-size: 150%;">
+	$$ 
+	\begin{align}
+	P(y) = \phi^y(1-\phi)^{1-y}
+	$$
+</div>
+
+as well as the gaussian assumptions we have made. Note that the parameter $\phi$ will also appear for any calculation of $P(y|x)$, and this will simply be the % of the data points available to us which are of the class we are interested in. 
+
+<figure>
+	<img src="{{site.baseurl}}/images/gda/test.jpg" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">Running Softmax regression slowly on some easy dataset. It's easy to get this to converge in only a handful of iterations.</figcaption>
+</figure>
+
+
+<details></details>
 <h2 align="center">References</h2><hr>
 
 - <a href="https://www.youtube.com/watch?v=qRJ3GKMOFrE&index=6&list=PLA89DCFA6ADACE599&t=0s" target="_blank">Andrew Ng's lecture</a> on generative learning algorithms, <a href="http://cs229.stanford.edu/notes/cs229-notes2.pdf" target="_blank"> and his notes</a>.
