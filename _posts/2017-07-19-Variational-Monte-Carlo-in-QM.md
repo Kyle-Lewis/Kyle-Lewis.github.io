@@ -15,18 +15,6 @@ MathJax.Hub.Config({
 <script type="text/javascript" async
 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<h2 align="center">References</h2>
-
-- An introduction to the <a href="http://pages.cs.wisc.edu/~jerryzhu/cs731/mcmc.pdf" target="_blank">Markov Chain detail balance</a>
-
-- Or a <a href="https://en.wikipedia.org/wiki/Detailed_balance" target="_blank">wiki page on the topic</a> if you want to scratch that itch with less math.
-
-- And finally, an introductory <a href="https://youtu.be/Ws63I3F7Moc" target="_blank">Khan video</a> provides a great example to introduce the topic.
-
-- And <a href="https://github.com/Hobbes1/CudaVariationalMonteCarloQM" target="_blank"> my GitHub repo for this project</a>
-
-- Introduction to Quantum Mechanics, 2nd ed. David Griffiths
-
 <h2 align="center">Introduction and Motivation</h2>
 
 I wanted to revisit a quick topic which was presented to me during my undergrad because it turns out so called Markov Chains are in fact a very useful tool in certain branches of machine learning as well. Additionally, while the basic implementation and proof of concept is entirely possible without any accelerating hardware or algorithm, I still wanted to introduce CUDA to more problems; in this case by upping the dimensionality of the problem. I've also gotten CUDA and openGL to play nicely together so I can do away with the pesky third party post-simulation animations, as well as the limiting data transfers from my graphics devices to the host CPU.
@@ -228,3 +216,15 @@ I also tried a potential with four nodes, as an extension to the double well pot
 	<img src="{{site.baseurl}}/images/variational-mc/4-node-potential.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">Distibution for a potential i've made up with 4 "nodes", because why not. </figcaption>
 </figure>
+
+<h2 align="center">References</h2>
+
+- An introduction to the <a href="http://pages.cs.wisc.edu/~jerryzhu/cs731/mcmc.pdf" target="_blank">Markov Chain detail balance</a>
+
+- Or a <a href="https://en.wikipedia.org/wiki/Detailed_balance" target="_blank">wiki page on the topic</a> if you want to scratch that itch with less math.
+
+- And finally, an introductory <a href="https://youtu.be/Ws63I3F7Moc" target="_blank">Khan video</a> provides a great example to introduce the topic.
+
+- And <a href="https://github.com/Hobbes1/CudaVariationalMonteCarloQM" target="_blank"> my GitHub repo for this project</a>
+
+- Introduction to Quantum Mechanics, 2nd ed. David Griffiths

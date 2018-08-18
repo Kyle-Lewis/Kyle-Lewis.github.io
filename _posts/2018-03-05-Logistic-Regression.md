@@ -15,14 +15,6 @@ MathJax.Hub.Config({
 <script type="text/javascript" async
 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<h2 align="center">References</h2>
-
-- <a href="https://youtu.be/HZ4cvaztQEs" target="_blank">Andrew Ng's lecture</a> on logistic regression and other topics 
-
-- <a href="http://cseweb.ucsd.edu/~elkan/250B/logreg.pdf" target="_blank">Lecture notes</a> on the same subject from a UCSD AI course taught by Charles Elkan. 
-
-- Code for the regression on <a href="https://github.com/Kyle-Lewis/MachineLearningProjects" target="_blank">My Github</a>. You really could write this one on a napkin though. 
-
 <h2 align="center">Motivation</h2>
 
 Logistic Regression is the first classification algorithm i've come across. It seems somewhat important so I figured it deserved an implementation such that I really "got it". It also turns out to be a special case of Softmax Regression, a more general classifier which I also intend on implementing. As I think will be typical of these projects, the post and code should be quite short, there's nothing fancy going on. 
@@ -167,6 +159,14 @@ I was more impressed with the results from this naive implementation than I was 
 	<img src="{{site.baseurl}}/images/logistic-regression/TwoClassLogisticRegression3d.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">Plotting the sigmoid surface for the same regression run</figcaption>
 </figure>
+
+<h2 align="center">References</h2>
+
+- <a href="https://youtu.be/HZ4cvaztQEs" target="_blank">Andrew Ng's lecture</a> on logistic regression and other topics 
+
+- <a href="http://cseweb.ucsd.edu/~elkan/250B/logreg.pdf" target="_blank">Lecture notes</a> on the same subject from a UCSD AI course taught by Charles Elkan. 
+
+- Code for the regression on <a href="https://github.com/Kyle-Lewis/MachineLearningProjects" target="_blank">My Github</a>. You really could write this one on a napkin though. 
 
 
 

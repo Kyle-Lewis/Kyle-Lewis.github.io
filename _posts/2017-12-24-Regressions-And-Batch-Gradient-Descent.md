@@ -15,24 +15,6 @@ MathJax.Hub.Config({
 <script type="text/javascript" async
 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<h2 align="center">References</h2>
-
-I'm cross referencing quite a few resources while I get into this subject, but the core resources are lectures provided online. For this particular post:
-
-- The first of Andrew Ng's lectures on Machine Learning, provided by Stanford:
-
-	- Lecture 1: <a href="https://www.youtube.com/watch?v=UzxYlbK2c7E&list=PLA89DCFA6ADACE599&index=1" target="_blank">Introduction</a>
-
-	- Lecture 2: <a href="https://www.youtube.com/watch?v=5u4G23_OohI&list=PLA89DCFA6ADACE599&index=2" target="_blank">linear regression, gradient descent</a>
-
-- The third of Yaser Abu-Mostafa's lectures, provided by CalTech:
-
-	- Lecture 3: <a href="https://www.youtube.com/watch?v=FIbVs5GbBlQ&index=3&list=PLD63A284B7615313A" target="_blank">The Linear Model</a>
-
-- Data from <a href="http://archive.ics.uci.edu/ml/index.php" target="_blank">UC Irvine's machine learning repository</a>
-
-- The code for these regressions <a href="https://github.com/Hobbes1/MachineLearningProjects/tree/464d9dd47d9d2ab7ba62cfc863c1eb4c0d99b360/1_LSR" target="_blank">on my GitHub in the LSR folder</a>
-
 <h2 align="center">Motivation</h2>
 
 There are plenty of reasons these days to explore Machine Learning. For me, in reviewing the math behind MCMC methods in a previous project I'd been coming across a lot of people discussing the topic not for Computational Physics applications, but for Machine Learning. A quick look revealed that many of the more advanced topics in Machine Learning share a mathematical foundation with QM (high dimensionality and linear algebra) and at that point I was sold. So in some of the project posts I make from here on out, i'll be going through freely available lecture resources from Andrew Ng and others and picking out examples to implement.
@@ -135,4 +117,22 @@ After working on an MCMC application  using randomness and Markov chains with 
 	<img src="{{site.baseurl}}/images/gradient-descent/secondorderpoly.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">I realized that I normalized the temperature data after making the gif . . . you get the idea though</figcaption>
 </figure>
+
+<h2 align="center">References</h2>
+
+I'm cross referencing quite a few resources while I get into this subject, but the core resources are lectures provided online. For this particular post:
+
+- The first of Andrew Ng's lectures on Machine Learning, provided by Stanford:
+
+	- Lecture 1: <a href="https://www.youtube.com/watch?v=UzxYlbK2c7E&list=PLA89DCFA6ADACE599&index=1" target="_blank">Introduction</a>
+
+	- Lecture 2: <a href="https://www.youtube.com/watch?v=5u4G23_OohI&list=PLA89DCFA6ADACE599&index=2" target="_blank">linear regression, gradient descent</a>
+
+- The third of Yaser Abu-Mostafa's lectures, provided by CalTech:
+
+	- Lecture 3: <a href="https://www.youtube.com/watch?v=FIbVs5GbBlQ&index=3&list=PLD63A284B7615313A" target="_blank">The Linear Model</a>
+
+- Data from <a href="http://archive.ics.uci.edu/ml/index.php" target="_blank">UC Irvine's machine learning repository</a>
+
+- The code for these regressions <a href="https://github.com/Hobbes1/MachineLearningProjects/tree/464d9dd47d9d2ab7ba62cfc863c1eb4c0d99b360/1_LSR" target="_blank">on my GitHub in the LSR folder</a>
 

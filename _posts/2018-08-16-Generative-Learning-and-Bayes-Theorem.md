@@ -15,12 +15,6 @@ MathJax.Hub.Config({
 <script type="text/javascript" async
 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<h2 align="center">References</h2><hr>
-
-- <a href="https://www.youtube.com/watch?v=qRJ3GKMOFrE&index=6&list=PLA89DCFA6ADACE599&t=0s" target="_blank">Andrew Ng's lecture</a> on generative learning algorithms, <a href="https://www.youtube.com/watch?v=qRJ3GKMOFrE&index=6&list=PLA89DCFA6ADACE599&t=0s" target="_blank"> and his notes</a>.
-
-- Code for the demonstration on my GitHub: <a href="https://github.com/Kyle-Lewis/MachineLearningProjects/tree/master/4_GDA" target="_blank">my Github</a>
-
 <h2 align="center">Motivation</h2><hr>
 
 I'm getting around to a project implementing a Naive Bayes classifier and there's some preliminary work that's going to be helpful in transitioning from logistic and softmax regression algorithms. Hopefully *that* post can get straight to the code as a result. 
@@ -40,5 +34,11 @@ And its not hard to calculate!
 	p(y|x) = \frac{p(x|y)p(y)}{p(x)}
 	$$
 </div>
+
+<h2 align="center">References</h2><hr>
+
+- <a href="https://www.youtube.com/watch?v=qRJ3GKMOFrE&index=6&list=PLA89DCFA6ADACE599&t=0s" target="_blank">Andrew Ng's lecture</a> on generative learning algorithms, <a href="https://www.youtube.com/watch?v=qRJ3GKMOFrE&index=6&list=PLA89DCFA6ADACE599&t=0s" target="_blank"> and his notes</a>.
+
+- Code for the demonstration on my GitHub: <a href="https://github.com/Kyle-Lewis/MachineLearningProjects/tree/master/4_GDA" target="_blank">my Github</a>
 
 WIP

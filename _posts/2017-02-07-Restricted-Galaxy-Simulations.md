@@ -6,14 +6,6 @@ date: 2017-02-07
 image: images/restricted/retrograde.gif
 ---
 
-<h2 align="center">References</h2>
-
-- On restricted galaxy simulations, and the Mice: <a href="http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?1972ApJ...178..623T&data_type=PDF_HIGH&whole_paper=YES&type=PRINTER&filetype=.pdf" target="_blank">Toomre & Toomre - 1972</a>
-
-- A quick rundown of the leapfrog algorithm: <a href="http://www.artcompsci.org/vol_1/v1_web/node34.html" target="_blank">The Art of Computational Science</a>
-
-- The code I've used for the simulations can be found <a href="https://github.com/Hobbes1/RestrictedGalaxies" target="THATSNIG_blank">on my GitHub</a>
-
 <h2 align="center">Introduction and Motivation</h2>
 
 
@@ -120,4 +112,10 @@ The restricted model has provided a good way to introduce anyone to the methodol
 
 In the next post I will be demonstrating disk-bulge-halo galaxy simulations with tens of thousands of "stars" all of which will be massive, which is made computationally possible on my measly laptop by performing tasks in bulk and in parallel with NVIDIA's CUDA platform.
 
+<h2 align="center">References</h2>
 
+- On restricted galaxy simulations, and the Mice: <a href="http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?1972ApJ...178..623T&data_type=PDF_HIGH&whole_paper=YES&type=PRINTER&filetype=.pdf" target="_blank">Toomre & Toomre - 1972</a>
+
+- A quick rundown of the leapfrog algorithm: <a href="http://www.artcompsci.org/vol_1/v1_web/node34.html" target="_blank">The Art of Computational Science</a>
+
+- The code I've used for the simulations can be found <a href="https://github.com/Hobbes1/RestrictedGalaxies" target="THATSNIG_blank">on my GitHub</a>

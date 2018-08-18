@@ -15,14 +15,6 @@ MathJax.Hub.Config({
 <script type="text/javascript" async
 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<h2 align="center">References</h2><hr>
-
-- <a href="https://people.eecs.berkeley.edu/~jordan/courses/260-spring10/other-readings/chapter8.pdf" target="_blank">A general introduction to the exponential family</a>, I believe this was extra material provided as a part of a course taught at Berkely, it was very helpful in expanding upon Ng's introduction.
-
-- <a href="https://youtu.be/nLKOQfKLUks" target="_blank">Andrew Ng's lecture</a> on generalized linear models, in which he introduces Softmax Regression. 
-
-- The Softmax code discussed here is on <a href="https://github.com/Kyle-Lewis/CudaSoftmax" target="_blank">my Github</a>
-
 <h2 align="center">Motivation</h2><hr>
 
 Logistic regression only worked with two classes, surely we should be able to distinguish between more. This post will contain a description of the softmax regression algorithm with a proof that gets us from the hypothesis function to the weight update rule which comprises the algorithm. I'll also discuss the code for this project which utilizes CUDA to speed up the main update algorithm, as well as visualization functions. This particular implementation is general in the number of classes for our data, but specifically expects two input features, so that we can plot them easily. To grow the input feature set would be to grow a vector here or there. 
@@ -364,6 +356,14 @@ On the other hand, this implementation doesn't suffer the same issue that log-re
 	<figcaption style="text-align:center;">With weights which are scewed for one class</figcaption>
 </figure>
 </div>
+
+<h2 align="center">References</h2><hr>
+
+- <a href="https://people.eecs.berkeley.edu/~jordan/courses/260-spring10/other-readings/chapter8.pdf" target="_blank">A general introduction to the exponential family</a>, I believe this was extra material provided as a part of a course taught at Berkely, it was very helpful in expanding upon Ng's introduction.
+
+- <a href="https://youtu.be/nLKOQfKLUks" target="_blank">Andrew Ng's lecture</a> on generalized linear models, in which he introduces Softmax Regression. 
+
+- The Softmax code discussed here is on <a href="https://github.com/Kyle-Lewis/CudaSoftmax" target="_blank">my Github</a>
 
 
 

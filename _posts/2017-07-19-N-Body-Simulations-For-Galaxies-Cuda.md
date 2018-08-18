@@ -16,14 +16,6 @@ MathJax.Hub.Config({
 <script type="text/javascript" async
 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<h2 align="center">References</h2>
-
-- The Disk-Bulge-Halo model for galaxies, stability, etc: <a href="https://arxiv.org/pdf/astro-ph/9502051.pdf" target="_blank">Kiujiken & Dubinski</a> 
-
-- Their GalactICS package which I have used to populate galaxies <a href="http://adsabs.harvard.edu/abs/2011ascl.soft09011K" target="_blank">is publicly available</a>
-
-- My <a href="https://github.com/Hobbes1/CudaGalaxies">GitHub repo</a> for this project
-
 <h2 align="center">Introduction and Motivation</h2>
 
 Following up after the simplified model in the previous post, I can now get into more high powered applications. The only "new physics" to be discussed at this point is the new model for the galaxies, which will be random populations of density functions which have been granted to us by *Kiujiken & Dubinski*. We also introduce dark matter to our galaxies, which turns out to be a necessity for stability.
@@ -258,6 +250,10 @@ zero_accels <<< numTiles, threadsPerBlock, sharedMemSize >>>
 </div>
 <hr>
 
-<h2 align="center">Results</h2>
+<h2 align="center">References</h2>
 
-I'll be posting more on the results, including a simulated collision of these D.B.H. galaxies.
+- The Disk-Bulge-Halo model for galaxies, stability, etc: <a href="https://arxiv.org/pdf/astro-ph/9502051.pdf" target="_blank">Kiujiken & Dubinski</a> 
+
+- Their GalactICS package which I have used to populate galaxies <a href="http://adsabs.harvard.edu/abs/2011ascl.soft09011K" target="_blank">is publicly available</a>
+
+- My <a href="https://github.com/Hobbes1/CudaGalaxies">GitHub repo</a> for this project
