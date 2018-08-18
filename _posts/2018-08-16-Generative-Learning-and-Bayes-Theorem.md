@@ -35,13 +35,21 @@ And its not hard to calculate!
 	$$
 </div>
 
+In words:
+<div style="font-size: 150%;">
+	$$ 
+	p(Person speaks French, given that they are from France) = \frac{p(Person is from France, given that they speak French)p(Person speaks french)}{p(Person is from France)}
+	$$
+</div>
+Thinking of some extreme cases helps feeling our way around this relationship. Imagine a world where 99% of French speakers live in Australia; the numerator on the right becomes very small, and as a result, the feature of being from France wouldn't be a very strong predictor of speaking French. In another world where 99% of people live in France, the odds of French people speaking French almost becomes simply the odds that a person speaks French in general.
+
 <h2 align="center">For Example, Gaussian Discriminate Analysis</h2><hr>
 
 We do have to come up with some model for the distribution of features. Of course there are infinitely many choices to make here but at least one common choice is to model some dataset as Gaussian, everyone's favourite distribution. The general form of $k$ dimensional gaussians looks like the following: 
 
 <div style="font-size: 150%;">
 	$$ 
-	P(x;\mu,\Sigma) = \frac{1}{(2\pi)^{n/2}\det{\Sigma}^{1/2}}exp\Big\(-\frac{1}{2}(\vec{x}-\vec{\mu})^T\Sigma^{-1}(\vec{x}-vec{\mu})\Big\)
+	P(x;\mu,\Sigma) = \frac{1}{(2\pi)^{n/2}\det{\Sigma}^{1/2}}exp\Big\{-\frac{1}{2}(\vec{x}-\vec{\mu})^T\Sigma^{-1}(\vec{x}-vec{\mu})\Big\}
 	\text{Where:}
 	\mu \text{Is a vector of the means for the distribution in each dimsension}
 	\Sigma \text{Is a K by K matrix detoting the covariances between each axis}
