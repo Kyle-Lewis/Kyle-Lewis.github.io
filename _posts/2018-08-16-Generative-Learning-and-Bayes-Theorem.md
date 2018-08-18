@@ -35,10 +35,25 @@ And its not hard to calculate!
 	$$
 </div>
 
+<h2 align="center">For Example, Gaussian Discriminate Analysis</h2><hr>
+
+We do have to come up with some model for the distribution of features. Of course there are infinitely many choices to make here but at least one common choice is to model some dataset as Gaussian, everyone's favourite distribution. The general form of $k$ dimensional gaussians looks like the following: 
+
+<div style="font-size: 150%;">
+	$$ 
+	P(x;\mu,\Sigma) = \frac{1}{(2\pi)^{n/2}\det{\Sigma}^{1/2}}exp\Big\(-\frac{1}{2}(\vec{x}-\vec{\mu})^T\Sigma^{-1}(\vec{x}-vec{\mu})\Big\)
+	\text{Where:}
+	\mu \text{Is a vector of the means for the distribution in each dimsension}
+	\Sigma \text{Is a K by K matrix detoting the covariances between each axis}
+	$$
+</div>
+If you aren't familiar with the concept of covariance, Ng has some really nice pictures in [his notes](http://cs229.stanford.edu/notes/cs229-notes2.pdf) that I won't bother reproducing. Simply put, the matrix describes the shape of the distribution, while the means describe the position. 
+
+
 <h2 align="center">References</h2><hr>
 
-- <a href="https://www.youtube.com/watch?v=qRJ3GKMOFrE&index=6&list=PLA89DCFA6ADACE599&t=0s" target="_blank">Andrew Ng's lecture</a> on generative learning algorithms, <a href="https://www.youtube.com/watch?v=qRJ3GKMOFrE&index=6&list=PLA89DCFA6ADACE599&t=0s" target="_blank"> and his notes</a>.
+- <a href="https://www.youtube.com/watch?v=qRJ3GKMOFrE&index=6&list=PLA89DCFA6ADACE599&t=0s" target="_blank">Andrew Ng's lecture</a> on generative learning algorithms, <a href="http://cs229.stanford.edu/notes/cs229-notes2.pdf" target="_blank"> and his notes</a>.
 
-- Code for the demonstration on my GitHub: <a href="https://github.com/Kyle-Lewis/MachineLearningProjects/tree/master/4_GDA" target="_blank">my Github</a>
+- Code for the demonstration on <a href="https://github.com/Kyle-Lewis/MachineLearningProjects/tree/master/4_GDA" target="_blank">my Github</a>
 
 WIP
