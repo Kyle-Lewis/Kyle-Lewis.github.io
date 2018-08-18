@@ -71,8 +71,8 @@ For a binomial classification problem we have our usual Bernoulli model.
 as well as the gaussian assumptions we have made. Note that the parameter $\phi$ will also appear for any calculation of $P(y|x)$, and this will simply be the % of the data points available to us which are of the class we are interested in. 
 
 <figure>
-	<img src="{{site.baseurl}}/images/gda/test.jpg" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
-	<figcaption style="text-align:center;">Running Softmax regression slowly on some easy dataset. It's easy to get this to converge in only a handful of iterations.</figcaption>
+	<img src="{{site.baseurl}}/images/gda/test.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;"></figcaption>
 </figure>
 
 
