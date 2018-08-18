@@ -72,7 +72,12 @@ as well as the gaussian assumptions we have made. Note that the parameter $\phi$
 <h2 align="center">Trying it out</h2><hr>
 
 <figure>
-	<img src="{{site.baseurl}}/images/gda/test.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/gda/distributions.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;"></figcaption>
+</figure>
+
+<figure>
+	<img src="{{site.baseurl}}/images/gda/accuracy.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;"></figcaption>
 </figure>
 
