@@ -36,9 +36,9 @@ And its not hard to calculate!
 </div>
 
 In words:
-<div style="font-size: 150%;">
+<div style="font-size: 130%;">
 	$$ 
-	P(Person\spacespeaks\space French,\space given \spacethat\space they\space are\space from\space France) = \frac{P(Person\space is\space from\space France\space, given\space that\space they\space speak\space French)P(Person\space speaks\space french)}{P(Person\space is\space from\space France)}
+	P(Person\space speaks\space French,\space given\space that\space they\space are\space from\space France) = \frac{P(Person\space is\space from\space France,\space given\space that\space they\space speak\space French)P(Person\space speaks\space french)}{P(Person\space is\space from\space France)}
 	$$
 </div>
 Thinking of some extreme cases helps feeling our way around this relationship. Imagine a world where 99% of French speakers live in Australia; the numerator on the right becomes very small, and as a result, the feature of being from France wouldn't be a very strong predictor of speaking French. In another world where 99% of people live in France, the odds of French people speaking French almost becomes simply the odds that a person speaks French in general.
@@ -49,10 +49,10 @@ We do have to come up with some model for the distribution of features. Of cours
 
 <div style="font-size: 150%;">
 	$$ 
-	P(x;\mu,\Sigma) = \frac{1}{(2\pi)^{n/2}\det{\Sigma}^{1/2}}exp\Big\{-\frac{1}{2}(\vec{x}-\vec{\mu})^T\Sigma^{-1}(\vec{x}-\vec{\mu})\Big\} \
-	\text{Where:} \
-	\mu \text{Is a vector of the means for the distribution in each dimsension} \
-	\Sigma \text{Is a K by K matrix detoting the covariances between each axis} \
+	P(x;\mu,\Sigma) = \frac{1}{(2\pi)^{n/2}\det{\Sigma}^{1/2}}exp\Big\{-\frac{1}{2}(\vec{x}-\vec{\mu})^T\Sigma^{-1}(\vec{x}-\vec{\mu})\Big\} \\ \\
+	\text{Where:} \\
+	\mu\space \text{Is a vector of the means for the distribution in each dimsension} \\
+	\Sigma\space \text{Is a K by K matrix detoting the covariances between each axis} \\
 	$$
 </div>
 If you aren't familiar with the concept of covariance, Ng has some really nice pictures in [his notes](http://cs229.stanford.edu/notes/cs229-notes2.pdf) that I won't bother reproducing. Simply put, the matrix describes the shape of the distribution, while the means describe the position. 
@@ -71,9 +71,11 @@ as well as the gaussian assumptions we have made. Note that the parameter $\phi$
 
 <h2 align="center">Trying it out</h2><hr>
 
+I test out GDA I generated some points again (I promise i'll be using some real data soon...). Theses aren't exactly gaussian but they are close. Class A contains contains 2000 and class B contains 1000 points, distributed along two features; this 2:1 ratio shows up in the Bayes calculation. They also mix a little near the boundary so no 100% prediction model will be coming out of this.
+
 <figure>
 	<img src="{{site.baseurl}}/images/gda/distributions.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
-	<figcaption style="text-align:center;"></figcaption>
+	<figcaption style="text-align:center;">My points, which *were* originally normal distributions. They've been chopped and warped a bit.</figcaption>
 </figure>
 
 <figure>
