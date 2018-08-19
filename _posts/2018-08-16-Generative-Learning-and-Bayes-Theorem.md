@@ -21,7 +21,7 @@ I'm getting around to a project implementing a Naive Bayes classifier and there'
 
 <h2 align="center">Generative vs Discriminate</h2><hr>
 
-Discriminant learning algorithms (like logistic regression) try to map from input features to class lables; $P(Y|X=x)$ can be read: the probability of some data point being of a class $y$, *given* the features $\vec{x}$ of that point. Conversely, generative learning algorithms try to map classes to the distributions of their features; $P(X|Y=y)$ . 
+Discriminant learning algorithms (like logistic regression) try to map from input features to class lables; $$ P(Y|X=x) $$ can be read: the probability of some data point being of a class $$y$$, *given* the features $$\vec{x}$$ of that point. Conversely, generative learning algorithms try to map classes to the distributions of their features; $$P(X|Y=y)$$ . 
 
 To me, the generative side of this symmetry is a little less intuitive. [Think of the geographic population distribution of the people who speak French.](https://en.wikipedia.org/wiki/Geographical_distribution_of_French_speakers) Already, the word distribution gives it away. "French speaking" is the class label and the geography, be it coordinates or country, is the feature set. You can imagine a good model for French speakers would have a high probability of finding that they *have the feature* of being from France, and then the DRC, and then Germany, and so on. 
 
@@ -38,7 +38,8 @@ And its not hard to calculate!
 In words:
 <div style="font-size: 130%;">
 	$$ 
-	P(Person\space speaks\space French,\space given\space that\space they\space are\space from\space France) = \frac{P(Person\space is\space from\space France,\space given\space that\space they\space speak\space French)P(Person\space speaks\space french)}{P(Person\space is\space from\space France)}
+	P(Person\space speaks\space French,\space given\space that\space they\space are\space from\space France) = \\
+	\frac{P(Person\space is\space from\space France,\space given\space that\space they\space speak\space French)P(Person\space speaks\space french)}{P(Person\space is\space from\space France)}
 	$$
 </div>
 Thinking of some extreme cases helps feeling our way around this relationship. Imagine a world where 99% of French speakers live in Australia; the numerator on the right becomes very small, and as a result, the feature of being from France wouldn't be a very strong predictor of speaking French. In another world where 99% of people live in France, the odds of French people speaking French almost becomes simply the odds that a person speaks French in general.
@@ -58,16 +59,6 @@ We do have to come up with some model for the distribution of features. Of cours
 If you aren't familiar with the concept of covariance, Ng has some really nice pictures in [his notes](http://cs229.stanford.edu/notes/cs229-notes2.pdf) that I won't bother reproducing. Simply put, the matrix describes the shape of the distribution, while the means describe the position. 
 
 We can very very easily come up with best fit gaussians for a given datasets and get right to predictions. I'm not even going to prove it, but know that you can in the same way that you usually do, by maximizing the log likelihood of the distributions parameterized by $\mu$ and $\Sigma$. The best fit mean values for a distribution are going to be the mean values of the data points you have available to you, in each direction. The best fit covariance matrix will have terms that simply match the measured covariances between variables in the data points you have available to you. 
-
-For a binomial classification problem we have our usual Bernoulli model.
-
-<div style="font-size: 150%;">
-	$$ 
-	P(y) = \phi^y(1-\phi)^{1-y}
-	$$
-</div>
-
-as well as the gaussian assumptions we have made. Note that the parameter $\phi$ will also appear for any calculation of $P(y|x)$, and this will simply be the % of the data points available to us which are of the class we are interested in. 
 
 <h2 align="center">Code</h2><hr>
 
@@ -133,8 +124,13 @@ Then it became a choice of how many points from the distribution(s) to sample wh
 	<figcaption style="text-align:center;">Predictive behavior as points are added to the original model</figcaption>
 </figure>
 
+As we all intuitively know, you need large sample sizes to gain predictive power, even for this very simple distribution. And because I can't help myself, an animation of the distributions associated with the predictions above. In the first frame you can make out the very "sharp" gaussian for class B that causes it to start off in such a poorly predictive state. 
 
-<details></details>
+<figure>
+	<img src="{{site.baseurl}}/images/gda/gda_more_terms.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">Gaussian behavior as points are added to the original model</figcaption>
+</figure>
+
 <h2 align="center">References</h2><hr>
 
 - <a href="https://www.youtube.com/watch?v=qRJ3GKMOFrE&index=6&list=PLA89DCFA6ADACE599&t=0s" target="_blank">Andrew Ng's lecture</a> on generative learning algorithms, <a href="http://cs229.stanford.edu/notes/cs229-notes2.pdf" target="_blank"> and his notes</a>.
