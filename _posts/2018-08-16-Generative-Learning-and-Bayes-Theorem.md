@@ -51,8 +51,8 @@ We do have to come up with some model for the distribution of features. Of cours
 	$$ 
 	P(x;\mu,\Sigma) = \frac{1}{(2\pi)^{n/2}\det{\Sigma}^{1/2}}exp\Big\{-\frac{1}{2}(\vec{x}-\vec{\mu})^T\Sigma^{-1}(\vec{x}-\vec{\mu})\Big\} \\ \\
 	\text{Where:} \\
-	\mu\space \text{Is a vector of the means for the distribution in each dimsension} \\
-	\Sigma\space \text{Is a K by K matrix detoting the covariances between each axis} \\
+	\mu\space \text{is a vector of the means for the distribution in each dimsension} \\
+	\Sigma\space \text{is a K by K matrix detoting the covariances between each axis} \\
 	$$
 </div>
 If you aren't familiar with the concept of covariance, Ng has some really nice pictures in [his notes](http://cs229.stanford.edu/notes/cs229-notes2.pdf) that I won't bother reproducing. Simply put, the matrix describes the shape of the distribution, while the means describe the position. 
@@ -69,6 +69,54 @@ For a binomial classification problem we have our usual Bernoulli model.
 
 as well as the gaussian assumptions we have made. Note that the parameter $\phi$ will also appear for any calculation of $P(y|x)$, and this will simply be the % of the data points available to us which are of the class we are interested in. 
 
+<h2 align="center">Code</h2><hr>
+
+There's really not much to see here. The NumPy and SciPy packages contain most of what we want to do in a couple of lines, the rest is just the application of Bayes rule and any matplotlib code I threw together to generate pictures. 
+
+<hr>
+<div style="width:110%">
+
+{% highlight python %}
+
+	def _predict(self, point, actualClass):
+		''' 
+		Make the prediction of the class of the point given the point evaluated at the PDF's A and B
+		using Bayes rule predictions: P(Y|x) = (P(X|y)*P(y)/(P(x))). Intended for use with only the known data, 
+		the points that were used to calculate distA and distB, to predict the values of the remaining points.
+		Return 1 if the actualClass(a number, 0:A, 1:B) is equal to the predicted class.
+		Return 0 otherwise
+
+		@param point: 		The point, a list-like with 2 members for x and y values
+		@param actualClass:	Either 0 or 1, as described above
+		'''
+		pA = (self.testNumA / (self.testNumA + self.testNumB))
+		pB = (self.testNumB / (self.testNumA + self.testNumB))
+		pXgivenA = self.gaussDistA.pdf(point) 
+		pXgivenB = self.gaussDistB.pdf(point)
+
+		# This term IS unecessary, the argmax evaluation does not 
+		# change as it is common between pAgivenX and pBgivenX
+		pX = pXgivenA * pA + pXgivenB * pB
+
+		pAgivenX = pXgivenA * pA / pX
+		pBgivenX = pXgivenB * pB / pX
+
+		if (pAgivenX > pBgivenX):
+			if actualClass == 0:
+				return 1
+			else:
+				return 0
+		else:
+			if actualClass == 1:
+				return 1
+			else:
+				return 0
+
+{% endhighlight %}
+
+</div>
+<hr>
+
 <h2 align="center">Trying it out</h2><hr>
 
 I test out GDA I generated some points again (I promise i'll be using some real data soon...). Theses aren't exactly gaussian but they are close. Class A contains contains 2000 and class B contains 1000 points, distributed along two features; this 2:1 ratio shows up in the Bayes calculation. They also mix a little near the boundary so no 100% prediction model will be coming out of this.
@@ -78,9 +126,11 @@ I test out GDA I generated some points again (I promise i'll be using some real 
 	<figcaption style="text-align:center;">My points, which *were* originally normal distributions. They've been chopped and warped a bit.</figcaption>
 </figure>
 
+Then it became a choice of how many points from the distribution(s) to sample when forming the original model. I stepped through a range until the results peaked at about 97% correct predictions for both distributions. Interestingly one of the distributions began with 100% accuracy in its predictions, I take this to mean that the distributions formed with low amounts of points (6 from class A, 3 from class B) were so skewed that one of them just dominated the feature space. Of course it over-predicted, and as the second distribution approaches a better fit they even out somewhat. 
+
 <figure>
 	<img src="{{site.baseurl}}/images/gda/accuracy.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
-	<figcaption style="text-align:center;"></figcaption>
+	<figcaption style="text-align:center;">Predictive behavior as points are added to the original model</figcaption>
 </figure>
 
 
