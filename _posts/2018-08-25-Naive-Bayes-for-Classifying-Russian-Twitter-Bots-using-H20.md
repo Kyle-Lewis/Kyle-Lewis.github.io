@@ -55,7 +55,7 @@ Ng presents the case where $Y$ takes on two values zero or one, and each $w_i$ t
 	\\ \\
 	P(Y=y_k|w_1 \ldots w_m) &= \frac{\prod_i^mP(w_i|Y = y_k) \cdot P(Y = y_k)}{\sum_j^KP(Y=y_j)\cdot\prod_i^mP(w_m|Y=y_k)}
 	\\
-	end{align}
+	\end{align}
 	$$
 </div>
 
@@ -63,7 +63,7 @@ As with GDA the prediction rule is then to simply assign the class with the high
 <div style="font-size: 130%;">
 	$$ 
 	\begin{align}
-	Y_{assigned} & = argmax_{y_k} \Big{ \frac{\prod_i^m P(w_i|Y = y_k) \cdot P(Y = y_k) } {\sum_j^K P(Y=y_j) \cdot \prod_i^m P(w_m|Y=y_k)} \Big}
+	Y_{assigned} & = argmax_{y_k} { \frac{\prod_i^m P(w_i|Y = y_k) \cdot P(Y = y_k) } {\sum_j^K P(Y=y_j) \cdot \prod_i^m P(w_m|Y=y_k)} }
 	& = argmax_{y_k} \prod_i^m P(w_i|Y = y_k) \cdot P(Y = y_k)
 	\end{align}
 	$$
