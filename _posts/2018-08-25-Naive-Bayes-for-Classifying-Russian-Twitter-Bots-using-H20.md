@@ -26,11 +26,11 @@ Here's that joint probability I mentioned. Assuming there are $m$ unique words i
 <div style="font-size: 130%;">
 	$$ 
 	\begin{align}
-	P(w_1,w_2,w_3 \ldots w_m | y) & = p(w_1 | y) \cdot p(w_2 | y \cdot x_1) \cdot p(w_3 | y \cdot x_1 \cdot x_2) \ldot \\
+	P(w_1,w_2,w_3 \ldots w_m | y) & = p(w_1 | y) \cdot p(w_2 | y \cdot x_1) \cdot p(w_3 | y \cdot x_1 \cdot x_2) \ldots \\
 	\\
 	\text{And, the big assumption:}
 	\\
-	& = p(w_1 | y) \cdot p(w_2 | y) \cdot p(w_3 | y) \ldot \\
+	& = p(w_1 | y) \cdot p(w_2 | y) \cdot p(w_3 | y) \ldots \\
 	& = \prod_{i=1}^mp(x_i | y)
 	\end{align}
 	$$
@@ -42,23 +42,37 @@ Ng presents the case where $Y$ takes on two values zero or one, and each $w_i$ t
 
 <div style="font-size: 130%;">
 	$$ 
-	\text{Generally, Bayes rule reads:}
-	Posterior\spaceodds = \frac{Likelihood\space\cdotPrior\spaceodds}{Evidence}
+	\text{Generally, Bayes rule reads:} \\
+	Posterior \space odds = \frac{Likelihood \space \cdot Prior \space odds}{Evidence} \\
 	\text{For boolean class, boolean variables:}
 	\\
-
+	P(Y=y_1|w_1 \ldots w_m) = \frac{\prod_i^mP(w_i|Y = y_1) \cdot P(Y = y_1)}{\prod_i^mP(w_m|Y=y_1)\cdotP(Y = y_1) + \prod_i^mP(w_m|Y=y_0)\cdotP(Y = y_0)}
 	\\
 	\text{For k discrete classes, and real valued variables:}
 	\\
-	P(Y=y_k|w_1 \ldots w_m) = \frac{P(Y = y_k)\cdot\prod_i^mP(w_i|Y = y_k)}{\sum_j^KP(Y=y_j)\cdot\prod_i^mP(w_m|Y=y_k)}
+	P(Y=y_k|w_1 \ldots w_m) = \frac{\prod_i^mP(w_i|Y = y_k) \cdot P(Y = y_k)}{\sum_j^KP(Y=y_j)\cdot\prod_i^mP(w_m|Y=y_k)}
 	\\
 	$$
 </div>
+
+As with GDA the prediction rule is then to simply assign the class with the highest probability given the Likelihood, Prior, and Evidence terms. It turns out we can actually eliminate the Evidence term, as it is constant when looking for a maximum among $Y\in[y_0 \ldots \y_k]$ :
+<div style="font-size: 130%;">
+	$$ 
+	\begin{align}
+	Y_{assigned} & = argmax_{y_k} \Big{ \frac{\prod_i^mP(w_i|Y = y_k) \cdot P(Y = y_k)}{\sum_j^KP(Y=y_j)\cdot\prod_i^mP(w_m|Y=y_k)} \Big}
+	& = argmax_{y_k} \big{ \prod_i^mP(w_i|Y = y_k) \cdot P(Y = y_k) \big}
+	$$
+</div>
+
+
+
 
 
 <h2 align="center">References</h2><hr>
 
 - <a href="http://www.cs.columbia.edu/~mcollins/em.pdf" target="_blank">Notes from a Columbia University course</a> focused on Naive Bayes and Maximum Likelihood Estimation.
+
+- <a href="https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf" target="_blank"> A Chapter from a textbook written by Tom Mitchell at Carnegie Mellon</a> focused on Naive Bayes which also describes discrete valued variables and multiple classes. 
 
 - <a href="https://youtu.be/qRJ3GKMOFrE?list=PLA89DCFA6ADACE599" target="_blank"> Andrew Ng's 5th lecture, on GDA, Naive Bayes, and Laplace Smoothing. 
 
