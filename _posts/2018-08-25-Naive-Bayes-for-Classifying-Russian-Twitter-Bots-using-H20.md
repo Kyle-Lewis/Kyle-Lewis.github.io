@@ -17,7 +17,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 <h2 align="center">Motivation</h2><hr>
 
-[Before](https://kyle-lewis.github.io/machine%20learning/2018/08/16/Generative-Learning-and-Bayes-Theorem.html) I presented an application of Bayes Theorem in GDA. That was cool and all but Bayes theorem can be applied to text classification problems as well through a Naive Bayes classifier. If we were to classify a peice of text using word counts we would do so using a joint probability. We can also use the generative Bayes Classification rule to do so. At least one motivation for using Naive Bayes for this approach is that many other classifiers will fail for various reasons given such a large feature space, like the number of unique words in a given dataset. 
+[Before](https://kyle-lewis.github.io/machine%20learning/2018/08/16/Generative-Learning-and-Bayes-Theorem.html) I presented an application of Bayes Theorem in GDA. Bayes theorem can also be applied to text classification problems as well through a Naive Bayes classifier. If we were to classify a peice of text using word counts we would do so using a joint probability. We can also use the generative Bayes Classification rule to do so. At least one motivation for using Naive Bayes for this approach is that many other classifiers will fail for various reasons given such a large feature space, like the number of unique words in a given dataset. 
 
 <h2 align="center">Naive Bayes in Text Classification</h2><hr>
 
@@ -42,25 +42,27 @@ Ng presents the case where $Y$ takes on two values zero or one, and each $w_i$ t
 
 <div style="font-size: 130%;">
 	$$ 
-	\text{Generally, Bayes rule reads:} \\
-	Posterior \space odds = \frac{Likelihood \space \cdot Prior \space odds}{Evidence} \\
+	\text{Generally, Bayes rule reads:} 
+	\\ \\
+	Posterior \space odds = \frac{Likelihood \space \cdot Prior \space odds}{Evidence} 
+	\\ \\
 	\text{For boolean class, boolean variables:}
-	\\
-	P(Y=y_1|w_1 \ldots w_m) = \frac{\prod_i^mP(w_i|Y = y_1) \cdot P(Y = y_1)}{\prod_i^mP(w_m|Y=y_1)\cdotP(Y = y_1) + \prod_i^mP(w_m|Y=y_0)\cdotP(Y = y_0)}
-	\\
+	\\ \\
+	P(Y=y_1|w_1 \ldots w_m) = \frac{\prod_i^mP(w_i|Y = y_1) \cdot P(Y = y_1)}{\prod_i^mP(w_m|Y=y_1) \cdot P(Y = y_1) + \prod_i^mP(w_m|Y=y_0) \cdot P(Y = y_0)}
+	\\ \\
 	\text{For k discrete classes, and real valued variables:}
-	\\
+	\\ \\
 	P(Y=y_k|w_1 \ldots w_m) = \frac{\prod_i^mP(w_i|Y = y_k) \cdot P(Y = y_k)}{\sum_j^KP(Y=y_j)\cdot\prod_i^mP(w_m|Y=y_k)}
 	\\
 	$$
 </div>
 
-As with GDA the prediction rule is then to simply assign the class with the highest probability given the Likelihood, Prior, and Evidence terms. It turns out we can actually eliminate the Evidence term, as it is constant when looking for a maximum among $Y\in[y_0 \ldots \y_k]$ :
+As with GDA the prediction rule is then to simply assign the class with the highest probability given the Likelihood, Prior, and Evidence terms. It turns out we can actually eliminate the Evidence term, as it is constant when looking for a maximum among $Y\in[y_0 \ldots y_k]$ :
 <div style="font-size: 130%;">
 	$$ 
 	\begin{align}
-	Y_{assigned} & = argmax_{y_k} \Big{ \frac{\prod_i^mP(w_i|Y = y_k) \cdot P(Y = y_k)}{\sum_j^KP(Y=y_j)\cdot\prod_i^mP(w_m|Y=y_k)} \Big}
-	& = argmax_{y_k} \big{ \prod_i^mP(w_i|Y = y_k) \cdot P(Y = y_k) \big}
+	Y_{assigned} & = argmax_{y_k} { \frac{\prod_i^mP(w_i|Y = y_k) \cdot P(Y = y_k)}{\sum_j^KP(Y=y_j) \cdot \prod_i^mP(w_m|Y=y_k)} }
+	& = argmax_{y_k} { \prod_i^mP(w_i|Y = y_k) \cdot P(Y = y_k) }
 	$$
 </div>
 
