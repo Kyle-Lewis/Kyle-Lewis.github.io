@@ -76,7 +76,7 @@ So, in order to make predictions, we just need to know all of the Prior terms $P
 
 <div style="font-size: 130%;">
 	$$ 
-	\phi_{ij, y = k} = P(W_i = w_{ij}|Y = y_k) = \frac{\sum_{ij}I\{W_i == w_{ij} \land Y = y_k} \} {\sum_k I\{Y=y_k\}}
+	\phi_{ij, y = k} = P(W_i = w_{ij}|Y = y_k) = \frac{\sum_{ij}I\{W_i == w_{ij} \land Y = y_k\} } {\sum_k I\{Y=y_k\}}
 	$$
 </div>
 
