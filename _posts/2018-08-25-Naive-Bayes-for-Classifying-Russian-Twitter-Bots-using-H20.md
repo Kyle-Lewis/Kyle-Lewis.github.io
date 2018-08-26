@@ -53,25 +53,41 @@ Ng presents the case where $Y$ takes on two values zero or one, and each $w_i$ t
 	\\ \\
 	\text{For k discrete classes, and real valued variables:}
 	\\ \\
-	P(Y=y_k|w_1 \ldots w_m) &= \frac{\prod_i^mP(w_i|Y = y_k) \cdot P(Y = y_k)}{\sum_j^KP(Y=y_j)\cdot\prod_i^mP(w_m|Y=y_k)}
+	P(Y=y_k|w_{1,1} \ldots w_{m,l}) &= \frac{\prod_i^{ml}P(w_{il}|Y = y_k) \cdot P(Y = y_k)}{\sum_j^KP(Y=y_j)\cdot\prod_i^{ml}P(w_{ml}|Y=y_k)}
 	\\
 	\end{align}
 	$$
 </div>
 
+In the last case I introduced a new index, $l$, for the word sums. $w_{il}$ indexes over each word, and over each count of each word, so we've added terms to fit, but fitting is already pretty fast for Naive Bayes so it's not much of a price to pay. I like the idea of the multinomial representation better, it allows for a "softness", maybe a few words appear once in a piece of text by chance, but multiple occurances of some words could have far more decisive power when determining the class of the text.
+
 As with GDA the prediction rule is then to simply assign the class with the highest probability given the Likelihood, Prior, and Evidence terms. It turns out we can actually eliminate the Evidence term, as it is constant when looking for a maximum among $Y\in[y_0 \ldots y_k]$ :
 <div style="font-size: 130%;">
 	$$ 
 	\begin{align}
-	Y_{assigned} & = argmax_{y_k} { \frac{\prod_i^m P(w_i|Y = y_k) \cdot P(Y = y_k) } {\sum_j^K P(Y=y_j) \cdot \prod_i^m P(w_m|Y=y_k)} }
+	Y_{assigned} & = argmax_{y_k} { \frac{\prod_i^m P(w_i|Y = y_k) \cdot P(Y = y_k) } {\sum_j^K P(Y=y_j) \cdot \prod_i^m P(w_m|Y=y_k)} } \\
 	& = argmax_{y_k} \prod_i^m P(w_i|Y = y_k) \cdot P(Y = y_k)
 	\end{align}
 	$$
 </div>
 
+So, in order to make predictions, we just need to know all of the Prior terms $P(Y = y_k)$ and all of the Likelihood terms $P(w_m|Y=y_k)$, in either the binomial or multinomial case. The maximum likelihood estimates for each of the Likelihood terms looks like:
 
+<div style="font-size: 130%;">
+	$$ 
+	\phi_{ij, y = k} = P(W_i = w_{ij}|Y = y_k) = \frac{\sum_{ij}I{W_i == w_{ij} \land Y = y_k} } {\sum_k I{Y=y_k}}
+	$$
+</div>
 
+Or in english, the percent of cases where the class was of class $k$ and you observed your feature $w_{ij}$. Likewise the estimate for the Priors is just the percent of cases where the class of the document is of the particular class:
 
+<div style="font-size: 130%;">
+	$$ 
+	\phi_{y} = P(Y = y_k) = \frac{\sum_n I{Y=y_k}}{N}
+	$$
+</div>
+
+At this point, everything is calculable! No regressions to run, we just have to calculate all of these terms for a large enough dataset, and then attempt to make predictions with them on remaining data.
 
 <h2 align="center">References</h2><hr>
 
