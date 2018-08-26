@@ -92,6 +92,23 @@ At this point, everything is calculable! No regressions to run, we just have to 
 
 <h2 align="center">Code</h2><hr>
 
+<h2 align="center">Results</h2><hr>
+
+
+<figure>
+	<img src="{{site.baseurl}}/images/naive-bayes/1000ofEach_94.6_99.0.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">With 1000 tweets from each dataset</figcaption>
+</figure>
+
+<figure>
+	<img src="{{site.baseurl}}/images/naive-bayes/10000ofEach_96.5_71.1.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">With 10,000 tweets from each dataset</figcaption>
+</figure>
+
+<figure>
+	<img src="{{site.baseurl}}/images/naive-bayes/100000ofEach_96.9_86.5.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">With 100,000 tweets from each dataset</figcaption>
+</figure>
 <h2 align="center">References</h2><hr>
 
 - <a href="http://www.cs.columbia.edu/~mcollins/em.pdf" target="_blank">Notes from a Columbia University course</a> focused on Naive Bayes and Maximum Likelihood Estimation.
