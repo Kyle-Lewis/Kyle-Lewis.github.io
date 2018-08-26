@@ -71,11 +71,12 @@ As with GDA the prediction rule is then to simply assign the class with the high
 	$$
 </div>
 
-So, in order to make predictions, we just need to know all of the Prior terms $P(Y = y_k)$ and all of the Likelihood terms $P(w_m|Y=y_k)$, in either the binomial or multinomial case. The maximum likelihood estimates for each of the Likelihood terms looks like:
+So, in order to make predictions, we just need to know all of the Prior terms $P(Y = y_k)$ and all of the Likelihood terms $P(w_m | Y = y_k)$, in either the binomial or multinomial case. The maximum likelihood estimates for each of the Likelihood terms looks like:
+
 
 <div style="font-size: 130%;">
 	$$ 
-	\phi_{ij, y = k} = P(W_i = w_{ij}|Y = y_k) = \frac{\sum_{ij}I{W_i == w_{ij} \land Y = y_k} } {\sum_k I{Y=y_k}}
+	\phi_{ij, y = k} = P(W_i = w_{ij}|Y = y_k) = \frac{\sum_{ij}I\{W_i == w_{ij} \land Y = y_k} \} {\sum_k I\{Y=y_k\}}
 	$$
 </div>
 
@@ -83,11 +84,13 @@ Or in english, the percent of cases where the class was of class $k$ and you obs
 
 <div style="font-size: 130%;">
 	$$ 
-	\phi_{y} = P(Y = y_k) = \frac{\sum_n I{Y=y_k}}{N}
+	\phi_{y} = P(Y = y_k) = \frac{\sum_n I\{Y=y_k\}}{N}
 	$$
 </div>
 
 At this point, everything is calculable! No regressions to run, we just have to calculate all of these terms for a large enough dataset, and then attempt to make predictions with them on remaining data.
+
+<h2 align="center">Code</h2><hr>
 
 <h2 align="center">References</h2><hr>
 
