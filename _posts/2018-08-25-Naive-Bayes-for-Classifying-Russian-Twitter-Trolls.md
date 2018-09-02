@@ -17,7 +17,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 <h2 align="center">Motivation</h2><hr>
 
-[Before](https://kyle-lewis.github.io/machine%20learning/2018/08/16/Generative-Learning-and-Bayes-Theorem.html) I presented an application of Bayes Theorem in GDA. Bayes theorem can also be applied to text classification problems as well through a Naive Bayes classifier. If we were to classify a peice of text using word counts we would do so using a joint probability. We can also use the generative Bayes Classification rule to do so. At least one motivation for using Naive Bayes for this approach is that many other classifiers will fail for various reasons given such a large feature space, like the number of unique words in a given dataset. It also gives me an excuse to do something with FiveThirtyEight's (Russian troll tweet dataset)[https://github.com/fivethirtyeight/russian-troll-tweets/ ].
+[Before](https://kyle-lewis.github.io/machine%20learning/2018/08/16/Generative-Learning-and-Bayes-Theorem.html) I presented an application of Bayes Theorem in GDA. Bayes theorem can also be applied to text classification problems as well through a Naive Bayes classifier. If we were to classify a peice of text using word counts we would do so using a joint probability. We can also use the generative Bayes Classification rule to do so. At least one motivation for using Naive Bayes for this approach is that many other classifiers will fail for various reasons given such a large feature space, like the number of unique words in a given dataset. It also gives me an excuse to do something with FiveThirtyEight's (Russian troll tweet dataset)[https://github.com/fivethirtyeight/russian-troll-tweets/].
 
 <h2 align="center">Naive Bayes in Text Classification</h2><hr>
 
@@ -220,7 +220,7 @@ There was a little bit of parsing to be done before anything could be ran; I end
 
 <h2 align="center">Results</h2><hr>
 
-I ran the classifier against a selection of Twitter data from FiveThirtyEight's (Russian troll tweet dataset)[https://github.com/fivethirtyeight/russian-troll-tweets/ ] using a more or less conversational Twitter (data set)[https://archive.org/details/twitter_cikm_2010 ] from a study on (geolocation data related to twittering)[http://faculty.cse.tamu.edu/caverlee/pubs/cheng11icwsm.pdf] as the baseline. Right out the gate this data isn't all that impressive; ideally i'd like to compare the Russian dataset to a politically minded subsection of twitter during the 2016 election. Political phrases, names of politicians, and socially charged language *all* quickly become the strongest predictors for the Russian classification, which is cool but not all that interesting. This isn't surprising given that my baseline is just everyday twitter, and worse yet from 2009-2010. This is due to a lack of historical data and overall access to large datasets through Twitter's developer API; I had to use what other people has already put together. 
+I ran the classifier against a selection of Twitter data from FiveThirtyEight's [Russian troll tweet dataset](https://github.com/fivethirtyeight/russian-troll-tweets/) using a more or less conversational Twitter [data set](https://archive.org/details/twitter_cikm_2010) from a study on [geolocation data related to twittering](http://faculty.cse.tamu.edu/caverlee/pubs/cheng11icwsm.pdf) as the baseline. Right out the gate this data isn't all that impressive; ideally i'd like to compare the Russian dataset to a politically minded subsection of twitter during the 2016 election. Political phrases, names of politicians, and socially charged language *all* quickly become the strongest predictors for the Russian classification, which is cool but not all that interesting. This isn't surprising given that my baseline is just everyday twitter, and worse yet from 2009-2010. This is due to a lack of historical data and overall access to large datasets through Twitter's developer API; I had to use what other people has already put together. 
 
 Still, the results do show off the power of Naive Bayes classification even if it is a really easy case. We can also see how the algorithm relatively struggles to classify the more difficult dataset (non-Russian) due to it's lack of prevalent, dominating terms. 
 
@@ -229,17 +229,63 @@ Still, the results do show off the power of Naive Bayes classification even if i
 	<figcaption style="text-align:center;">With 1000 tweets from each dataset</figcaption>
 </figure>
 
-It also performs worse for larger datasets when scaling the ratio of samples used to build the model, but only for the non-Russian dataset. The Russian accuracies for these runs were 94.6, 96.5, and 96.9% when using half of the data for the model. It's worth mentioning that I have not performed (cross validation)[https://en.wikipedia.org/wiki/Cross-validation_(statistics)#k-fold_cross-validation], these runs always took some percent of the dataset from the top to use as the model. Cross validation would smooth out the jagged behavior caused by different order of introductions with respect to certain words.
-
-<figure>
-	<img src="{{site.baseurl}}/images/naive-bayes/10000ofEach_96.5_71.1.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
-	<figcaption style="text-align:center;">With 10,000 tweets from each dataset</figcaption>
-</figure>
+It also performs worse for larger datasets when scaling the ratio of samples used to build the model, but only for the non-Russian dataset. The Russian accuracies for these runs were 94.6, and 96.9% when using half of the data for the model, The Normal accuracies were 99, and 86.5%. It's worth mentioning that I have not performed [cross validation](https://en.wikipedia.org/wiki/Cross-validation), these runs always took some percent of the dataset from the top to use as the model. Cross validation would smooth out the jagged behavior caused by different order of introductions with respect to certain words.
 
 <figure>
 	<img src="{{site.baseurl}}/images/naive-bayes/100000ofEach_96.9_86.5.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">With 100,000 tweets from each dataset</figcaption>
 </figure>
+
+<h2 align="center">Using scikit-learn</h2><hr>
+
+As long as we're learning this stuff I may as well use and compare some industry standard implementations. Scikit-learn has implemented the multinomial featured bayes classification which I derived above, but better yet they've provided some additional clever pre-processing tricks and analysis tools for free. Using the toolkit is extremely easy with their "Pipelines":
+
+<hr>
+<div style="width:110%">
+
+{% highlight python %}
+
+# SKLNaiveBayes.py
+
+# Library implementations
+from sklearn.naive_bayes import BernoulliNB, MultinomialNB
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfTransformer 
+from sklearn.pipeline import Pipeline 
+from sklearn import metrics 
+from sklearn.model_selection import cross_val_score
+
+...
+# loading data here
+...
+
+AllData = pd.concat([russianDataRaw, normalDataRaw])
+
+classifierPipeline = Pipeline([('vectorizer', CountVectorizer()),
+							   ('tfidf', TfidfTransformer()),
+							   ('classifier', MultinomialNB())])
+
+accScores = cross_val_score(classifierPipeline, AllData["text"].values.astype('U'), AllData["Labels"], cv=10)
+print("10-level cross validation scores: " + str(accScores))
+print("Accuracy: %0.2f (+/- %0.2f)" % (accScores.mean(), accScores.std() * 2))
+
+{% endhighlight %}
+
+</div>
+<hr>
+
+I'll narrate this code a bit. The pipeline instance is simply defining a sequence of transformations to make to data as a part of a machine learning process. Their *CountVectorizer* does exactly what my tallying code was doing above, and the *MultinomialNB* classifier applies the multinomial version of Naive bayes to data as discussed above. The *TfidTransformer* is new. The acronym stands for the product of *term frequency* and *inverse document frequency* which is used  as a heuristic weighting factor for the words in our dataset, [here's a wiki page](https://en.wikipedia.org/wiki/Tf%E2%80%93idf). Now in general this seems like a really clever idea but I'm not sure it will make too much of a difference given the limited text length of tweets, but the IDF term may at least do better than just applying stop word filters. 
+
+Cross validation is also provided for free, 10-fold cross validation as I've used it will split the input feature and label data into 10 groups, and use each of the 10 to build a model to predict on the other 9. You can then get better statistics and not have to worry about localized groupings in the data scewing your results. 
+
+With cross validation it's revealed that even with very low (less than 100) sets of data, Naive Bayes performs extremely well. The results from scikit-learn's process:
+
+<figure>
+	<img src="{{site.baseurl}}/images/naive-bayes/SKLearnResults.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">Yeah they did a bit better than me. I'm not bitter.</figcaption>
+</figure>
+
+
 
 <h2 align="center">References</h2><hr>
 
