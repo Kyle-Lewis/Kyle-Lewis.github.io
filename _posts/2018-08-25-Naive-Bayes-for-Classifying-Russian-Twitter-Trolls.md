@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Classifying Russian Twitter Bots using Naive Bayes and H20"
+title: "Naive Bayes for Classifying Russian Twitter Trolls"
 categories: [Machine Learning]
 date: 2018-08-16
 image: images/logistic-regression/regression.gif
@@ -53,7 +53,7 @@ Ng presents the case where $Y$ takes on two values zero or one, and each $w_i$ t
 	\\ \\
 	\text{For k discrete classes, and real valued variables:}
 	\\ \\
-	P(Y=y_k|w_{1,1} \ldots w_{m,l}) &= \frac{\prod_i^{ml}P(w_{il}|Y = y_k) \cdot P(Y = y_k)}{\sum_j^KP(Y=y_j)\cdot\prod_i^{ml}P(w_{ml}|Y=y_k)}
+	P(Y=y_k|w_{1,1} \ldots w_{m,l}) &= \frac{\prod_i^{ml}P(w_{i}|Y = y_k) \cdot P(Y = y_k)}{\sum_j^KP(Y=y_j)\cdot\prod_i^{ml}P(w_{i}|Y=y_k)}
 	\\
 	\end{align}
 	$$
@@ -92,7 +92,7 @@ At this point, everything is calculable! No regressions to run, we just have to 
 
 <h2 align="center">Code</h2><hr>
 
-There was a little bit of parsing to be done before anything could be ran; I ended up using the (Natural Language Toolkit)[https://www.nltk.org/] for tokenization and string cleaning, and then built in Python dicts are already hash maps which are exactly what you want when keeping and searching a large histogram of word counts. I also parsed against a set of stop words, which is common practice. Words like "A", "an", "or" which appear to frequently to offer much predictive quality.
+There was a little bit of parsing to be done before anything could be ran; I ended up using the (Natural Language Toolkit)[https://www.nltk.org/] for tokenization and string cleaning, and then built in Python dicts are already hash maps which are exactly what you want when keeping and searching a large histogram of word counts. I also parsed against a set of stop words, which is common practice. Words like "A", "an", "or" which appear too frequently to offer much predictive quality.
 
 <hr>
 <div style="width:110%">
@@ -284,8 +284,6 @@ With cross validation it's revealed that even with very low (less than 100) sets
 	<img src="{{site.baseurl}}/images/naive-bayes/SKLearnResults.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">Yeah they did a bit better than me. I'm not bitter.</figcaption>
 </figure>
-
-
 
 <h2 align="center">References</h2><hr>
 
