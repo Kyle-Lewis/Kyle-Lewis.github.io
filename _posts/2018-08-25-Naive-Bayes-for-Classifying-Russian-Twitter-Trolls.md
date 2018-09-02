@@ -59,7 +59,7 @@ Ng presents the case where $Y$ takes on two values zero or one, and each $w_i$ t
 	$$
 </div>
 
-In the last case I introduced a new index, $l$, for the word sums. $w_{il}$ indexes over each word, and over each count of each word, so we've added terms to fit, but fitting is already pretty fast for Naive Bayes so it's not much of a price to pay. I like the idea of the multinomial representation better, it allows for a "softness", maybe a few words appear once in a piece of text by chance, but multiple occurances of some words could have far more decisive power when determining the class of the text.
+In the last case I introduced a new index, $l$, for the word sums. $w_{il}$ indexes over each word, and over each count of each word. So we've added more terms to fit, but fitting is already pretty fast for Naive Bayes so it's not much of a price to pay. Intuitively, I like the idea of the multinomial representation better, it allows for a "softness", maybe a few words appear once in a piece of text by chance, but multiple occurances of some words could have far more decisive power when determining the class of the text.
 
 As with GDA the prediction rule is then to simply assign the class with the highest probability given the Likelihood, Prior, and Evidence terms. It turns out we can actually eliminate the Evidence term, as it is constant when looking for a maximum among $Y\in[y_0 \ldots y_k]$ :
 <div style="font-size: 130%;">
@@ -297,7 +297,7 @@ With cross validation it's revealed that even with very low (less than 100) sets
 |-------------------------------+--------------+---------------------|
 
 <figure>
-	<img src="{{site.baseurl}}/images/naive-bayes/SKLearnResults.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/naive-bayes/SKLearnResults.png" style="padding-bottom:0.5em; width:60%; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">Yeah they did a bit better than me. I'm not bitter.</figcaption>
 </figure>
 
