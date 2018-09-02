@@ -17,7 +17,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 <h2 align="center">Motivation</h2><hr>
 
-[Before](https://kyle-lewis.github.io/machine%20learning/2018/08/16/Generative-Learning-and-Bayes-Theorem.html) I presented an application of Bayes Theorem in GDA. Bayes theorem can also be applied to text classification problems as well through a Naive Bayes classifier. If we were to classify a peice of text using word counts we would do so using a joint probability. We can also use the generative Bayes Classification rule to do so. At least one motivation for using Naive Bayes for this approach is that many other classifiers will fail for various reasons given such a large feature space, like the number of unique words in a given dataset. It also gives me an excuse to do something with FiveThirtyEight's (Russian troll tweet dataset)[https://github.com/fivethirtyeight/russian-troll-tweets/].
+[Before](https://kyle-lewis.github.io/machine%20learning/2018/08/16/Generative-Learning-and-Bayes-Theorem.html) I presented an application of Bayes Theorem in GDA. Bayes theorem can also be applied to text classification problems as well through a Naive Bayes classifier. If we were to classify a peice of text using word counts we would do so using a joint probability. We can also use the generative Bayes Classification rule to do so. At least one motivation for using Naive Bayes for this approach is that many other classifiers will fail for various reasons given such a large feature space, like the number of unique words in a given dataset. It also gives me an excuse to do something with FiveThirtyEight's [Russian troll tweet dataset](https://github.com/fivethirtyeight/russian-troll-tweets/).
 
 <h2 align="center">Naive Bayes in Text Classification</h2><hr>
 
@@ -71,7 +71,7 @@ As with GDA the prediction rule is then to simply assign the class with the high
 	$$
 </div>
 
-So, in order to make predictions, we just need to know all of the Prior terms $P(Y = y_k)$ and all of the Likelihood terms $P(w_m | Y = y_k)$, in either the binomial or multinomial case. The maximum likelihood estimates for each of the Likelihood terms looks like:
+So, in order to make predictions, we just need to know all of the Prior terms $P(Y = y_k)$ and all of the Likelihood terms $P(w_m \| Y = y_k)$, in either the binomial or multinomial case. The maximum likelihood estimates for each of the Likelihood terms looks like:
 
 
 <div style="font-size: 130%;">
@@ -92,7 +92,7 @@ At this point, everything is calculable! No regressions to run, we just have to 
 
 <h2 align="center">Code</h2><hr>
 
-There was a little bit of parsing to be done before anything could be ran; I ended up using the (Natural Language Toolkit)[https://www.nltk.org/] for tokenization and string cleaning, and then built in Python dicts are already hash maps which are exactly what you want when keeping and searching a large histogram of word counts. I also parsed against a set of stop words, which is common practice. Words like "A", "an", "or" which appear too frequently to offer much predictive quality.
+There was a little bit of parsing to be done before anything could be ran; I ended up using the [Natural Language Toolkit](https://www.nltk.org/) for tokenization and string cleaning, and then built in Python dicts are already hash maps which are exactly what you want when keeping and searching a large histogram of word counts. I also parsed against a set of stop words, which is common practice. Words like "A", "an", "or" which appear too frequently to offer much predictive quality.
 
 <hr>
 <div style="width:110%">
@@ -220,7 +220,7 @@ There was a little bit of parsing to be done before anything could be ran; I end
 
 <h2 align="center">Results</h2><hr>
 
-I ran the classifier against a selection of Twitter data from FiveThirtyEight's [Russian troll tweet dataset](https://github.com/fivethirtyeight/russian-troll-tweets/) using a more or less conversational Twitter [data set](https://archive.org/details/twitter_cikm_2010) from a study on [geolocation data related to twittering](http://faculty.cse.tamu.edu/caverlee/pubs/cheng11icwsm.pdf) as the baseline. Right out the gate this data isn't all that impressive; ideally i'd like to compare the Russian dataset to a politically minded subsection of twitter during the 2016 election. Political phrases, names of politicians, and socially charged language *all* quickly become the strongest predictors for the Russian classification, which is cool but not all that interesting. This isn't surprising given that my baseline is just everyday twitter, and worse yet from 2009-2010. This is due to a lack of historical data and overall access to large datasets through Twitter's developer API; I had to use what other people has already put together. 
+I ran the classifier against a selection of Twitter data from FiveThirtyEight's [Russian troll tweet dataset](https://github.com/fivethirtyeight/russian-troll-tweets/) using a more or less conversational Twitter [data set](https://archive.org/details/twitter_cikm_2010) from a study on [geolocation data related to twittering](http://faculty.cse.tamu.edu/caverlee/pubs/cheng11icwsm.pdf) as the baseline. Right out the gate this data isn't all that impressive; ideally i'd like to compare the Russian dataset to a politically minded subsection of twitter during the 2016 election. Political phrases, names of politicians, and socially charged language *all* quickly become the strongest predictors for the Russian classification, which is cool but not all that interesting. This isn't surprising given that my baseline is just everyday twitter, and worse yet from 2009-2010. This is due to a lack of historical data and overall access to large datasets through Twitter's developer API; I had to use what other people had already put together. 
 
 Still, the results do show off the power of Naive Bayes classification even if it is a really easy case. We can also see how the algorithm relatively struggles to classify the more difficult dataset (non-Russian) due to it's lack of prevalent, dominating terms. 
 
@@ -279,6 +279,22 @@ I'll narrate this code a bit. The pipeline instance is simply defining a sequenc
 Cross validation is also provided for free, 10-fold cross validation as I've used it will split the input feature and label data into 10 groups, and use each of the 10 to build a model to predict on the other 9. You can then get better statistics and not have to worry about localized groupings in the data scewing your results. 
 
 With cross validation it's revealed that even with very low (less than 100) sets of data, Naive Bayes performs extremely well. The results from scikit-learn's process:
+
+|-------------------------------+--------------+---------------------|
+| Tweets Used (from *each* set) | Accuracy (%) | Deviation (+/-) (%) |
+|-------------------------------|--------------|---------------------|
+| 20                            | 93           | 0.23				 |
+| 30				            | 88           | 0.21				 |
+| 50							| 92		   | 0.15				 |
+| 100							| 92		   | 0.12				 |
+| 200							| 92		   | 0.10				 |
+| 500							| 92		   | 0.06			     |
+| 750							| 92		   | 0.04				 |
+| 1000							| 93		   | 0.05				 |
+| 2000							| 92		   | 0.03				 |
+| 5000							| 94		   | 0.02				 |
+| 10000							| 93		   | 0.02				 |
+|-------------------------------+--------------+---------------------|
 
 <figure>
 	<img src="{{site.baseurl}}/images/naive-bayes/SKLearnResults.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
