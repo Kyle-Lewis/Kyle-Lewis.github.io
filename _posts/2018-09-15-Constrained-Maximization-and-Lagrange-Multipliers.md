@@ -30,7 +30,7 @@ I'll use a 2d parabola $$f(x,y) = x^2 + y^2$$ as the function I'm trying to mini
 To minimize, we want to decrease $$ f(x,y) $$ as long as we can while the still satisfying the inequality (intersecting with the constraint at least once). The minima will occur when we have just one single point left which satisfies our constraint 
 
 <figure>
-	<img src="{{site.baseurl}}/images/constrained-optimization/ShrinkingToMin.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/constrained-optimization/ShrinkingToMin3.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">Contours of the function to optimize, and the edge of the constraint $g$</figcaption>
 </figure>
 
