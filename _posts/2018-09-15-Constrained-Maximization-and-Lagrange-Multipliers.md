@@ -36,6 +36,8 @@ To minimize, we want to decrease $$ f(x,y) $$ as long as we can while the still 
 
 A fact we can use to solve for this point of interest is that tangent curves will have gradients which are proportional to eachother. Or:
 
+With the addition of the constraint equation itself $$ y + \frac{1}{4}x = 1 $$ we then have 3 variables and 3 equations which we can solve. In this case we could just substitute our way to the solution, but with higher dimensional functions with increasing numbers of variables it helps to make use of [gaussian elimination](https://en.wikipedia.org/wiki/Gaussian_elimination) strategies. And of course, any software employing these methods can make use of LAPACK or Numpy's linalg module (*also lapack*) to solve the system:
+
 <div style="font-size: 130%;">
 	$$ 
 	\begin{bmatrix}2.0 & 0.0 & -0.5 \\ 0.0 & 2.0 & -1.0 \\ 0.5 & 1.0 & 0.0 \end{bmatrix} \times 
@@ -44,8 +46,6 @@ A fact we can use to solve for this point of interest is that tangent curves wil
 	\left[\begin{array}{c} 0 \\ 0 \\ 1 \end{array}\right]
 	$$
 </div>
-
-With the addition of the constraint equation itself $$ y + \frac{1}{4}x = 1 $$ we then have 3 variables and 3 equations which we can solve. In this case we could just substitute our way to the solution, but with higher dimensional functions with increasing numbers of variables it helps to make use of [gaussian elimination](https://en.wikipedia.org/wiki/Gaussian_elimination) strategies. And of course, any software employing these methods can make use of LAPACK or Numpy's linalg module (*also lapack*) to solve the system:
 
 // Gif of the solution point moving as you change slope and offset of the constraining line, expand the circle x^2 + y^2 and display the solution point while you are at it. 
 
