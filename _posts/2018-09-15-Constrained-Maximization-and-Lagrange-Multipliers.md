@@ -39,9 +39,9 @@ A fact we can use to solve for this point of interest is that tangent curves wil
 <div style="font-size: 130%;">
 	$$ 
 	\begin{bmatrix}2.0 & 0.0 & -0.5 \\ 0.0, 2.0, -1.0 \\ 0.5, 1.0, 0.0 \end{array} \right \times 
-	\begin{array}{c} s_x \\ s_y \\ s_{\lambda} \end{array}
+	\left[\begin{array}{c} s_x \\ s_y \\ s_{\lambda} \end{array}\right]
 	=
-	\begin{array}{c} 0 \\ 0 \\ 1 \end{array}
+	\left[\begin{array}{c} 0 \\ 0 \\ 1 \end{array}\right]
 	$$
 </div>
 
