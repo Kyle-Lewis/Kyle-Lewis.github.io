@@ -52,7 +52,7 @@ The "Lagrangian" in the name of this method just refers to the form of the syste
 
 <div style="font-size: 130%;">
 	$$ 
-	\mathcal{L}(x, y, \lambda) = 0 \equiv f(x, y) - \lambda (g(x, y) - b) \\ 
+	\mathcal{L}(x, y, \lambda) \equiv f(x, y) - \lambda (g(x, y) - b) \\ 
 	$$
 </div>
 
@@ -62,11 +62,19 @@ With a constraint on the system that's not binding - the minima of the function 
 
 <div style="font-size: 130%;">
 	$$ 
-	\nabla \mathcal{L}(x, y, \lambda) \LongRightArrow 
+	\nabla \mathcal{L}(x, y, \lambda) \implies  
 	\begin{cases}
 		\nabla f(x, y) = \lambda g(x, y) \\
 		g(x,y) = 0 
 	\end{cases}
+	$$
+</div>
+
+But if $lambda$ is zero, as is the case for a non-binding constraint, you are left with the usual minimization equation:
+
+<div style="font-size: 130%;">
+	$$ 
+	\nabla \mathcal{L}(x, y, \lambda) = 0 \implies \nabla f(x, y) = 0 \\
 	$$
 </div>
 
