@@ -21,7 +21,7 @@ Lessons on Support Vector Machines - at least the ones I've watched - jump strai
 
 <h2 align="center">Minimizing one function with one constraint</h2><hr>
 
-I'll use a 2d parabola $$f(x,y) = x^2 + y^2$$ as the function I'm trying to minimize, with the inequality constraint of $$ y + \frac{1}{4}x \geq 1 $$. I'll call the line of the inequality $$ g(x,y) $$ and *for now* I'll be assuming that the minima will actually lie on this constrianing line and ignore the fact that it's an inequality.
+I'll use a 2d parabola $$f(x,y) = x^2 + y^2$$ as the function I'm trying to minimize, with the inequality constraint of $$ y + \frac{1}{4}x - 1 \geq 0 $$. I'll call the line of the inequality $$ g(x,y) $$ and *for now* I'll be assuming that the minima will actually lie on this constrianing line and ignore the fact that it's an inequality.
 
 To minimize, we want to decrease $$ f(x,y) $$ as long as we can while the still satisfying the inequality (intersecting with the constraint at least once). The minima will occur when we have just one single point left which satisfies our constraint 
 
@@ -32,14 +32,14 @@ To minimize, we want to decrease $$ f(x,y) $$ as long as we can while the still 
 
 A fact we can use to solve for this point of interest is that tangent curves will have gradients which are proportional to eachother. Or:
 
-With the addition of the constraint equation itself $$ y + \frac{1}{4}x = 1 $$ we then have 3 variables and 3 equations which we can solve. In this case we could just substitute our way to the solution, but with higher dimensional functions with increasing numbers of variables it helps to make use of [gaussian elimination](https://en.wikipedia.org/wiki/Gaussian_elimination) strategies. And of course, any software employing these methods can make use of LAPACK or Numpy's linalg module (*also lapack*) to solve the system:
+With the addition of the constraint equation itself $$ y + \frac{1}{4}x -1 = 0 $$ we then have 3 variables and 3 equations which we can solve. In this case we could just substitute our way to the solution, but with higher dimensional functions with increasing numbers of variables it helps to make use of [gaussian elimination](https://en.wikipedia.org/wiki/Gaussian_elimination) strategies. And of course, any software employing these methods can make use of LAPACK or Numpy's linalg module (*also lapack*) to solve the system:
 
 <div style="font-size: 130%;">
 	$$ 
-	\begin{bmatrix}2.0 & 0.0 & -0.5 \\ 0.0 & 2.0 & -1.0 \\ 0.5 & 1.0 & 0.0 \end{bmatrix} \times 
+	\begin{bmatrix}2.0 & 0.0 & -0.5 \\ 0.0 & 2.0 & -1.0 \\ 0.5 & 1.0 & 1.0 \end{bmatrix} \times 
 	\left[\begin{array}{c} s_x \\ s_y \\ s_{\lambda} \end{array}\right]
 	=
-	\left[\begin{array}{c} 0 \\ 0 \\ 1 \end{array}\right]
+	\left[\begin{array}{c} 0 \\ 0 \\ 0 \end{array}\right]
 	$$
 </div>
 
@@ -48,17 +48,27 @@ With the addition of the constraint equation itself $$ y + \frac{1}{4}x = 1 $$ w
 	<figcaption style="text-align:center;">Gradually modifying the constraint and plotting the contour of the resulting minima</figcaption>
 </figure>
 
-The "Lagrangian" in the name of this method just refers to the form of the system of equations when written out to one side, and the "multipliers" are just what people call the extra variables we introduce, $\lambda$.
+The "Lagrangian" in the name of this method just refers to the form of the system of equations when written out to one side, and the "multipliers" are just what people call the extra variables we introduce, $\lambda$. Any constant term in the constraint is moved from the right to the left under the multiplier.
 
 <div style="font-size: 130%;">
 	$$ 
-	\mathcal{L}(x, y, $\lambda) \equiv \nabla f(x, y) - \lambda g(x, y) 
+	\mathcal{L}(x, y, \lambda) = 0 \equiv f(x, y) - \lambda (g(x, y) - b) \\ 
 	$$
 </div>
 
 <h2 align="center">What about when constraints don't matter?</h2><hr>
 
-A constraint on 
+With a constraint on the system that's not binding - the minima of the function lies within the constrained region but not on the boundary - the system of equations to solve becomes the usual $\nabla f(x, y) = \vec{0}$. This is entirely contained by the form of the Lagrangian. Taking the derivative of the Lagrangian and setting it to zero is conveniantly equivalent to stating the system of equations that we found above:
+
+<div style="font-size: 130%;">
+	$$ 
+	\nabla \mathcal{L}(x, y, \lambda) \LongRightArrow 
+	\begin{cases}
+		\nabla f(x, y) = \lambda g(x, y) \\
+		g(x,y) = 0 
+	\end{cases}
+	$$
+</div>
 
 <h2 align="center">What about multiple constraints?</h2><hr>
 
