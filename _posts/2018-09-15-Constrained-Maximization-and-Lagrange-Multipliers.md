@@ -23,10 +23,6 @@ Lessons on Support Vector Machines - at least the ones I've watched - jump strai
 
 I'll use a 2d parabola $$f(x,y) = x^2 + y^2$$ as the function I'm trying to minimize, with the inequality constraint of $$ y + \frac{1}{4}x \geq 1 $$. I'll call the line of the inequality $$ g(x,y) $$ and *for now* I'll be assuming that the minima will actually lie on this constrianing line and ignore the fact that it's an inequality.
 
-<figure>
-	<img src="{{site.baseurl}}/images/constrained-optimization/constraintAndContours.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
-	<figcaption style="text-align:center;">Contours of the function to optimize, and the edge of the constraint $g$</figcaption>
-</figure>
 To minimize, we want to decrease $$ f(x,y) $$ as long as we can while the still satisfying the inequality (intersecting with the constraint at least once). The minima will occur when we have just one single point left which satisfies our constraint 
 
 <figure>
@@ -47,9 +43,22 @@ With the addition of the constraint equation itself $$ y + \frac{1}{4}x = 1 $$ w
 	$$
 </div>
 
-// Gif of the solution point moving as you change slope and offset of the constraining line, expand the circle x^2 + y^2 and display the solution point while you are at it. 
+<figure>
+	<img src="{{site.baseurl}}/images/constrained-optimization/ModifyingConstraint.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">Gradually modifying the constraint and plotting the contour of the resulting minima</figcaption>
+</figure>
+
+The "Lagrangian" in the name of this method just refers to the form of the system of equations when written out to one side, and the "multipliers" are just what people call the extra variables we introduce, $\lambda$.
+
+<div style="font-size: 130%;">
+	$$ 
+	\mathcal{L}(x, y, $\lambda) \equiv \nabla f(x, y) - \lambda g(x, y) 
+	$$
+</div>
 
 <h2 align="center">What about when constraints don't matter?</h2><hr>
+
+A constraint on 
 
 <h2 align="center">What about multiple constraints?</h2><hr>
 
