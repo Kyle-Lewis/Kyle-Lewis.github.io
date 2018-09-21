@@ -17,7 +17,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 <h2 align="center">Motivation</h2><hr>
 
-Lessons on Support Vector Machines - at least the ones I've watched - jump straight into a lagrangian representation for a constrained miminization problem without much justification. I thought it would be valuable to prove to myself why this approach works, and tie it to some physics problem to give it some meaning. 
+Lessons on Support Vector Machines - at least the ones I've watched - jump straight into a lagrangian representation for a constrained miminization problem without much justification. I thought it would be valuable to prove to myself why this approach works, before going on to use it in SVM classification later.
 
 <h2 align="center">Minimizing one function with one constraint</h2><hr>
 
