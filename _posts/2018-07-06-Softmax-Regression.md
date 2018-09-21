@@ -79,7 +79,7 @@ Now for multiple classes we have a new multinomial probability distrubution to t
 	$$
 </div>
 
-Now, Ng chooses to drop the scaling factor out front and focus only on the product of the natural parameters $\phi$. We can use the same trick on this form of the equation. We also break out the $K^{th}$ component of $\phi$ from the rest of the sum to achieve a *minimal* representation for the distribution. This makes sense; as Ng describes, once we have up to $K-1$ terms, the $K$ term can be represented by one minus the sum of the rest. Using that replacement:
+First drop the scaling factor out front and focus only on the product of the natural parameters $\phi$. We can use the same trick on this form of the equation. We also break out the $K^{th}$ component of $\phi$ from the rest of the sum to achieve a *minimal* representation for the distribution. This makes sense; as Ng describes in his notes, once we have up to $K-1$ terms, the $K^{th}$ term can be represented by one minus the sum of the rest. Using that replacement:
 
 <div style="font-size: 150%;">
 	$$
@@ -91,7 +91,7 @@ Now, Ng chooses to drop the scaling factor out front and focus only on the produ
 	\end{align}
 	$$
 </div>
-Where in the last line we've retrieved the form of the exponential family and we get each of our $k$ hypothesis function by inverting the natural parameter and solving for $\phi_k$, making the same assumption that $\eta$ is a linear combination of weighted terms $\vec{\theta_k}^{T}\vec{x}$ for weights associated with each class: 
+Where in the last line we've retrieved the form of the exponential family and we get each of our $k$ hypothesis functions by inverting the natural parameter and solving for $\phi_k$, making the same assumption that $\eta$ is a linear combination of weighted terms $\vec{\theta_k}^{T}\vec{x}$ for weights associated with each class: 
 
 <div style="font-size: 150%;">
 	$$
@@ -113,14 +113,14 @@ Pictures always help so here's what that function looks in two dimensions for $\
 
 <h2 align="center">Derivative of Log Likelihood to Retrieve Update Rule</h2><hr>
 
-Remember that the general form of log likelihood maximization goes:
+Remembering that the general form of log likelihood maximization goes:
 <div style="font-size: 150%;">
 	$$
 	\theta := \theta + \alpha\nabla_{\theta}L(\theta)
 	$$
 </div>
 
-So we'll need to get the likelihood function and take its derivative. What we recovered above was the hypothesis function for a point *of a class $k$* (note the subscript). The function for all classes must represent the joint probability of the classes at hand. When you have joint probabilties, you multiply the individual terms. [Go ahead and check if that doesn't make sense](https://en.wikipedia.org/wiki/Joint_probability_distribution). Because of this, the likelihood function this time around must be a product. Remeber that before, for logistic regression between two classes, it was a sum. Here's what that looks like:
+we'll need to get the likelihood function and take its derivative. What we recovered above was the hypothesis function for a point *of a class $k$* (note the subscript). The function for all classes must represent the joint probability of the classes at hand. When you have joint probabilties, you multiply the individual terms. [Go ahead and check if that doesn't make sense](https://en.wikipedia.org/wiki/Joint_probability_distribution). Because of this, the likelihood function this time around must be a product. Remeber that before, for logistic regression between two classes, it was a sum. Here's what that looks like:
 
 <div style="font-size: 150%;">
 	$$

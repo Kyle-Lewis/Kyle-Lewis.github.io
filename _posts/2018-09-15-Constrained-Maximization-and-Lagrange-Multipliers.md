@@ -58,7 +58,7 @@ The "Lagrangian" in the name of this method just refers to the form of the syste
 
 <h2 align="center">What about when constraints don't matter?</h2><hr>
 
-With a constraint on the system that's not binding - the minima of the function lies within the constrained region but not on the boundary - the system of equations to solve becomes the usual $\nabla f(x, y) = \vec{0}$. This is entirely contained by the form of the Lagrangian. Taking the derivative of the Lagrangian and setting it to zero is conveniantly equivalent to stating the system of equations that we found above:
+Now I'll let $g(x,y)$ be the inequality $y + \frac{1}{4}x - 1 \geq 0$ and not assume that the solution lies on the constraint boundary. With a constraint on the system that's not binding - the minima of the function lies within the constrained region but not on the boundary - the system of equations to solve becomes the usual $\nabla f(x, y) = \vec{0}$. This is entirely contained by the form of the Lagrangian. Taking the derivative of the Lagrangian and setting it to zero is conveniantly equivalent to stating the system of equations that we found above:
 
 <div style="font-size: 130%;">
 	$$ 
@@ -77,6 +77,8 @@ But if $lambda$ is zero, as is the case for a non-binding constraint, you are le
 	\nabla \mathcal{L}(x, y, \lambda) = 0 \implies \nabla f(x, y) = 0 \\
 	$$
 </div>
+
+We know to set $\lambda$ for the constraint to zero when the inequality constraint $g(x,y) > 0$. Think about it from a calculus perspective, if the value of the constraint is currently positive by any amount, then moving anywhere in the feature space by any infinitesimally small amount you will still have a $g(x,y)$ value that is greater than zero, and so we must be in the region enclosed by the inequality and not on the border - not bounded. That assumption wouldn't hold for non-continuous constraints, so don't use those unless you want to come up with clever workarounds. An equivalent reason for setting $\lambda$ to zero arises when discussing the lagrangian in terms of the primal and dual problem, which I'll get to later. 
 
 <h2 align="center">What about multiple constraints?</h2><hr>
 
