@@ -2,7 +2,7 @@
 layout: post
 title: "Naive Bayes for Classifying Russian Twitter Trolls"
 categories: [Machine Learning]
-date: 2018-08-16
+date: 2018-08-25
 image: images/logistic-regression/regression.gif
 ---
 
