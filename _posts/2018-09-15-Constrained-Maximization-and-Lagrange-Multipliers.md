@@ -78,7 +78,12 @@ But if $lambda$ is zero, as is the case for a non-binding constraint, you are le
 	$$
 </div>
 
-We know to set $\lambda$ for the constraint to zero when the inequality constraint $g(x,y) > 0$. Think about it from a calculus perspective, if the value of the constraint is currently positive by any amount, then moving anywhere in the feature space by any infinitesimally small amount you will still have a $g(x,y)$ value that is greater than zero, and so we must be in the region enclosed by the inequality and not on the border - not bounded. That assumption wouldn't hold for non-continuous constraints, so don't use those unless you want to come up with clever workarounds. An equivalent reason for setting $\lambda$ to zero arises when discussing the lagrangian in terms of the primal and dual problem, which I'll get to later. 
+<figure>
+	<img src="{{site.baseurl}}/images/constrained-optimization/NonBindingConstraint.gif" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">Disregarding the constraint when it is non-binding</figcaption>
+</figure>
+
+We know to set $\lambda$ for the constraint to zero when the inequality constraint is *more than satisfied*; $g(x,y) > 0$. Think about it from a calculus perspective, if the value of the constraint is currently positive by any amount, then moving anywhere in the feature space by any infinitesimally small amount you will still have a $g(x,y)$ value that is greater than zero, and so we must be in the region enclosed by the inequality and not on the border - not bounded. That assumption wouldn't hold for non-continuous constraints, so don't use those unless you want to come up with clever workarounds. An equivalent reason for setting $\lambda$ to zero arises when discussing the lagrangian in terms of the primal and dual problem, which I'll get to later. 
 
 <h2 align="center">What about multiple constraints?</h2><hr>
 
