@@ -48,14 +48,16 @@ With the addition of the constraint equation itself $$ y + \frac{1}{4}x -1 = 0 $
 	<figcaption style="text-align:center;">Gradually modifying the constraint and plotting the contour of the resulting minima</figcaption>
 </figure>
 
-The "Lagrangian" in the name of this method just refers to the form of the system of equations when written out to one side, and the "multipliers" are just what people call the extra variables we introduce, $\lambda$. Any constant term in the constraint is moved from the right to the left under the multiplier.
+The "Lagrangian" in the name of this method just refers to the form of the system of equations when written out to one side, and the "multipliers" are just what people call the extra variables we introduce, $\lambda$.
 
 <div style="font-size: 130%;">
 	$$ 
-	\mathcal{L}(x, y, \lambda) \equiv f(x, y) - \lambda (g(x, y) - b) \\ 
+	\mathcal{L}(x, y, \lambda) \equiv f(x, y) - \lambda g(x, y) \\ 
 	$$
 </div>
 
+Any constant term in the constraint is moved from the right to the left under the multiplier; such that $ \lambda (g(x, y) - b) = 0 $. This is one of the [KKT](https://en.wikipedia.org/wiki/Karush%E2%80%93Kuhn%E2%80%93Tucker_conditions) conditions known as complementary slackness. "Slackness" is used because when the constriant is found to be *more than satisfied* then the behavior of the system 
+ 
 <h2 align="center">What about when constraints don't matter?</h2><hr>
 
 Now I'll let $g(x,y)$ be the inequality $y + \frac{1}{4}x - 1 \geq 0$ and not assume that the solution lies on the constraint boundary. With a constraint on the system that's not binding - the minima of the function lies within the constrained region but not on the boundary - the system of equations to solve becomes the usual $\nabla f(x, y) = \vec{0}$. This is entirely contained by the form of the Lagrangian. Taking the derivative of the Lagrangian and setting it to zero is conveniantly equivalent to stating the system of equations that we found above:
@@ -87,7 +89,27 @@ We know to set $\lambda$ for the constraint to zero when the inequality constrai
 
 <h2 align="center">What about multiple constraints?</h2><hr>
 
-WIP 
+Lets say we had two constriants on the same function as before; $ \frac{1}{2}x + y + 2 \geq 0 $ and $ 2x + y + 4 \geq 0 $. We end up just adding to the lagrangian:
+
+<div style="font-size: 130%;">
+	$$ 
+	\mathcal{L}(x, y, \lambda_{g_1}, \lambda_{g_2}) = f(x, y) - \lambda_{g_1} * g_1(x, y) - \lambda_{g_2} * g_2(x, y) \\
+	\text{where:} \\
+	g_1 = \frac{1}{2}x + y + 2 \\
+	g_2 = 2x + y + 4 \\
+	\text{and generally:}
+	\mathcal{L}(x, y, \lambda_{g_1}, ... \lambda_{g_m}) = f(x, y) - \sum_i^m \lambda_{g_i} * g_i(x, y)
+	$$
+</div>
+
+We then go and solve the system of derivatives just as we did before, we just have a larger matrix equation in front of us. 
+
+<figure>
+	<img src="{{site.baseurl}}/images/constrained-optimization/multipleConstraints.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<figcaption style="text-align:center;">Two constraints on $f(x, y)$</figcaption>
+</figure>
+
+This is all I want to say specifically about minimizing constrianed systems through Lagrangian formalism. We can already imaging the awkward situation which results when we go ahead and add more constraints, with some binding and some non-binding. Later, the dual optimization problem, the addition of a tolerance factor, and the application of sequantial minimalization methods *will* finally bring us to the point of solving an arbitrary system with both binding and non-binding constriants. However, 
 
 <h2 align="center">References</h2><hr>
 
