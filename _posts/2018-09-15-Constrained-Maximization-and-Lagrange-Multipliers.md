@@ -30,7 +30,7 @@ To minimize, we want to decrease $$ f(x,y) $$ as long as we can while the still 
 	<figcaption style="text-align:center;">Contours of the function to optimize, and the edge of the constraint $g$</figcaption>
 </figure>
 
-A fact we can use to solve for this point of interest is that tangent curves will have gradients which are proportional to eachother. Or:
+A fact we can use to solve for this point of interest is that tangent curves will have gradients which are proportional to eachother.
 
 With the addition of the constraint equation itself $$ y + \frac{1}{4}x -1 = 0 $$ we then have 3 variables and 3 equations which we can solve. In this case we could just substitute our way to the solution, but with higher dimensional functions with increasing numbers of variables it helps to make use of [gaussian elimination](https://en.wikipedia.org/wiki/Gaussian_elimination) strategies. And of course, any software employing these methods can make use of LAPACK or Numpy's linalg module (*also lapack*) to solve the system:
 
@@ -56,7 +56,7 @@ The "Lagrangian" in the name of this method just refers to the form of the syste
 	$$
 </div>
 
-Any constant term in the constraint is moved from the right to the left under the multiplier; such that $ \lambda (g(x, y) - b) = 0 $. This is one of the [KKT](https://en.wikipedia.org/wiki/Karush%E2%80%93Kuhn%E2%80%93Tucker_conditions) conditions known as complementary slackness. "Slackness" is used because when the constriant is found to be *more than satisfied* then the behavior of the system 
+Any constant term in the constraint is moved from the right to the left under the multiplier; such that $ \lambda (g(x, y) - b) = 0 $. This is one of the [KKT](https://en.wikipedia.org/wiki/Karush%E2%80%93Kuhn%E2%80%93Tucker_conditions) conditions known as complementary slackness. "Slackness" is used because when the constriant is found to be *more than satisfied* the behavior of the system allows for it; essentially allowing for some "cost" to accumulate as a result. 
  
 <h2 align="center">What about when constraints don't matter?</h2><hr>
 
@@ -109,7 +109,8 @@ We then go and solve the system of derivatives just as we did before, we just ha
 	<figcaption style="text-align:center;">Two constraints on $f(x, y)$</figcaption>
 </figure>
 
-This is all I want to say specifically about minimizing constrianed systems through Lagrangian formalism. We can already imaging the awkward situation which results when we go ahead and add more constraints, with some binding and some non-binding. Later, the dual optimization problem, the addition of a tolerance factor, and the application of sequantial minimalization methods *will* finally bring us to the point of solving an arbitrary system with both binding and non-binding constriants. However, 
+Unfortuneately we're not done. We can already imaging the awkward situation which results when we go ahead and add more constraints, with some binding and some non-binding, which may not have a conveniant shared solution of this form. Later, the dual optimization problem, the addition of a tolerance factor, and the application of sequantial minimalization methods *will* finally bring us to the point of solving an arbitrary system.
+
 
 <h2 align="center">References</h2><hr>
 
