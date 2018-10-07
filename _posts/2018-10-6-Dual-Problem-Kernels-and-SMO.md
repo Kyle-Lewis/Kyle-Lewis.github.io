@@ -29,12 +29,13 @@ Translating the previously discussed optimization problem into what is known as 
 
 <div style="font-size: 130%;">
 	$$ 
-	minimize f(x) \\
+	\min f(x) \\
 	\begin{align}
 	s.t. & g_i(x) \leq 0 \\
 	& h_i(x) = 0 \\
 	\\
-	\mathcal{L}(\vec{x}, \lambda, \nu) = f(\vec{x}) + \sum_{i=i}^m \lambda_ig_i(x) + \sum_{i=1}^p\nu_ih_i(x)
+	\mathcal{L}(x, \lambda, \nu) = f(x) + \sum_{i=i}^m \lambda_ig_i(x) + \sum_{i=1}^p\nu_ih_i(x) \\
+	\end{align}
 	$$
 </div>
 
@@ -42,7 +43,7 @@ Translating the previously discussed optimization problem into what is known as 
 
 <div style="font-size: 130%;">
 	$$ 
-	\frac{min}{x}(\frac{max}{\lambda, \nu, \lambda_i \geq 0} (\mathcal{L}(\vec{x}, \lambda, \nu))) = \frac{min}{x}\Theta_P(x)
+	\frac{min}{x}(\frac{max}{\lambda, \nu, \lambda_i \geq 0} (\mathcal{L}(x, \lambda, \nu))) = \frac{min}{x}\Theta_P(x)
 	$$
 </div>
 
@@ -52,8 +53,18 @@ The inner maximization problem, $\Theta_P(x)$ or the "primal objective" turns ou
 	$$ 
 	\max_{\substack{0 \leq x \leq 1 \\ a \geq y \geq b}}
 	\begin{align}
-	$\Theta_P(x)$ & = \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } f(x) + \sum_{i=i}^m \lambda_ig_i(x) + \sum_{i=1}^p\nu_ih_i(x)
-	& = f(x) + \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } \sum_{i=i}^m \lambda_ig_i(x) + \sum_{i=1}^p\nu_ih_i(x)
+	$\Theta_P(x)$ & = \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } f(x) + \sum_{i=i}^m \lambda_ig_i(x) + \sum_{i=1}^p\nu_ih_i(x) \\
+	& = f(x) + \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } \sum_{i=i}^m \lambda_ig_i(x) + \sum_{i=1}^p\nu_ih_i(x) \\
+	\end{align}
+	$$
+</div>
+
+If, however, $x$ is *feasible* - it satisfies $g_i(x) \leq 0$ and $h_i(x) = 0$ - then the sum of inequality constraint terms are strictly negative or zero, and the equality constraints are of course zero having satisfied the constraints. Nothing fancy was done there; when the constraints are satisfied you simply have a sum of positive values times negative values, and that sum has to be less than or equal to zero. Because of these two results, for a feasible point $x\*$:
+
+<div style="font-size: 130%;">
+	$$ 
+	\begin{align}
+	$\Theta_P(x\*)$ & = f(x\*) + \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } \underbrace{\sum_{i=i}^m \lambda_ig_i(x\*)}_\text{\leq 0} + \underbrace{\sum_{i=1}^p\nu_ih_i(x\*)}_\text{= 0}
 	$$
 </div>
 

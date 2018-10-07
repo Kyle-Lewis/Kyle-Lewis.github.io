@@ -109,8 +109,7 @@ We then go and solve the system of derivatives just as we did before, we just ha
 	<figcaption style="text-align:center;">Two constraints on $f(x, y)$</figcaption>
 </figure>
 
-Unfortuneately we're not done. We can already imaging the awkward situation which results when we go ahead and add more constraints, with some binding and some non-binding, which may not have a conveniant shared solution of this form. Later, the dual optimization problem, the addition of a tolerance factor, and the application of sequantial minimalization methods *will* finally bring us to the point of solving an arbitrary system.
-
+We're not done at this point. We can already imaging the awkward situation which results when we go ahead and add more constraints, with some binding and some non-binding, which may not have a conveniant shared solution of this form. Later, the dual optimization problem, the addition of a tolerance factor, and the application of sequantial minimalization methods *will* finally bring us to the point of solving an arbitrary system.
 
 <h2 align="center">References</h2><hr>
 
