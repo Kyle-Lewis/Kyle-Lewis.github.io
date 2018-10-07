@@ -105,7 +105,7 @@ Lets say we had two constriants on the same function as before; $ \frac{1}{2}x +
 We then go and solve the system of derivatives just as we did before, we just have a larger matrix equation in front of us. 
 
 <figure>
-	<img src="{{site.baseurl}}/images/constrained-optimization/multipleConstraints.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
+	<img src="{{site.baseurl}}/images/constrained-optimization/multipleConstriants.png" style="padding-bottom:0.5em; width:60%; margin-left:auto; margin-right:auto; display:block;" />
 	<figcaption style="text-align:center;">Two constraints on $f(x, y)$</figcaption>
 </figure>
 
