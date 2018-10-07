@@ -90,7 +90,7 @@ So long as the vector $\lambda$ is feasible - $\lambda_i \geq 0$ - then there is
 	$$ 
 	\Theta_D(\lambda, \nu\lambda, \nu) = \min_{\substack{x, \lambda_i \geq 0}} \bigg[ f(x^*) + \underbrace{\sum_{i=i}^m \lambda_ig_i(x^*)}_{\leq 0} + \underbrace{\sum_{i=1}^p\nu_ih_i(x^*)}_\text{= 0} \bigg] \\
 	\text{or} \\
-	\Theta_D(\lambda, \nu) = \min_{\substack{x^*}} \bigg[ f(x^*) + \text{[A negative number]} + \text{[zero]}
+	\Theta_D(\lambda, \nu) = \min_{\substack{x^*}} \bigg[ f(x^*) + \text{[A negative number]} + \text{[zero]} \bigg]
 	$$
 </div>
 
@@ -99,14 +99,14 @@ Because we've ended up with the minimum of the original function, minus some val
 <div style="font-size: 130%;">
 	$$
 	\begin{align}
-	\Theta_D(\lambda, \nu) & \leq \mathcal{L}(x^*, \lambda, \nu) \leq \min_{\substack{x}} f(x^*) = P^*
-	\Theta_D(\lambda, \nu) & \leq \Theta_P(x^*) 
-	\D^* \leq P^*
+	\Theta_D(\lambda, \nu) & \leq \mathcal{L}(x^*, \lambda, \nu) \leq \min_{\substack{x}} f(x^*) = P^* \\
+	\Theta_D(\lambda, \nu) & \leq \Theta_P(x^*) \\
+	\D^* \leq P^* \\
 	\end{align}
 	$$
 </div>
 
-So what we could do, instead of solving the primal problem, is solve the dual problem and that will give us a lower bound on the optimal value. Then maximizing that value as was originally posed in the dual problem will give us the *tightest lower bound* on $P^\*$
+So what we could do, instead of solving the primal problem, is solve the dual problem and that will give us a lower bound on the optimal value. Then maximizing that value as was originally posed in the dual problem will give us the *tightest lower bound* on $P^\*$. 
 
 
 
