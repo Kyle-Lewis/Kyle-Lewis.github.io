@@ -51,22 +51,30 @@ The inner maximization problem, $\Theta_P(x)$ or the "primal objective" turns ou
 
 <div style="font-size: 130%;">
 	$$ 
-	\max_{\substack{0 \leq x \leq 1 \\ a \geq y \geq b}}
 	\begin{align}
-	$\Theta_P(x)$ & = \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } f(x) + \sum_{i=i}^m \lambda_ig_i(x) + \sum_{i=1}^p\nu_ih_i(x) \\
-	& = f(x) + \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } \sum_{i=i}^m \lambda_ig_i(x) + \sum_{i=1}^p\nu_ih_i(x) \\
+	\Theta_P(x) & = \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } \bigg[ f(x) + \sum_{i=i}^m \lambda_ig_i(x) + \sum_{i=1}^p\nu_ih_i(x) \\
+	& = f(x) + \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } \sum_{i=i}^m \lambda_ig_i(x) + \sum_{i=1}^p\nu_ih_i(x) \bigg] \\
 	\end{align}
 	$$
 </div>
 
-If, however, $x$ is *feasible* - it satisfies $g_i(x) \leq 0$ and $h_i(x) = 0$ - then the sum of inequality constraint terms are strictly negative or zero, and the equality constraints are of course zero having satisfied the constraints. Nothing fancy was done there; when the constraints are satisfied you simply have a sum of positive values times negative values, and that sum has to be less than or equal to zero. Because of these two results, for a feasible point $x\*$:
+If, however, $x$ is *feasible* - it satisfies $g_i(x) \leq 0$ and $h_i(x) = 0$ - then the sum of inequality constraint terms are strictly negative or zero, and the equality constraints are of course zero having satisfied the constraints. Nothing fancy was done there; when the constraints are satisfied you simply have a sum of positive values times negative values, and that sum has to be less than or equal to zero. Because of these two results, for a feasible point $x\*$ the primal objective problem is exactly the original minimization problem. For *in*feasible points $x$ however, the violations - $g_i(x) \gre 0$, or $h_i(x) \neq 0$ - allows for either of the sums to go to infinity by choosing an arbitrarily large Lagrange multiplier:
 
 <div style="font-size: 130%;">
 	$$ 
 	\begin{align}
-	$\Theta_P(x\*)$ & = f(x\*) + \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } \underbrace{\sum_{i=i}^m \lambda_ig_i(x\*)}_\text{\leq 0} + \underbrace{\sum_{i=1}^p\nu_ih_i(x\*)}_\text{= 0}
+	\Theta_P(x\*) & = f(x\*) + \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } \bigg[ \underbrace{\sum_{i=i}^m \lambda_ig_i(x\*)}_\text{\leq 0} + \underbrace{\sum_{i=1}^p\nu_ih_i(x\*)}_\text{= 0} \bigg] \\
+	\Theta_P(x^\dagger) & = f(x^\dagger) + \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } \bigg[ \underbrace{\sum_{i=i}^m \lambda_ig_i(x^\dagger)}_\text{\leq 0} + \underbrace{\sum_{i=1}^p\nu_ih_i(x^\dagger)}_\text{= 0} \bigg] \\
+	\text{or} \\
+	& = f(x) + \begin{cases}
+				0 & \text{if x is feasible} \\
+				\inf & \text{if x is not feasible} \\
+				\end{cases}
+	\end{align}
 	$$
 </div>
+
+We could describe the primal maximization as being a barrier function which prevents the consideration of infeasible points. For these, the whole system blows up as a result of the structure of our inner-maximization / outer-minimization problem. Finally, we define the feasible solution $P\* = \Theta_P(x\*)$
 
 
 
