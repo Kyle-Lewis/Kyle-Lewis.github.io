@@ -63,8 +63,8 @@ If, however, $x$ is *feasible* - it satisfies $g_i(x) \leq 0$ and $h_i(x) = 0$ -
 <div style="font-size: 130%;">
 	$$ 
 	\begin{align}
-	\Theta_P(x*) & = f(x^*) + \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } \bigg[ \underbrace{\sum_{i=i}^m \lambda_ig_i(x^*)}_{\leq 0} + \underbrace{\sum_{i=1}^p\nu_ih_i(x*)}_\text{= 0} \bigg] \\
-	\Theta_P(x) & = f(x) + \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } \bigg[ \underbrace{\sum_{i=i}^m \lambda_ig_i(x)}_{\leq 0} + \underbrace{\sum_{i=1}^p\nu_ih_i(x)}_\text{= 0} \bigg] \\
+	\Theta_P(x^*) & = f(x^*) + \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } \bigg[ \underbrace{\sum_{i=i}^m \lambda_ig_i(x^*)}_{\leq 0} + \underbrace{\sum_{i=1}^p\nu_ih_i(x^*)}_\text{= 0} \bigg] \\
+	\Theta_P(x) & = f(x) + \max_{\substack{\lambda, \nu, \lambda_i \geq 0} } \bigg[ \underbrace{\sum_{i=i}^m \lambda_ig_i(x) + \sum_{i=1}^p\nu_ih_i(x)}_{\inf} \bigg] \\
 	\text{or} \\
 	& = f(x) + \begin{cases}
 				0 & \text{if x is feasible} \\
@@ -74,13 +74,13 @@ If, however, $x$ is *feasible* - it satisfies $g_i(x) \leq 0$ and $h_i(x) = 0$ -
 	$$
 </div>
 
-We could describe the primal maximization as being a barrier function which prevents the consideration of infeasible points. For these, the whole system blows up as a result of the structure of our inner-maximization / outer-minimization problem. Finally, we define the feasible solution $P* = \Theta_P(x\*)$.
+We could describe the primal maximization as being a barrier function which prevents the consideration of infeasible points. For these, the whole system blows up as a result of the structure of our inner-maximization / outer-minimization problem. Finally, we define the feasible solution $P^* = \Theta_P(x^*)$.
 
-**The Dual Problem** is the minimization of the Lagrangian over x, holding all $\lambda_i \geq 0$. This quantity, which is now a function only of the multipliers $\lambda$ and $\nu$, can then be minimized. 
+**The Dual Problem** is the minimization of the Lagrangian over x, holding all $\lambda_i \geq 0$. This quantity, which is now a function only of the multipliers $\lambda$ and $\nu$, can then be maximized. 
 
 <div style="font-size: 130%;">
 	$$ 
-	\max_{\substack{\lambda, \nu}}\bigg[\min_{\substack{\lambda_i \geq 0} }\bigg[ (\mathcal{L}(x, \lambda, \nu)))\bigg]\bigg] = \min_{\substack{x}}\Theta_D(\lambda, \nu)
+	\max_{\substack{\lambda, \nu}}\bigg[\min_{\substack{x, \lambda_i \geq 0} }\bigg[ (\mathcal{L}(x, \lambda, \nu)))\bigg]\bigg] = \max_{\substack{\lambda, \nu}}\Theta_D(\lambda, \nu)
 	$$
 </div>
 
@@ -88,9 +88,29 @@ So long as the vector $\lambda$ is feasible - $\lambda_i \geq 0$ - then there is
 
 <div style="font-size: 130%;">
 	$$ 
-	\Theta_D(x*) & = \min_{\substack{x, \lambda_i \geq 0} } \bigg[ f(x^*) + \underbrace{\sum_{i=i}^m \lambda_ig_i(x^*)}_{\leq 0} + \underbrace{\sum_{i=1}^p\nu_ih_i(x*)}_\text{= 0} \bigg] \\
+	\Theta_D(\lambda, \nu\lambda, \nu) = \min_{\substack{x, \lambda_i \geq 0}} \bigg[ f(x^*) + \underbrace{\sum_{i=i}^m \lambda_ig_i(x^*)}_{\leq 0} + \underbrace{\sum_{i=1}^p\nu_ih_i(x^*)}_\text{= 0} \bigg] \\
+	\text{or} \\
+	\Theta_D(\lambda, \nu) = \min_{\substack{x^*}} \bigg[ f(x^*) + \text{[A negative number]} + \text{[zero]}
 	$$
 </div>
+
+Because we've ended up with the minimum of the original function, minus some value:
+
+<div style="font-size: 130%;">
+	$$
+	\begin{align}
+	\Theta_D(\lambda, \nu) & \leq \mathcal{L}(x^*, \lambda, \nu) \leq \min_{\substack{x}} f(x^*) = P^*
+	\Theta_D(\lambda, \nu) & \leq \Theta_P(x^*) 
+	\D^* \leq P^*
+	\end{align}
+	$$
+</div>
+
+So what we could do, instead of solving the primal problem, is solve the dual problem and that will give us a lower bound on the optimal value. Then maximizing that value as was originally posed in the dual problem will give us the *tightest lower bound* on $P^\*$
+
+
+
+
 
 
 
