@@ -17,6 +17,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-
 
 <h2 align="center">Motivation</h2><hr>
 
+WIP 
+
 I'm still working my way towards the implementation of a support vector machine, doing my best to leave no gaps in understanding. In the last post I discussed the general application of Lagrangian systems of equations to optimization problems. This approach (solving the resulting system of equations) would have been enough if the optimization problem found in SVMs yielded a system in which the solution lies directly on the intersection of all of the constraints. (Un)fortunately that is not the case, and we have to do something more interesting.
 
 TL;DR:
